@@ -1,6 +1,6 @@
 package cn.fc.service;
 
-import cn.fc.bean.AppConfiguration;
+import cn.fc.conf.AppConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -17,7 +17,7 @@
 
     <context:component-scan base-package="cn"/>
 
-    <bean class="cn.fc.bean.AppConfiguration" id="appConfiguration">
+    <bean class="cn.fc.conf.AppConfiguration" id="appConfiguration">
         <property name="pageSize" value="20"/>
     </bean>
 

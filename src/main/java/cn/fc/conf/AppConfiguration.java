@@ -1,4 +1,4 @@
-package cn.fc.bean;
+package cn.fc.conf;
 
 public class AppConfiguration {
 
