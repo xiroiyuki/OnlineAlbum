@@ -1,8 +1,11 @@
 package cn.fc.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Photo {
     private long id;
     private String url;
+    @SerializedName("album_id")
     private long albumId;//ALBUM_ID
 
 

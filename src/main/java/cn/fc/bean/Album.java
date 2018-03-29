@@ -1,5 +1,7 @@
 package cn.fc.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Album {
@@ -7,10 +9,14 @@ public class Album {
     private long id;
     private String title;
     private String intro;
+    @SerializedName("face_url")
     private String faceUrl;
+    @SerializedName("photo_num")
     private int photoNum;
     private String url;
+    @SerializedName("create_time")
     private long createTime;
+    @SerializedName("source_id")
     private long sourceId;//SOURCE_ID
     private List<Photo> photos;
 

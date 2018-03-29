@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fc.dao.PhotoDao">
+    <select id="selectAll" resultType="cn.fc.bean.Photo" parameterType="long">
+        SELECT
+            *,
+            ALBUM_ID AS albumId
+        FROM photo
+    </select>
+    <select id="selectByAlbumId" resultType="cn.fc.bean.Photo" parameterType="long">
+        SELECT
+            *,
+            ALBUM_ID AS albumId
+        FROM photo
+        WHERE ALBUM_ID = #{albumId}
+    </select>
+    <update id="update" parameterType="cn.fc.bean.Photo">
+        UPDATE photo SET
+        <trim suffixOverrides=",">
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="albumId != 0">
+                ALBUM_ID = #{albumId},
+            </if>
+        </trim>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <delete id="delete" parameterType="long">
+        DELETE FROM photo
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

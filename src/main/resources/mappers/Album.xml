@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fc.dao.AlbumDao">
+
+    <resultMap id="AlbumList" type="cn.fc.bean.Album">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="intro" property="intro" jdbcType="VARCHAR"/>
+        <result column="face_url" property="faceUrl" jdbcType="VARCHAR"/>
+        <result column="photo_num" property="photoNum" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="INTEGER"/>
+        <result column="SOURCE_ID" property="sourceId" jdbcType="INTEGER"/>
+        <collection property="photos" column="id" select="cn.fc.dao.PhotoDao.selectByAlbumId"
+                    javaType="java.util.List"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="AlbumList">
+        SELECT *
+        FROM album
+    </select>
+    <select id="selectBySource" resultMap="AlbumList">
+        SELECT *
+        FROM album
+        WHERE SOURCE_ID = #{sourceId}
+    </select>
+    <update id="update" parameterType="cn.fc.bean.Album">
+        UPDATE album SET
+        <trim suffixOverrides=",">
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="intro != null">
+                intro=#{intro},
+            </if>
+            <if test="faceUrl != null">
+                face_url=#{faceUrl},
+            </if>
+            <if test="photoNum != 0">
+                photo_num=#{photoNum},
+            </if>
+            <if test="url != null">
+                url=#{url},
+            </if>
+            <if test="createTime != 0">
+                create_time=#{createTime},
+            </if>
+            <if test="sourceId != 0">
+                SOURCE_ID=#{sourceId},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM album
+        where id = #{id}
+    </delete>
+</mapper>

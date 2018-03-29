@@ -6,9 +6,7 @@ public class Source {
     private long id;
     private String name;
     private String url;
-
     private List<Album> albums;
-
 
     @Override
     public String toString() {
