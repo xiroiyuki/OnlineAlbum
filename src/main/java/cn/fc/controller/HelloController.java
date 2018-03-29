@@ -1,4 +1,4 @@
-package controller;
+package cn.fc.controller;
 
 
 import org.springframework.stereotype.Controller;

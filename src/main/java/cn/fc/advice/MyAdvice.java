@@ -1,4 +1,4 @@
-package advice;
+package cn.fc.advice;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;

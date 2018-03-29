@@ -1,4 +1,4 @@
-package service;
+package cn.fc.service;
 
 import cn.fc.bean.User;
 

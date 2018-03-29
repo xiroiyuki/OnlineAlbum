@@ -1,4 +1,4 @@
-package dao;
+package cn.fc.dao;
 
 import cn.fc.bean.User;
 

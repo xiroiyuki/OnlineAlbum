@@ -1,4 +1,4 @@
-package bean;
+package cn.fc.bean;
 
 public class Photo {
     private long id;

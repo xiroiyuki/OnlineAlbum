@@ -1,4 +1,4 @@
-package bean;
+package cn.fc.bean;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package serviceImpl;
+package cn.fc.serviceImpl;
 
 import cn.fc.bean.User;
 import cn.fc.dao.UserDao;

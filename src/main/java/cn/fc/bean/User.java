@@ -1,4 +1,4 @@
-package bean;
+package cn.fc.bean;
 
 public class User {
     private int id;
