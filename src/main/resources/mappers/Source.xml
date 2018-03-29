@@ -23,10 +23,16 @@
         </where>
     </update>
 
+    <delete id="delete" parameterType="cn.fc.bean.Source">
+        DELETE FROM source
+        WHERE id = #{id}
+    </delete>
+
     <resultMap id="SourceList" type="cn.fc.bean.Source">
         <id column="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
-        <association property="albums" column="id" javaType="java.util.List" select="cn.fc.dao.AlbumDao.selectBySource"/>
+        <association property="albums" column="id" javaType="java.util.List"
+                     select="cn.fc.dao.AlbumDao.selectBySource"/>
     </resultMap>
 </mapper>
