@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface SourceDao {
+    Source selectById(long id);
+
     List<Source> select();
 
     List<Source> select(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);

@@ -8,6 +8,12 @@
         FROM source
     </select>
 
+    <select id="selectById" resultMap="SourceList" parameterType="long">
+        SELECT *
+        FROM source
+        WHERE id = #{id}
+    </select>
+
     <update id="update" parameterType="cn.fc.bean.Source">
         UPDATE source SET
         <trim suffixOverrides=",">

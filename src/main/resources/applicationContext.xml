@@ -17,6 +17,9 @@
 
     <context:component-scan base-package="cn"/>
 
+    <bean class="cn.fc.bean.AppConfiguration" id="appConfiguration">
+        <property name="pageSize" value="20"/>
+    </bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

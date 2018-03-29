@@ -9,6 +9,12 @@
         WHERE username = #{username} AND password = #{password}
     </select>
 
+    <select id="selectById" resultType="cn.fc.bean.User" parameterType="long">
+        SELECT *
+        FROM `user`
+        WHERE id = #{id}
+    </select>
+
     <update id="update" parameterType="cn.fc.bean.User">
         UPDATE `user` SET
         <trim suffixOverrides=",">
