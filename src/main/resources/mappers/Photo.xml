@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.PhotoDao">
+    <select id="selectById" resultType="cn.fc.bean.Photo" parameterType="long">
+        SELECT
+            *,
+            ALBUM_ID AS albumId
+        FROM photo
+        WHERE id = #{id}
+    </select>
     <select id="selectAll" resultType="cn.fc.bean.Photo" parameterType="long">
         SELECT
             *,

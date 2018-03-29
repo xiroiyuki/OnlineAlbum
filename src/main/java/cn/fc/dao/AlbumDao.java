@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface AlbumDao {
 
+    Album selectById(long id);
+
     List<Album> selectAll();
 
     List<Album> selectAll(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);

@@ -21,6 +21,12 @@
         SELECT *
         FROM album
     </select>
+
+    <select id="selectById" resultMap="AlbumList" parameterType="long">
+        SELECT *
+        FROM album
+        WHERE id = #{id}
+    </select>
     <select id="selectBySource" resultMap="AlbumList">
         SELECT *
         FROM album

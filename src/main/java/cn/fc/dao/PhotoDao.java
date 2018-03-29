@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface PhotoDao {
+    Photo selectById(long id);
 
     List<Photo> selectAll();
 
