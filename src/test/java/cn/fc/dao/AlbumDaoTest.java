@@ -29,7 +29,6 @@ public class AlbumDaoTest {
         for (Album album : albums) {
             System.out.println(gson.toJson(album));
         }
-
     }
 
     @Test

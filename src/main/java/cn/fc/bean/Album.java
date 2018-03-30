@@ -2,8 +2,6 @@ package cn.fc.bean;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class Album {
 
     private long id;
@@ -18,7 +16,6 @@ public class Album {
     private long createTime;
     @SerializedName("source_id")
     private long sourceId;//SOURCE_ID
-    private List<Photo> photos;
 
     @Override
     public String toString() {
@@ -31,7 +28,6 @@ public class Album {
                 ", url='" + url + '\'' +
                 ", createTime=" + createTime +
                 ", sourceId=" + sourceId +
-                ", photos=" + photos.size() +
                 '}';
     }
 
@@ -99,11 +95,4 @@ public class Album {
         this.sourceId = sourceId;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
 }

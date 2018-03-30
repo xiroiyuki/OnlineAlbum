@@ -8,7 +8,6 @@ public class Photo {
     @SerializedName("album_id")
     private long albumId;//ALBUM_ID
 
-
     @Override
     public String toString() {
         return "Photo{" +

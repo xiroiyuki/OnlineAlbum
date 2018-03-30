@@ -3,8 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.AlbumDao">
-
-    <resultMap id="AlbumList" type="cn.fc.bean.Album">
+    <resultMap id="Album" type="cn.fc.bean.Album">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="intro" property="intro" jdbcType="VARCHAR"/>
@@ -13,21 +12,19 @@
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="INTEGER"/>
         <result column="SOURCE_ID" property="sourceId" jdbcType="INTEGER"/>
-        <collection property="photos" column="id" select="cn.fc.dao.PhotoDao.selectByAlbumId"
-                    javaType="java.util.List"/>
     </resultMap>
 
-    <select id="selectAll" resultMap="AlbumList">
+    <select id="selectAll" resultMap="Album">
         SELECT *
         FROM album
     </select>
 
-    <select id="selectById" resultMap="AlbumList" parameterType="long">
+    <select id="selectById" resultMap="Album"  parameterType="long">
         SELECT *
         FROM album
         WHERE id = #{id}
     </select>
-    <select id="selectBySource" resultMap="AlbumList">
+    <select id="selectBySource" resultMap="Album">
         SELECT *
         FROM album
         WHERE SOURCE_ID = #{sourceId}

@@ -1,12 +1,9 @@
 package cn.fc.bean;
 
-import java.util.List;
-
 public class Source {
     private long id;
     private String name;
     private String url;
-    private List<Album> albums;
 
     @Override
     public String toString() {
@@ -14,7 +11,6 @@ public class Source {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", albums=" + albums.size() +
                 '}';
     }
 
@@ -42,11 +38,4 @@ public class Source {
         this.url = url;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
-    }
 }

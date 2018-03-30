@@ -3,12 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.SourceDao">
-    <select id="select" resultMap="SourceList">
+    <select id="select" resultType="cn.fc.bean.Source">
         SELECT *
         FROM source
     </select>
 
-    <select id="selectById" resultMap="SourceList" parameterType="long">
+    <select id="selectById" resultType="cn.fc.bean.Source" parameterType="long">
         SELECT *
         FROM source
         WHERE id = #{id}
@@ -34,11 +34,4 @@
         WHERE id = #{id}
     </delete>
 
-    <resultMap id="SourceList" type="cn.fc.bean.Source">
-        <id column="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="url" property="url" jdbcType="VARCHAR"/>
-        <association property="albums" column="id" javaType="java.util.List"
-                     select="cn.fc.dao.AlbumDao.selectBySource"/>
-    </resultMap>
 </mapper>
