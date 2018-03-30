@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class AlbumServiceTest {
 
-    //    @Autowired
+    @Autowired
     AlbumService albumService;
 
 
@@ -33,7 +34,7 @@ public class AlbumServiceTest {
     @Test
     public void getAllBySource() {
         long sourceId = 1;
-        List<Album> albums = albumService.getAllBySource(sourceId, 2);
+        List<Album> albums = albumService.getAllBySource(sourceId, 1);
         System.out.println(gson.toJson(albums));
 
     }
@@ -49,7 +50,7 @@ public class AlbumServiceTest {
     @Test
     public void update() {
         Album album = new Album();
-        album.setId(137);
+        album.setId(10);
         album.setTitle("7");
         album.setCreateTime(3);
         album.setIntro("2");

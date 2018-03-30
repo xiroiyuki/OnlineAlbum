@@ -7,5 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public abstract class BaseService {
     @Autowired
-    private AppConfiguration configuration;
+    protected AppConfiguration configuration;
+
+
 }
