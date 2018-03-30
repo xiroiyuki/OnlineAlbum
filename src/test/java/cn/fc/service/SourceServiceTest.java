@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class SourceServiceTest {
 
 
-//    @Autowired
+    @Autowired
     SourceService sourceService;
 
     private GsonBuilder builder = new GsonBuilder();
@@ -42,15 +42,15 @@ public class SourceServiceTest {
     @Test
     public void update() {
         Source source = new Source();
-        source.setId(2);
-        source.setName("ccc");
+        source.setId(5);
+        source.setName("wwww");
         boolean success = sourceService.update(source);
         System.out.println(success);
     }
 
     @Test
     public void delete() {
-        long id = 3;
+        long id = 7;
         boolean success = sourceService.delete(id);
         System.out.println(success);
     }
