@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -40,18 +42,64 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Dashboard
+        来源列表
         <small>Version 2.0</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">来源列表</li>
     </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <h1>来源列表</h1>
+    <div class="row">
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>标题</th>
+                        <th>原始URL</th>
+                        <th>操作</th>
+                    </tr>
+                    <c:choose>
+                        <c:when test="${sources ==  null || fn:length(sources) == 0} ">
+                            <tr>
+                                <th width="30" colspan="3">暂无数据</th>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="source" items="${sources}">
+                                <tr>
+                                    <td>${source.id}</td>
+                                    <td>${source.name}</td>
+                                    <td>${source.url}</td>
+                                    <td>
+                                        <a href="/source/delete?id=${source.id}">删除</a>
+                                        <a href="/source/edit?id=${source.id}">编辑</a>
+                                        <a href="/album/list?sourceId=${source.id}&page=1">浏览资源</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li><a href="/source/list?page=${page-1}">«</a></li>
+                    <li><a href="#">${page}</a></li>
+                    <li><a href="/source/list?page=${page+1}">»</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
 </section>
 <!-- /.content -->
 

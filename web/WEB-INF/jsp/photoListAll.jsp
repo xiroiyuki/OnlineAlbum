@@ -42,7 +42,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-       xx相册
+        相片列表
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -87,9 +87,9 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="/photo/list?page=${page-1}&albumId=${albumId}">«</a></li>
+                    <li><a href="/photo/listAll?page=${page-1}">«</a></li>
                     <li> ${page} </li>
-                    <li><a href="/photo/listAll?page=${page+1}&albumId=${albumId}">»</a></li>
+                    <li><a href="/photo/listAll?page=${page+1}">»</a></li>
                 </ul>
             </div>
         </div>

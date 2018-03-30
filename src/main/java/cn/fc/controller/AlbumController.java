@@ -34,6 +34,7 @@ public class AlbumController {
         List<Album> albums = service.getAllBySource(sourceId, page);
         request.setAttribute("albums", albums);
         request.setAttribute("page", page);
+        request.setAttribute("sourceId", sourceId);
         return "albumList";
     }
 
@@ -44,7 +45,7 @@ public class AlbumController {
         System.out.println(albums);
         request.setAttribute("albums", albums);
         request.setAttribute("page", page);
-        return "albumList";
+        return "albumListAll";
     }
 
     @RequestMapping("/edit")

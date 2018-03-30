@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -40,18 +42,69 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Dashboard
-        <small>Version 2.0</small>
+        xx来源
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">相册列表</li>
     </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <h1>相册列表</h1>
+    <div class="row">
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>标题</th>
+                        <th>简介</th>
+                        <th>封面图</th>
+                        <th>图片数量</th>
+                        <th>原始URL</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <c:choose>
+                        <c:when test="${albums ==  null || fn:length(albums) == 0} ">
+                            <tr>
+                                <th width="30" colspan="3">暂无数据</th>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="album" items="${albums}">
+                                <tr>
+                                    <td>${album.id}</td>
+                                    <td>${album.title}</td>
+                                    <td>${album.intro}</td>
+                                    <td><a href="${album.faceUrl}">查看</a></td>
+                                    <td>${album.photoNum}</td>
+                                    <td><a href="${album.url}">打开</a></td>
+                                    <td>${album.createTime}</td>
+                                    <td>
+                                        <a href="/album/delete?id=${album.id}">删除</a>
+                                        <a href="/album/edit?id=${album.id}">编辑</a>
+                                        <a href="/photo/list?albumId=${album.id}&page=1">浏览相册</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li><a href="/album/list?page=${page-1}&sourceId=${sourceId}">«</a></li>
+                    <li> ${page} </li>
+                    <li><a href="/album/list?page=${page+1}&sourceId=${sourceId}">»</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- /.content -->
 

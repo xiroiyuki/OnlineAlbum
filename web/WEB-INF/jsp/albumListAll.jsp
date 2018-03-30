@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -42,13 +42,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-       xx相册
+        相册列表
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">相片列表</li>
+        <li class="active">相册列表</li>
     </ol>
 </section>
+
 <!-- Main content -->
 <section class="content">
     <div class="row">
@@ -58,24 +59,34 @@
                     <tbody>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>url</th>
+                        <th>标题</th>
+                        <th>简介</th>
+                        <th>封面图</th>
+                        <th>图片数量</th>
+                        <th>原始URL</th>
+                        <th>创建时间</th>
                         <th>操作</th>
                     </tr>
                     <c:choose>
-                        <c:when test="${photos ==  null || fn:length(photos) == 0} ">
+                        <c:when test="${albums ==  null || fn:length(albums) == 0} ">
                             <tr>
                                 <th width="30" colspan="3">暂无数据</th>
                             </tr>
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="photo" items="${photos}">
+                            <c:forEach var="album" items="${albums}">
                                 <tr>
-                                    <td>${photo.id}</td>
-                                    <td>${photo.url}</td>
+                                    <td>${album.id}</td>
+                                    <td>${album.title}</td>
+                                    <td>${album.intro}</td>
+                                    <td><a href="${album.faceUrl}">查看</a></td>
+                                    <td>${album.photoNum}</td>
+                                    <td><a href="${album.url}">打开</a></td>
+                                    <td>${album.createTime}</td>
                                     <td>
-                                        <a href="/photo/delete?id=${photo.id}">删除</a>
-                                        <a href="/photo/edit?id=${photo.id}">编辑</a>
-                                        <a href="${photo.url}">预览</a>
+                                        <a href="/album/delete?id=${photo.id}">删除</a>
+                                        <a href="/album/edit?id=${photo.id}">编辑</a>
+                                        <a href="/photo/list?albumId=${album.id}&page=1">浏览相册</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -87,9 +98,9 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="/photo/list?page=${page-1}&albumId=${albumId}">«</a></li>
+                    <li><a href="/photo/listAll?page=${page-1}">«</a></li>
                     <li> ${page} </li>
-                    <li><a href="/photo/listAll?page=${page+1}&albumId=${albumId}">»</a></li>
+                    <li><a href="/photo/listAll?page=${page+1}">»</a></li>
                 </ul>
             </div>
         </div>

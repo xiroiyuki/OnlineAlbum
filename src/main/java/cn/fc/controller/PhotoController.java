@@ -25,6 +25,7 @@ public class PhotoController {
         List<Photo> photos = service.getAllByAlbum(albumId, page);
         request.setAttribute("photos", photos);
         request.setAttribute("page", page);
+        request.setAttribute("albumId", albumId);
         return "photoList";
     }
 
@@ -34,7 +35,7 @@ public class PhotoController {
         List<Photo> photos = service.getAll(page);
         request.setAttribute("photos", photos);
         request.setAttribute("page", page);
-        return "photoList";
+        return "photoListAll";
     }
 
     @RequestMapping("/delete")
@@ -44,7 +45,7 @@ public class PhotoController {
         }
         boolean success = service.delete(id);
         if (success) {
-            return "photoList";
+            return "redirect:listAll";
         }
         return "error";
     }
@@ -63,7 +64,7 @@ public class PhotoController {
     public String update(Photo photo) {
         boolean success = service.update(photo);
         if (success) {
-            return "photoEdit";
+            return "redirect:listAll";
         }
         return "error";
     }

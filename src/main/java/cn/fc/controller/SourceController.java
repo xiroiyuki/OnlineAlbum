@@ -23,6 +23,7 @@ public class SourceController {
         List<Source> sources;
         sources = service.getAllSource(page);
         request.setAttribute("sources", sources);
+        request.setAttribute("page", page);
         return "sourceList";
     }
 

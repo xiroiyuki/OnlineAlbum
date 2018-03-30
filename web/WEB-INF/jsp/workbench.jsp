@@ -848,7 +848,7 @@
                         id: "90011",
                         text: "相册列表",
                         icon: "fa fa-circle-o",
-                        url: "album/list",
+                        url: "album/listAll",
                         targetType: "iframe-tab"
                     },
                     {
@@ -868,9 +868,9 @@
                 children: [
                     {
                         id: "90011",
-                        text: "相册列表",
+                        text: "相片列表",
                         icon: "fa fa-circle-o",
-                        url: "photo/list",
+                        url: "photo/listAll",
                         targetType: "iframe-tab"
                     }
                 ]
