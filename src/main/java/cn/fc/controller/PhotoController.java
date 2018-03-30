@@ -25,7 +25,7 @@ public class PhotoController {
         List<Photo> photos = service.getAllByAlbum(albumId, page);
         request.setAttribute("photos", photos);
         request.setAttribute("page", page);
-        return "sourceList";
+        return "photoList";
     }
 
     @RequestMapping("/listAll")
@@ -34,7 +34,7 @@ public class PhotoController {
         List<Photo> photos = service.getAll(page);
         request.setAttribute("photos", photos);
         request.setAttribute("page", page);
-        return "sourceList";
+        return "photoList";
     }
 
     @RequestMapping("/delete")
