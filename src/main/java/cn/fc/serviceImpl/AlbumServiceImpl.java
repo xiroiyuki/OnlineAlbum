@@ -27,6 +27,11 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
     }
 
     @Override
+    public List<Album> getAll(int pageNum) {
+        return dao.selectAll(pageNum, super.configuration.getPageSize());
+    }
+
+    @Override
     public boolean delete(long id) {
         dao.delete(id);
         return dao.selectById(id) == null;

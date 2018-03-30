@@ -26,6 +26,11 @@ public class PhotoServiceImpl extends BaseService implements PhotoService {
     }
 
     @Override
+    public List<Photo> getAll(int pageNum) {
+        return dao.selectAll(pageNum, super.configuration.getPageSize());
+    }
+
+    @Override
     public boolean delete(long id) {
         dao.delete(id);
         return dao.selectById(id) == null;

@@ -7,7 +7,9 @@ import java.util.List;
 public interface PhotoService {
     Photo get(long id);
 
-    List<Photo> getAllByAlbum(long albumId,int pageNum);
+    List<Photo> getAllByAlbum(long albumId, int pageNum);
+
+    List<Photo> getAll(int pageNum);
 
     boolean delete(long id);
 
