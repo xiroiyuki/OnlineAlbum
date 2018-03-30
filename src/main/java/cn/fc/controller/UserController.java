@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 
@@ -14,9 +16,10 @@ public class UserController {
     private UserService service;
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.POST})
-    public String doLogin(String username, String password) {
+    public String doLogin(String username, String password, HttpSession session) {
         User user = service.login(username, password);
         if (user != null) {
+            session.setAttribute("loginUser", user);
             return "redirect:/workbench";
         }
         return "redirect:/";

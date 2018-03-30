@@ -2,6 +2,12 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+
+    Object obj = session.getAttribute("loginUser");
+    if (obj == null) {
+        response.sendRedirect("/login");
+    }
+
 %>
 <html>
 <head>
@@ -828,7 +834,7 @@
                         id: "90011",
                         text: "来源列表",
                         icon: "fa fa-circle-o",
-                        url: "UI/buttons_iframe.html",
+                        url: "source/list",
                         targetType: "iframe-tab"
                     }
                 ]
@@ -842,7 +848,7 @@
                         id: "90011",
                         text: "相册列表",
                         icon: "fa fa-circle-o",
-                        url: "UI/buttons_iframe.html",
+                        url: "album/list",
                         targetType: "iframe-tab"
                     },
                     {
@@ -852,6 +858,20 @@
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o",
                         urlType: 'abosulte'
+                    }
+                ]
+            },
+            {
+                id: "9002",
+                text: "相片管理",
+                icon: "fa fa-laptop",
+                children: [
+                    {
+                        id: "90011",
+                        text: "相册列表",
+                        icon: "fa fa-circle-o",
+                        url: "photo/list",
+                        targetType: "iframe-tab"
                     }
                 ]
             }
