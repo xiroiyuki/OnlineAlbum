@@ -14,11 +14,6 @@ public class GateWay {
     @Autowired
     private UserService service;
 
-    @RequestMapping
-    public String index() {
-        return "index";
-    }
-
     @RequestMapping(value = "/login.do", method = {RequestMethod.POST})
     public String doLogin(String username, String password) {
         User user = service.login(username, password);
