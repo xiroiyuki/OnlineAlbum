@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class PhotoServiceTest {
 
 
-//    @Autowired
+    @Autowired
     PhotoService service;
 
     private GsonBuilder builder = new GsonBuilder();
@@ -29,13 +29,13 @@ public class PhotoServiceTest {
     @Test
     public void get() {
         long id = 1;
-        Photo photo =  service.get(id);
+        Photo photo = service.get(id);
         System.out.println(gson.toJson(photo));
     }
 
     @Test
     public void getAllByAlbum() {
-        List<Photo> photos = service.getAllByAlbum(2,2);
+        List<Photo> photos = service.getAllByAlbum(1, 2);
         System.out.println(gson.toJson(photos));
     }
 
@@ -49,10 +49,10 @@ public class PhotoServiceTest {
     @Test
     public void update() {
         Photo photo = new Photo();
-        photo.setId(3);
+        photo.setId(4);
         photo.setAlbumId(2);
         photo.setUrl("2323");
         boolean success = service.update(photo);
-
+        System.out.println(success);
     }
 }

@@ -37,6 +37,6 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
         Album old = dao.selectById(album.getId());
         dao.update(album);
         Album newAlbum = dao.selectById(album.getId());
-        return newAlbum.equals(old);
+        return !newAlbum.equals(old);
     }
 }
