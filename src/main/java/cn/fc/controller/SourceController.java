@@ -54,7 +54,7 @@ public class SourceController {
         }
         Source source = service.get(id);
         request.setAttribute("source", source);
-        return "sourceList";
+        return "sourceEdit";
     }
 
     @RequestMapping("/update")

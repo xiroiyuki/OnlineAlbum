@@ -81,10 +81,10 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <a href="album/edit?id=${source.id}">
+                <a href="source/edit?id=${source.id}">
                     <button class="btn btn-info">编辑</button>
                 </a>
-                <a href="album/delete?id=${source.id}">
+                <a href="source/delete?id=${source.id}">
                     <button class="btn btn-danger">删除</button>
                 </a>
             </div>
