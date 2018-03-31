@@ -1,17 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-
     Object obj = session.getAttribute("loginUser");
     if (obj == null) {
         response.sendRedirect("/login");
     }
-
 %>
 <html>
 <head>
-    <base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | with iframe</title>

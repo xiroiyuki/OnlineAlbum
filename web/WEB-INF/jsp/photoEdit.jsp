@@ -48,7 +48,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="box box-primary">
+        <div class="box box-solid">
             <!-- form start -->
             <%--url
             albumId--%>

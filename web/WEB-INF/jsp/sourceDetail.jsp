@@ -128,9 +128,7 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="#">删除</a>
-                                        <a href="#">编辑</a>
-                                        <a href="#">浏览相册</a>
+                                        <a href="album/detail?id=${album.id}">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -83,17 +83,14 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="source/list?page=${page-1}">«</a></li>
-                    <li><a href="source/list?page=${page+1}">»</a></li>
+                    <li><a href="source/list?page=${page-1}"> << </a></li>
+                    <li><a href="source/list?page=${page+1}"> >> </a></li>
                 </ul>
             </div>
         </div>
     </div>
-
-
 </section>
 <!-- /.content -->
-
 <!-- jQuery 2.2.3 -->
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
@@ -111,9 +108,5 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="../plugins/chartjs/Chart.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard2.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
 </body>
 </html>

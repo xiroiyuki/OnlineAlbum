@@ -47,7 +47,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="box box-primary">
+        <div class="box box-solid">
             <!-- form start -->
             <form role="form" method="post" action="album/update">
                 <div class="box-body">
