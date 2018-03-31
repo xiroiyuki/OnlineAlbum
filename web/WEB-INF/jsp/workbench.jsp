@@ -629,7 +629,7 @@
 
     $(function () {
 
-        App.setbasePath("<%=basePath%>");
+        App.setbasePath("");
         App.setGlobalImgPath("dist/img/");
 
         addTabs({
