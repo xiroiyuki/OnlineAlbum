@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping("photo")
@@ -15,20 +14,6 @@ public class PhotoController {
 
     @Autowired
     private PhotoService service;
-
-    @RequestMapping("/list")
-    public String list(Integer page, Long albumId, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        if (albumId == null) {
-            return "error";
-        }
-        List<Photo> photos = service.getAllByAlbum(albumId, page);
-        request.setAttribute("photos", photos);
-        request.setAttribute("page", page);
-        request.setAttribute("albumId", albumId);
-        return "photoList";
-    }
-
 
     @RequestMapping("/detail")
     public String detail(Long id, HttpServletRequest request) {

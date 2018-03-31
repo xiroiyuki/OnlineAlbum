@@ -44,10 +44,6 @@
     <h1>
         相册列表
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">相册列表</li>
-    </ol>
 </section>
 
 <!-- Main content -->

@@ -44,7 +44,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        来源详情
+        相片详情
     </h1>
 </section>
 <!-- Main content -->
