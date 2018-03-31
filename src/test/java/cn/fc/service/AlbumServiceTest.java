@@ -59,7 +59,6 @@ public class AlbumServiceTest {
         album.setUrl("8");
         album.setCreateTime(13);
         album.setSourceId(3);
-        boolean success = albumService.update(album);
-        System.out.println(success);
+        albumService.update(album);
     }
 }

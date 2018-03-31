@@ -32,9 +32,9 @@
 <section class="content">
     <div class="row">
         <div class="box box-solid">
-            <form role="form" method="post" action="album/update">
+            <form role="form">
                 <div class="box-body">
-                    <input name="id" value="${album.id}" hidden>
+                    <input name="id" id="id" value="${album.id}" hidden>
                     <div class="form-group">
                         <label for="title">标题</label>
                         <input type="text" class="form-control" name="title" id="title" placeholder="请输入新标题"
@@ -58,9 +58,22 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button type="button" id="submit" class="btn btn-primary">提交</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Default Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMsg">One fine body…</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -74,5 +87,36 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script>
+    var tabId = top.getActivePageId();
+    $("#submit").click(function () {
+        $.post("album/update",
+            {
+                id: $("#id").val(),
+                title: $("#title").val(),
+                intro: $("#intro").val(),
+                faceUrl: $("#faceUrl").val(),
+                url: $("#url").val()
+            },
+            function (data, status) {
+                console.log("Data: " + data.result + "\nStatus: " + status);
+                if (data.result) {
+                    $("#submit").attr('disabled', "true");
+                    $('#resModal').addClass('modal-success');
+                    $("#modalTitle").text("成功");
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                    setTimeout(function () {
+                        top.closeTabByPageId(tabId);
+                    }, 2000);
+                } else {
+                    $('#resModal').addClass('modal-danger');
+                    $("#modalTitle").text("失败");
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                }
+            });
+    });
+</script>
 </body>
 </html>

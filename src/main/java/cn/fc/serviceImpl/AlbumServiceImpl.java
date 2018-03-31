@@ -38,10 +38,7 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
     }
 
     @Override
-    public boolean update(Album album) {
-        Album old = dao.selectById(album.getId());
+    public void update(Album album) {
         dao.update(album);
-        Album newAlbum = dao.selectById(album.getId());
-        return !newAlbum.equals(old);
     }
 }

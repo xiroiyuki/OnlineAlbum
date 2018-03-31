@@ -8,9 +8,12 @@ import cn.fc.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("album")
@@ -79,13 +82,14 @@ public class AlbumController {
     }
 
     @RequestMapping("/update")
-    public String update(Album album) {
-        boolean success = service.update(album);
-        if (success) {
-            //TODO 重定向
-            return "albumList";
-        }
-        return "error";
+    @ResponseBody
+    public Map update(Album album) {
+        service.update(album);
+        Map<String, Object> res = new HashMap<>();
+        res.put("result", true);
+        res.put("code", 200);
+        res.put("msg", "更新成功");
+        return res;
     }
 
 }

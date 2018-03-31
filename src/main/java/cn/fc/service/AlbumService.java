@@ -13,6 +13,6 @@ public interface AlbumService {
 
     boolean delete(long id);
 
-    boolean update(Album album);
+    void update(Album album);
 
 }
