@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("user")
 public class UserController {
 
     @Autowired

@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Theme style -->
@@ -42,23 +44,63 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        相册列表
+        来源详情
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">相册列表</li>
-    </ol>
 </section>
-
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="box">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">基本信息</h3>
+            </div>
+            <!-- /.box-header -->
             <div class="box-body">
-                <table class="table table-hover">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>值</th>
+                    </tr>
+                    </thead>
                     <tbody>
                     <tr>
-                        <th style="width: 10px">#</th>
+                        <td>ID</td>
+                        <td>${source.id}</td>
+                    </tr>
+                    <tr>
+                        <td>名称</td>
+                        <td>${source.name}</td>
+                    </tr>
+                    <tr>
+                        <td>URL</td>
+                        <td>${source.url}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a href="album/edit?id=${source.id}">
+                    <button class="btn btn-info">编辑</button>
+                </a>
+                <a href="album/delete?id=${source.id}">
+                    <button class="btn btn-danger">删除</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box box-solid">
+            <div class="box-header">
+                <h3 class="box-title">包含的相册</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
                         <th>标题</th>
                         <th>简介</th>
                         <th>封面图</th>
@@ -67,10 +109,12 @@
                         <th>创建时间</th>
                         <th>操作</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <c:choose>
                         <c:when test="${albums ==  null || fn:length(albums) == 0} ">
                             <tr>
-                                <th width="30" colspan="3">暂无数据</th>
+                                <th width="30" colspan="8">暂无数据</th>
                             </tr>
                         </c:when>
                         <c:otherwise>
@@ -84,9 +128,9 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="/album/delete?id=${photo.id}">删除</a>
-                                        <a href="/album/edit?id=${photo.id}">编辑</a>
-                                        <a href="/photo/list?albumId=${album.id}&page=1">浏览相册</a>
+                                        <a href="#">删除</a>
+                                        <a href="#">编辑</a>
+                                        <a href="#">浏览相册</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -95,16 +139,28 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="/photo/listAll?page=${page-1}">«</a></li>
-                    <li> ${page} </li>
-                    <li><a href="/photo/listAll?page=${page+1}">»</a></li>
-                </ul>
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-md-4 pull-right">
+                        <ul class="pagination">
+                            <li>
+                                <a href="source/detail?id=${source.id}&page=${page-1}">
+                                    上一页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="source/detail?id=${source.id}&page=${page+1}">
+                                    下一页
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!-- /.box-body -->
+
 </section>
 <!-- /.content -->
 
@@ -112,6 +168,9 @@
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -126,8 +185,22 @@
 <!-- ChartJS 1.0.1 -->
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard2.js"></script>
+<%--<script src="../dist/js/pages/dashboard2.js"></script>--%>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+<%--<script src="../dist/js/demo.js"></script>--%>
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable(
+            {
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "autoWidth": true
+            }
+        );
+    });
+</script>
 </body>
 </html>

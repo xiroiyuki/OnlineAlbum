@@ -77,9 +77,7 @@
                                     <td>${source.name}</td>
                                     <td>${source.url}</td>
                                     <td>
-                                        <a href="/source/delete?id=${source.id}">删除</a>
-                                        <a href="/source/edit?id=${source.id}">编辑</a>
-                                        <a href="/album/list?sourceId=${source.id}&page=1">浏览资源</a>
+                                        <a href="source/detail?id=${source.id}">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -91,9 +89,8 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="/source/list?page=${page-1}">«</a></li>
-                    <li><a href="#">${page}</a></li>
-                    <li><a href="/source/list?page=${page+1}">»</a></li>
+                    <li><a href="source/list?page=${page-1}">«</a></li>
+                    <li><a href="source/list?page=${page+1}">»</a></li>
                 </ul>
             </div>
         </div>
