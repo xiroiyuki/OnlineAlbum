@@ -74,7 +74,5 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
-<script src="../dist/js/pages/dashboard2.js"></script>
-<script src="../dist/js/demo.js"></script>
 </body>
 </html>
