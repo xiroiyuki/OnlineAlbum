@@ -73,7 +73,7 @@
                             </tr>
                             <tr>
                                 <td>创建时间</td>
-                                <td>${album.url}</td>
+                                <td>${album.createTime}</td>
                             </tr>
                             <tr>
                                 <td>来源</td>
