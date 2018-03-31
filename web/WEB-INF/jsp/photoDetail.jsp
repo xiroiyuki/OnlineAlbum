@@ -78,7 +78,7 @@
                 <h3 class="box-title">预览</h3>
             </div>
             <div class="box-body">
-                <img class="img-responsive" src="${photo.url}"/>
+                <img class="img-bordered" src="${photo.url}"/>
             </div>
         </div>
     </div>

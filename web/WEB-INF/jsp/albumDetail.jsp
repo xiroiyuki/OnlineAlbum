@@ -32,65 +32,77 @@
 </section>
 <section class="content">
     <div class="row">
-        <div class="box box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">基本信息</h3>
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <table class="table table-condensed table-hover">
-                            <thead>
-                            <tr>
-                                <th>属性</th>
-                                <th>值</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>ID</td>
-                                <td>${album.id}</td>
-                            </tr>
-                            <tr>
-                                <td>标题</td>
-                                <td>${album.title}</td>
-                            </tr>
-                            <tr>
-                                <td>简介</td>
-                                <td>${album.intro}</td>
-                            </tr>
-                            <tr>
-                                <td>封面</td>
-                                <td>${album.faceUrl}</td>
-                            </tr>
-                            <tr>
-                                <td>相片数量</td>
-                                <td>${album.photoNum}</td>
-                            </tr>
-                            <tr>
-                                <td>URL</td>
-                                <td>${album.url}</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>${album.url}</td>
-                            </tr>
-                            <tr>
-                                <td>来源</td>
-                                <td>${album.sourceId}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+        <div class="col-md-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">基本信息</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>${album.id}</td>
+                                </tr>
+                                <tr>
+                                    <td>标题</td>
+                                    <td>${album.title}</td>
+                                </tr>
+                                <tr>
+                                    <td>简介</td>
+                                    <td>${album.intro}</td>
+                                </tr>
+                                <tr>
+                                    <td>封面</td>
+                                    <td>${album.faceUrl}</td>
+                                </tr>
+                                <tr>
+                                    <td>相片数量</td>
+                                    <td>${album.photoNum}</td>
+                                </tr>
+                                <tr>
+                                    <td>URL</td>
+                                    <td>${album.url}</td>
+                                </tr>
+                                <tr>
+                                    <td>创建时间</td>
+                                    <td>${album.url}</td>
+                                </tr>
+                                <tr>
+                                    <td>来源</td>
+                                    <td>${album.sourceId}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <div class="box-footer">
+                    <a href="album/edit?id=${album.id}">
+                        <button class="btn btn-info">编辑</button>
+                    </a>
+                    <a href="album/delete?id=${album.id}">
+                        <button class="btn btn-danger">删除</button>
+                    </a>
+                </div>
             </div>
-            <div class="box-footer">
-                <a href="album/edit?id=${album.id}">
-                    <button class="btn btn-info">编辑</button>
-                </a>
-                <a href="album/delete?id=${album.id}">
-                    <button class="btn btn-danger">删除</button>
-                </a>
+        </div>
+        <div class="col-md-8">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">封面</h3>
+                </div>
+                <div class="box-body">
+                    <img src="${album.faceUrl}" class="img-bordered img-responsive">
+                </div>
             </div>
         </div>
     </div>
