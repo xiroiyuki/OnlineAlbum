@@ -69,16 +69,19 @@ public class AlbumController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Long id) {
-        if (id == null) {
-            return "error";
-        }
+    @ResponseBody
+    public Map delete(Long id) {
         boolean success = service.delete(id);
+        Map<String, Object> res = new HashMap<>();
+        res.put("result", success);
         if (success) {
-            //TODO 重定向
-            return "albumList";
+            res.put("code", 200);
+            res.put("msg", "删除成功");
+            return res;
         }
-        return "error";
+        res.put("code", 500);
+        res.put("msg", "删除失败");
+        return res;
     }
 
     @RequestMapping("/update")

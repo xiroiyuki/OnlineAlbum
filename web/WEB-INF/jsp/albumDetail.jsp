@@ -87,9 +87,7 @@
                     <a href="javascript:createNewTab('album/edit?id=${album.id}','编辑相册 ${album.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
-                    <a href="album/delete?id=${album.id}">
-                        <button class="btn btn-danger">删除</button>
-                    </a>
+                    <button class="btn btn-danger" id="delete">删除</button>
                 </div>
             </div>
         </div>
@@ -160,7 +158,18 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="resModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Default Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMsg">One fine body…</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -176,6 +185,31 @@
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
 <script>
+    var tabId = top.getActivePageId();
+    $("#delete").click(function (e) {
+        $.get(
+            'album/delete', {id:${album.id}}, function (data, status) {
+                console.log("Data: " + data.result + "\nStatus: " + status);
+                if (data.result) {
+                    $('#resModal').addClass('modal-success');
+                    $('#resModal').removeClass('modal-danger');
+                    $("#modalTitle").text("成功");
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                    setTimeout(function () {
+                        top.closeTabByPageId(tabId);
+                    }, 2000);
+                } else {
+                    $('#resModal').removeClass('modal-success');
+                    $('#resModal').addClass('modal-danger');
+                    $("#modalTitle").text("失败");
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                }
+            }
+        );
+    });
+
     $(document).ready(function () {
         $('#photoTable').DataTable(
             {

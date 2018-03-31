@@ -103,6 +103,7 @@
                 if (data.result) {
                     $("#submit").attr('disabled', "true");
                     $('#resModal').addClass('modal-success');
+                    $('#resModal').removeClass('modal-danger');
                     $("#modalTitle").text("成功");
                     $("#modalMsg").text(data.msg);
                     $('#resModal').modal('show');
@@ -110,6 +111,7 @@
                         top.closeTabByPageId(tabId);
                     }, 2000);
                 } else {
+                    $('#resModal').removeClass('modal-success');
                     $('#resModal').addClass('modal-danger');
                     $("#modalTitle").text("失败");
                     $("#modalMsg").text(data.msg);
