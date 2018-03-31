@@ -29,7 +29,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        相片详情
+        图片详情
     </h1>
 </section>
 <section class="content">
@@ -82,7 +82,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
