@@ -56,7 +56,7 @@
                                     <td>${source.name}</td>
                                     <td>${source.url}</td>
                                     <td>
-                                        <a href="source/detail?id=${source.id}">详情</a>
+                                        <a href="javascript:createNewTab('source/detail?id=${source.id}','来源 ${source.name}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -83,5 +83,6 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../dist/js/online_album.js"></script>
 </body>
 </html>

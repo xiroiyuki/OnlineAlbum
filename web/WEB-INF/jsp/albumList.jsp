@@ -63,7 +63,7 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="/album/detail?id=${album.id}">详情</a>
+                                        <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -91,7 +91,6 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
-<script src="../dist/js/pages/dashboard2.js"></script>
-<script src="../dist/js/demo.js"></script>
+<script src="../dist/js/online_album.js"></script>
 </body>
 </html>
