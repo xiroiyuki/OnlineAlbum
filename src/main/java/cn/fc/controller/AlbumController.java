@@ -5,7 +5,6 @@ import cn.fc.bean.Album;
 import cn.fc.bean.Photo;
 import cn.fc.service.AlbumService;
 import cn.fc.service.PhotoService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,22 +46,22 @@ public class AlbumController {
         }
         Album album = service.get(id);
         List<Photo> photos = photoService.getAllByAlbum(id, page);
-
         request.setAttribute("photos", photos);
         request.setAttribute("album", album);
         request.setAttribute("page", page);
         return "albumDetail";
     }
 
+    /**
+     * 编辑回显方法
+     */
     @RequestMapping("/edit")
-    public String edit(HttpServletRequest request) {
-        String id = (String) request.getAttribute("id");
-        if (StringUtils.isNumeric(id)) {
-            long id_ = Long.valueOf(id);
-            Album album = service.get(id_);
-            request.setAttribute("album", album);
+    public String edit(Long id, HttpServletRequest request) {
+        if (id == null) {
+            return "error";
         }
-        //TODO 视图没做
+        Album album = service.get(id);
+        request.setAttribute("album", album);
         return "albumEdit";
     }
 
