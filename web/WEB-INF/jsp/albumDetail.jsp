@@ -39,50 +39,48 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <table class="table table-condensed table-hover">
-                                <thead>
-                                <tr>
-                                    <th>属性</th>
-                                    <th>值</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>ID</td>
-                                    <td>${album.id}</td>
-                                </tr>
-                                <tr>
-                                    <td>标题</td>
-                                    <td>${album.title}</td>
-                                </tr>
-                                <tr>
-                                    <td>简介</td>
-                                    <td>${album.intro}</td>
-                                </tr>
-                                <tr>
-                                    <td>封面</td>
-                                    <td>${album.faceUrl}</td>
-                                </tr>
-                                <tr>
-                                    <td>相片数量</td>
-                                    <td>${album.photoNum}</td>
-                                </tr>
-                                <tr>
-                                    <td>URL</td>
-                                    <td>${album.url}</td>
-                                </tr>
-                                <tr>
-                                    <td>创建时间</td>
-                                    <td>${album.url}</td>
-                                </tr>
-                                <tr>
-                                    <td>来源</td>
-                                    <td>${album.sourceId}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th>属性</th>
+                                <th>值</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>ID</td>
+                                <td>${album.id}</td>
+                            </tr>
+                            <tr>
+                                <td>标题</td>
+                                <td>${album.title}</td>
+                            </tr>
+                            <tr>
+                                <td>简介</td>
+                                <td>${album.intro}</td>
+                            </tr>
+                            <tr>
+                                <td>封面</td>
+                                <td>${album.faceUrl}</td>
+                            </tr>
+                            <tr>
+                                <td>图片数量</td>
+                                <td>${album.photoNum}</td>
+                            </tr>
+                            <tr>
+                                <td>URL</td>
+                                <td>${album.url}</td>
+                            </tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td>${album.url}</td>
+                            </tr>
+                            <tr>
+                                <td>来源</td>
+                                <td>${album.sourceId}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="box-footer">
@@ -109,10 +107,10 @@
     <div class="row">
         <div class="box box-solid">
             <div class="box-header">
-                <h3 class="box-title">包含的相片</h3>
+                <h3 class="box-title">包含的图片</h3>
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="photoTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -133,7 +131,7 @@
                                     <td>${photo.id}</td>
                                     <td><a href="${photo.url}">查看</a></td>
                                     <td>
-                                        <a href="photo/detail?id=${photo.id}">详情</a>
+                                        <a href="javascript:createNewTab('photo/detail?id=${photo.id}','图片 ${photo.id}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -176,9 +174,10 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../dist/js/online_album.js"></script>
 <script>
     $(document).ready(function () {
-        $('#example1').DataTable(
+        $('#photoTable').DataTable(
             {
                 "paging": false,
                 "lengthChange": false,

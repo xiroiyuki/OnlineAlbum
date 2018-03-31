@@ -38,7 +38,7 @@
                 <h3 class="box-title">基本信息</h3>
             </div>
             <div class="box-body">
-                <table class="table table-condensed">
+                <table class="table table-condensed table-hover">
                     <thead>
                     <tr>
                         <th>属性</th>
@@ -77,7 +77,7 @@
                 <h3 class="box-title">包含的相册</h3>
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="sourceTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -109,6 +109,7 @@
                                     <td>${album.createTime}</td>
                                     <td>
                                         <a href="album/detail?id=${album.id}">详情</a>
+                                        <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -151,9 +152,10 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../dist/js/online_album.js"></script>
 <script>
     $(document).ready(function () {
-        $('#example1').DataTable(
+        $('#sourceTable').DataTable(
             {
                 "paging": false,
                 "lengthChange": false,
