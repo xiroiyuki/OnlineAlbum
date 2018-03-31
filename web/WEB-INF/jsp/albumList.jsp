@@ -42,7 +42,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        xx来源
+        相册列表
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -53,7 +53,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="box">
+        <div class="box box-solid">
             <div class="box-body">
                 <table class="table table-hover">
                     <tbody>
@@ -84,9 +84,7 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="/album/delete?id=${album.id}">删除</a>
-                                        <a href="/album/edit?id=${album.id}">编辑</a>
-                                        <a href="/photo/list?albumId=${album.id}&page=1">浏览相册</a>
+                                        <a href="/album/detail?id=${album.id}">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -98,9 +96,8 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="/album/list?page=${page-1}&sourceId=${sourceId}">«</a></li>
-                    <li> ${page} </li>
-                    <li><a href="/album/list?page=${page+1}&sourceId=${sourceId}">»</a></li>
+                    <li><a href="album/list?page=${page-1}">«</a></li>
+                    <li><a href="album/list?page=${page+1}">»</a></li>
                 </ul>
             </div>
         </div>

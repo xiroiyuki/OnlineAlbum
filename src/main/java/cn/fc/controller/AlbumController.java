@@ -2,7 +2,9 @@ package cn.fc.controller;
 
 
 import cn.fc.bean.Album;
+import cn.fc.bean.Photo;
 import cn.fc.service.AlbumService;
+import cn.fc.service.PhotoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class AlbumController {
 
     @Autowired
     private AlbumService service;
+    @Autowired
+    private PhotoService photoService;
+
 
     /**
      * 啥都不传 默认查询所有并显示第一页
@@ -26,26 +31,27 @@ public class AlbumController {
      * @return 前端页面
      */
     @RequestMapping("/list")
-    public String list(Integer page, Long sourceId, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        if (sourceId == null) {
-            return "error";
-        }
-        List<Album> albums = service.getAllBySource(sourceId, page);
-        request.setAttribute("albums", albums);
-        request.setAttribute("page", page);
-        request.setAttribute("sourceId", sourceId);
-        return "albumList";
-    }
-
-    @RequestMapping("/listAll")
     public String list(Integer page, HttpServletRequest request) {
         page = page == null ? 1 : page;
         List<Album> albums = service.getAll(page);
-        System.out.println(albums);
         request.setAttribute("albums", albums);
         request.setAttribute("page", page);
-        return "albumListAll";
+        return "albumList";
+    }
+
+    @RequestMapping("/detail")
+    public String detail(Long id, Integer page, HttpServletRequest request) {
+        page = page == null ? 1 : page;
+        if (id == null) {
+            return "error";
+        }
+        Album album = service.get(id);
+        List<Photo> photos = photoService.getAllByAlbum(id, page);
+
+        request.setAttribute("photos", photos);
+        request.setAttribute("album", album);
+        request.setAttribute("page", page);
+        return "albumDetail";
     }
 
     @RequestMapping("/edit")
@@ -56,6 +62,7 @@ public class AlbumController {
             Album album = service.get(id_);
             request.setAttribute("album", album);
         }
+        //TODO 视图没做
         return "albumEdit";
     }
 
@@ -66,6 +73,7 @@ public class AlbumController {
         }
         boolean success = service.delete(id);
         if (success) {
+            //TODO 重定向
             return "albumList";
         }
         return "error";
@@ -75,6 +83,7 @@ public class AlbumController {
     public String update(Album album) {
         boolean success = service.update(album);
         if (success) {
+            //TODO 重定向
             return "albumList";
         }
         return "error";

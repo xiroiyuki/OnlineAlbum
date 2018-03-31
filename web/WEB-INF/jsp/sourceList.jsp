@@ -54,7 +54,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="box">
+        <div class="box box-solid">
             <div class="box-body">
                 <table class="table table-hover">
                     <tbody>

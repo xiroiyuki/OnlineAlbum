@@ -845,33 +845,19 @@
                 icon: "fa fa-laptop",
                 children: [
                     {
-                        id: "90011",
+                        id: "90021",
                         text: "相册列表",
                         icon: "fa fa-circle-o",
-                        url: "album/listAll",
+                        url: "album/list",
                         targetType: "iframe-tab"
                     },
                     {
-                        id: "90024",
+                        id: "90022",
                         text: "百度",
                         url: "https://www.baidu.com",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o",
                         urlType: 'abosulte'
-                    }
-                ]
-            },
-            {
-                id: "9002",
-                text: "相片管理",
-                icon: "fa fa-laptop",
-                children: [
-                    {
-                        id: "90011",
-                        text: "相片列表",
-                        icon: "fa fa-circle-o",
-                        url: "photo/listAll",
-                        targetType: "iframe-tab"
                     }
                 ]
             }
