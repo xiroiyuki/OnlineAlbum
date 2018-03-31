@@ -41,7 +41,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        编辑${album.title}
+        编辑相册:${album.title}
     </h1>
 </section>
 <!-- Main content -->
