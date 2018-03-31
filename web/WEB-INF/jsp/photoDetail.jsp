@@ -63,7 +63,7 @@
                 </table>
             </div>
             <div class="box-footer">
-                <a href="photo/edit?id=${photo.id}">
+                <a href="javascript:createNewTab('photo/edit?id=${photo.id}','编辑图片 ${photo.id}')">
                     <button class="btn btn-info">编辑</button>
                 </a>
                 <a href="photo/delete?id=${photo.id}">
@@ -95,5 +95,7 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../dist/js/online_album.js"></script>
+
 </body>
 </html>

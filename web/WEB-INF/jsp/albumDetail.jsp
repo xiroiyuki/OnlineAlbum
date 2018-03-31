@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="album/edit?id=${album.id}">
+                    <a href="javascript:createNewTab('album/edit?id=${album.id}','编辑相册 ${album.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <a href="album/delete?id=${album.id}">
