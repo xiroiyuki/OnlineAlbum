@@ -26,11 +26,11 @@
     <script src="plugins/ie9/html5shiv.min.js"></script>
     <script src="plugins/ie9/respond.min.js"></script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed">
+<body class="hold-transition skin-yellow sidebar-mini fixed">
 <div class="wrapper">
     <header class="main-header">
         <a href="#" class="logo">
-            <span class="logo-mini">OnlineAlbum</span>
+            <span class="logo-mini">Album</span>
             <span class="logo-lg">OnlineAlbum</span>
         </a>
         <nav class="navbar navbar-static-top">
