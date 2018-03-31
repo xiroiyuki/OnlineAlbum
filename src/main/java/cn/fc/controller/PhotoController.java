@@ -29,13 +29,15 @@ public class PhotoController {
         return "photoList";
     }
 
-    @RequestMapping("/listAll")
-    public String listAll(Integer page, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        List<Photo> photos = service.getAll(page);
-        request.setAttribute("photos", photos);
-        request.setAttribute("page", page);
-        return "photoListAll";
+
+    @RequestMapping("/detail")
+    public String detail(Long id, HttpServletRequest request) {
+        if (id == null) {
+            return "error";
+        }
+        Photo photo = service.get(id);
+        request.setAttribute("photo", photo);
+        return "photoDetail";
     }
 
     @RequestMapping("/delete")

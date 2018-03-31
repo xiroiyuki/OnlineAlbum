@@ -142,8 +142,7 @@
                                     <td>${photo.id}</td>
                                     <td><a href="${photo.url}">查看</a></td>
                                     <td>
-                                        <a href="#">删除</a>
-                                        <a href="#">编辑</a>
+                                        <a href="photo/detail?id=${photo.id}">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
