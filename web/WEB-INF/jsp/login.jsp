@@ -16,10 +16,10 @@
     <title>$Title$</title>
 </head>
 <body>
-
-<form action="login.do" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
+这是登录页面
+<form action="user/login.do" method="post">
+    <input type="text" name="username" placeholder="username" value="admin">
+    <input type="password" name="password" placeholder="password" value="111111">
     <button type="submit">提交</button>
 </form>
 

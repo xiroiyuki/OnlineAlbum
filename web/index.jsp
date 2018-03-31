@@ -16,7 +16,7 @@
     <title>$Title$</title>
 </head>
 <body>
-
+这是首页
 <form action="user/login.do" method="post">
     <input type="text" name="username" placeholder="username" value="admin">
     <input type="password" name="password" placeholder="password" value="111111">
