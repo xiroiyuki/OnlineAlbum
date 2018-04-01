@@ -45,6 +45,7 @@
                         <value>
                             helperDialect=mysql
                             supportMethodsArguments=true
+                            reasonable=true
                         </value>
                     </property>
                 </bean>
