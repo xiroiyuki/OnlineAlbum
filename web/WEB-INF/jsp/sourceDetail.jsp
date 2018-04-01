@@ -65,9 +65,7 @@
                 <a href="javascript:createNewTab('source/edit?id=${source.id}','编辑来源 ${source.name}')">
                     <button class="btn btn-info">编辑</button>
                 </a>
-                <a href="source/delete?id=${source.id}">
-                    <button class="btn btn-danger">删除</button>
-                </a>
+                <button class="btn btn-danger" id="delete">删除</button>
             </div>
         </div>
     </div>
@@ -108,7 +106,6 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="album/detail?id=${album.id}">详情</a>
                                         <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
                                     </td>
                                 </tr>
@@ -138,7 +135,15 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="resModal">
+        <div class="modal-dialog  modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p id="modalMsg" class="text-center">One fine body…</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -154,6 +159,28 @@
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
 <script>
+    var tabId = top.getActivePageId();
+    $("#delete").click(function (e) {
+        $.get(
+            'source/delete', {id:${source.id}}, function (data, status) {
+                console.log("Data: " + data.result + "\nStatus: " + status);
+                if (data.result) {
+                    $('#resModal').addClass('modal-success');
+                    $('#resModal').removeClass('modal-danger');
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                    setTimeout(function () {
+                        top.closeTabByPageId(tabId);
+                    }, 2000);
+                } else {
+                    $('#resModal').removeClass('modal-success');
+                    $('#resModal').addClass('modal-danger');
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                }
+            }
+        );
+    });
     $(document).ready(function () {
         $('#sourceTable').DataTable(
             {
