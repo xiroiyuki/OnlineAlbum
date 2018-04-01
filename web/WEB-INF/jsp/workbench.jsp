@@ -156,37 +156,45 @@
                 id: "9001",
                 text: "来源管理",
                 icon: "fa fa-cloud",
-                children: [
-                    {
-                        id: "90011",
-                        text: "来源列表",
-                        icon: "fa fa-circle-o",
-                        url: "source/list",
-                        targetType: "iframe-tab"
-                    }
-                ]
+                url: "source/list",
+                targetType: "iframe-tab"
             },
             {
                 id: "9002",
                 text: "相册管理",
                 icon: "fa fa-folder-open",
-                children: [
-                    {
-                        id: "90021",
-                        text: "相册列表",
-                        icon: "fa fa-circle-o",
-                        url: "album/list",
-                        targetType: "iframe-tab"
-                    },
-                    {
-                        id: "90022",
-                        text: "百度",
-                        url: "https://www.baidu.com",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o",
-                        urlType: 'abosulte'
-                    }
-                ]
+                url: "album/list",
+                targetType: "iframe-tab"
+            },
+            {
+                id: "9101",
+                text: "System",
+                icon: "",
+                isHeader: true
+            },
+            {
+                id: "9102",
+                text: "用户管理",
+                icon: "fa fa-user",
+                targetType: "iframe-tab"
+            },
+            {
+                id: "9103",
+                text: "数据维护",
+                icon: "fa fa-database",
+                targetType: "iframe-tab"
+            },
+            {
+                id: "9104",
+                text: "日志统计",
+                icon: "fa fa-book",
+                targetType: "iframe-tab"
+            },
+            {
+                id: "9105",
+                text: "消息推送",
+                icon: "fa fa-wifi",
+                targetType: "iframe-tab"
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});
