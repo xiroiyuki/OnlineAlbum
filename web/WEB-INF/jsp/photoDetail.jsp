@@ -108,27 +108,21 @@
 
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${photo eq null}">
+    showNotFoundModal();
+    closeTab(tabId, 2000);
+    </c:when>
+    <c:otherwise>
     $("#delete").click(function (e) {
         $.get(
             'photo/delete', {id:${photo.id}}, function (data, status) {
-                console.log("Data: " + data.result + "\nStatus: " + status);
-                if (data.result) {
-                    $('#resModal').addClass('modal-success');
-                    $('#resModal').removeClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                    setTimeout(function () {
-                        top.closeTabByPageId(tabId);
-                    }, 2000);
-                } else {
-                    $('#resModal').removeClass('modal-success');
-                    $('#resModal').addClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                }
+                resultHandler(data, status, tabId);
             }
         );
     });
+    </c:otherwise>
+    </c:choose>
 </script>
 
 </body>

@@ -160,6 +160,12 @@
 <script src="../dist/js/online_album.js"></script>
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${source eq null}">
+    showNotFoundModal();
+    closeTab(tabId, 2000);
+    </c:when>
+    <c:otherwise>
     $("#delete").click(function (e) {
         $.get(
             'source/delete', {id:${source.id}}, function (data, status) {
@@ -193,6 +199,8 @@
             }
         );
     });
+    </c:otherwise>
+    </c:choose>
 </script>
 </body>
 </html>

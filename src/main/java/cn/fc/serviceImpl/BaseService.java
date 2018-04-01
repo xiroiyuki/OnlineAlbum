@@ -33,7 +33,7 @@ public class BaseService {
     }
 
     protected Map createNotFoundResultMap() {
-        return createResultMap(ResultCode.NOT_FOUND, "没有找到资源", false);
+        return createResultMap(ResultCode.NOT_FOUND, "没有找到目标资源", false);
     }
 
     protected Map createUnauthorizedResultMap() {

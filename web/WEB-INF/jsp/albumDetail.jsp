@@ -183,40 +183,32 @@
 <script src="../dist/js/online_album.js"></script>
 <script>
     var tabId = top.getActivePageId();
-    $("#delete").click(function (e) {
-        $.get(
-            'album/delete', {id:${album.id}}, function (data, status) {
-                console.log("Data: " + data.result + "\nStatus: " + status);
-                if (data.result) {
-                    $('#resModal').addClass('modal-success');
-                    $('#resModal').removeClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                    setTimeout(function () {
-                        top.closeTabByPageId(tabId);
-                    }, 2000);
-                } else {
-                    $('#resModal').removeClass('modal-success');
-                    $('#resModal').addClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
+    <c:choose>
+        <c:when test="${album eq null}">
+        showNotFoundModal();
+        closeTab(tabId, 2000);
+        </c:when>
+        <c:otherwise>
+        $("#delete").click(function (e) {
+            $.get('album/delete', {id:${album.id}}, function (data, status) {
+                    resultHandler(data, status, tabId);
                 }
-            }
-        );
-    });
-
-    $(document).ready(function () {
-        $('#photoTable').DataTable(
-            {
-                "paging": false,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": false,
-                "autoWidth": true
-            }
-        );
-    });
+            );
+        });
+        $(document).ready(function () {
+            $('#photoTable').DataTable(
+                {
+                    "paging": false,
+                    "lengthChange": false,
+                    "searching": true,
+                    "ordering": true,
+                    "info": false,
+                    "autoWidth": true
+                }
+            );
+        });
+        </c:otherwise>
+    </c:choose>
 </script>
 </body>
 </html>
