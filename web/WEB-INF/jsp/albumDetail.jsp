@@ -159,10 +159,10 @@
         </div>
     </div>
     <div class="modal fade" id="resModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog  modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p id="modalMsg">One fine body…</p>
+                    <p id="modalMsg" class="text-center">One fine body…</p>
                 </div>
             </div>
         </div>

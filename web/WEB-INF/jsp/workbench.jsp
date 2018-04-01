@@ -1,11 +1,9 @@
-<%@ page import="cn.fc.bean.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Object obj = session.getAttribute("loginUser");
     if (obj == null) {
         response.sendRedirect("/login");
     }
-    User user = (User) obj;
 %>
 <html>
 <head>
@@ -50,7 +48,7 @@
                 </div>
                 <div class="pull-left info">
                     <p>
-                        <%=user.getUsername()%>
+                        ${sessionScope.loginUser.username}
                     </p>
                 </div>
             </div>

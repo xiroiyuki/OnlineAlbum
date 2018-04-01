@@ -33,9 +33,9 @@
 <section class="content">
     <div class="row">
         <div class="box box-solid">
-            <form role="form" method="post" action="photo/update">
+            <form role="form">
                 <div class="box-body">
-                    <input name="id" value="${photo.id}" hidden>
+                    <input name="id" id="id" value="${photo.id}" hidden>
                     <div class="form-group">
                         <label for="url">来源URL</label>
                         <input type="url" class="form-control" name="url" id="url" value="${photo.url}"
@@ -43,9 +43,18 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button type="button" id="submit" class="btn btn-primary">提交</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="modal fade" id="resModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p id="modalMsg" class="text-center">One fine body…</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -60,4 +69,33 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
 </body>
+<script>
+    var tabId = top.getActivePageId();
+    $("#submit").click(function () {
+        $.post("photo/update",
+            {
+                id: $("#id").val(),
+                url: $("#url").val()
+            },
+            function (data, status) {
+                console.log("Data: " + data.result + "\nStatus: " + status);
+                if (data.result) {
+                    $("#submit").attr('disabled', "true");
+                    $('#resModal').addClass('modal-success');
+                    $('#resModal').removeClass('modal-danger');
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                    setTimeout(function () {
+                        top.closeTabByPageId(tabId);
+                    }, 2000);
+                } else {
+                    $('#resModal').removeClass('modal-success');
+                    $('#resModal').addClass('modal-danger');
+                    $("#modalMsg").text(data.msg);
+                    $('#resModal').modal('show');
+                }
+            });
+    });
+</script>
+
 </html>
