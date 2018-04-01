@@ -1,5 +1,5 @@
 function createNewTab(url, title) {
-    var tabId = Math.floor(Math.random() * 10);
+    var tabId = Math.floor(Math.random() * 100);
     top.addTabs({
         id: '' + tabId,
         title: title,
