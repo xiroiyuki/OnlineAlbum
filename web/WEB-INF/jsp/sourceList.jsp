@@ -93,7 +93,10 @@
                 "searching": true,
                 "ordering": true,
                 "info": true,
-                "autoWidth": true
+                "autoWidth": true,
+                language: {
+                    url: "../plugins/datatables/Chinese.json"
+                }
             }
         );
     });
