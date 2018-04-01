@@ -161,9 +161,6 @@
     <div class="modal fade" id="resModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalTitle">Default Modal</h4>
-                </div>
                 <div class="modal-body">
                     <p id="modalMsg">One fine body…</p>
                 </div>
@@ -193,7 +190,6 @@
                 if (data.result) {
                     $('#resModal').addClass('modal-success');
                     $('#resModal').removeClass('modal-danger');
-                    $("#modalTitle").text("成功");
                     $("#modalMsg").text(data.msg);
                     $('#resModal').modal('show');
                     setTimeout(function () {
@@ -202,7 +198,6 @@
                 } else {
                     $('#resModal').removeClass('modal-success');
                     $('#resModal').addClass('modal-danger');
-                    $("#modalTitle").text("失败");
                     $("#modalMsg").text(data.msg);
                     $('#resModal').modal('show');
                 }
