@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
@@ -42,8 +40,7 @@ public class PhotoServiceTest {
     @Test
     public void delete() {
         long id = 3;
-        boolean success = service.delete(id);
-        System.out.println(success);
+        System.out.println(service.delete(id));
     }
 
     @Test
@@ -52,7 +49,6 @@ public class PhotoServiceTest {
         photo.setId(4);
         photo.setAlbumId(2);
         photo.setUrl("2323");
-        boolean success = service.update(photo);
-        System.out.println(success);
+        System.out.println(service.update(photo));
     }
 }

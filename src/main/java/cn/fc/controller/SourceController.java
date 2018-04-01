@@ -7,9 +7,11 @@ import cn.fc.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("source")
@@ -58,23 +60,14 @@ public class SourceController {
     }
 
     @RequestMapping("/update")
-    public String update(Source sources) {
-        boolean success = service.update(sources);
-        if (success) {
-            return "sourceList";
-        }
-        return "error";
+    @ResponseBody
+    public Map update(Source sources) {
+        return service.update(sources);
     }
 
     @RequestMapping("/delete")
-    public String delete(Long id) {
-        if (id == null) {
-            return "error";
-        }
-        boolean success = service.delete(id);
-        if (success) {
-            return "sourceList";
-        }
-        return "error";
+    @ResponseBody
+    public Map delete(Long id) {
+        return service.delete(id);
     }
 }

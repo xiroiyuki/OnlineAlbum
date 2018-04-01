@@ -28,13 +28,23 @@ public class SourceServiceImpl extends BaseService implements SourceService {
 
     @Override
     public Map update(Source source) {
-        dao.update(source);
-        return super.resultDataBuilder.setCode(200).setMsg("修改成功").setResult(true).create();
+        Source temp = dao.selectById(source.getId());
+        if (temp == null) {
+            return createNotFoundResultMap();
+        } else {
+            dao.update(source);
+            return createOKResultMap();
+        }
     }
 
     @Override
     public Map delete(long id) {
-        dao.delete(id);
-        return super.resultDataBuilder.setCode(200).setMsg("删除成功").setResult(true).create();
+        Source source = dao.selectById(id);
+        if (source == null) {
+            return createNotFoundResultMap();
+        } else {
+            dao.delete(id);
+            return createOKResultMap();
+        }
     }
 }

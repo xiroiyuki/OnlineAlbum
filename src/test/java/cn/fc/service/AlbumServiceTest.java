@@ -42,8 +42,7 @@ public class AlbumServiceTest {
     @Test
     public void delete() {
         long id = 4;
-        boolean success = albumService.delete(id);
-        System.out.println(success);
+        System.out.println(albumService.delete(id));
 
     }
 

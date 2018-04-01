@@ -42,14 +42,12 @@ public class SourceServiceTest {
         Source source = new Source();
         source.setId(5);
         source.setName("wwww");
-        boolean success = sourceService.update(source);
-        System.out.println(success);
+        System.out.println(sourceService.update(source));
     }
 
     @Test
     public void delete() {
         long id = 7;
-        boolean success = sourceService.delete(id);
-        System.out.println(success);
+        System.out.println(sourceService.delete(id));
     }
 }

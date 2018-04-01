@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PhotoServiceImpl extends BaseService implements PhotoService {
@@ -31,16 +32,24 @@ public class PhotoServiceImpl extends BaseService implements PhotoService {
     }
 
     @Override
-    public boolean delete(long id) {
-        dao.delete(id);
-        return dao.selectById(id) == null;
+    public Map delete(long id) {
+        Photo photo = dao.selectById(id);
+        if (photo == null) {
+            return super.createNotFoundResultMap();
+        } else {
+            dao.delete(id);
+            return super.createOKResultMap();
+        }
     }
 
     @Override
-    public boolean update(Photo photo) {
-        Photo old = dao.selectById(photo.getId());
-        dao.update(photo);
-        Photo newPhoto = dao.selectById(photo.getId());
-        return !old.equals(newPhoto);
+    public Map update(Photo photo) {
+        Photo temp = dao.selectById(photo.getId());
+        if (temp == null) {
+            return super.createNotFoundResultMap();
+        } else {
+            dao.update(photo);
+            return super.createOKResultMap();
+        }
     }
 }

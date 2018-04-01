@@ -3,6 +3,7 @@ package cn.fc.service;
 import cn.fc.bean.Album;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AlbumService {
     Album get(long id);
@@ -11,8 +12,8 @@ public interface AlbumService {
 
     List<Album> getAll(int pageNum);
 
-    boolean delete(long id);
+    Map delete(long id);
 
-    void update(Album album);
+    Map update(Album album);
 
 }

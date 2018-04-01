@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,14 +23,6 @@ public class AlbumController {
     @Autowired
     private PhotoService photoService;
 
-
-    /**
-     * 啥都不传 默认查询所有并显示第一页
-     * 传page 和 source_id 可按来源选择
-     *
-     * @param request HttpServletRequest
-     * @return 前端页面
-     */
     @RequestMapping("/list")
     public String list(Integer page, HttpServletRequest request) {
         page = page == null ? 1 : page;
@@ -71,28 +62,13 @@ public class AlbumController {
     @RequestMapping("/delete")
     @ResponseBody
     public Map delete(Long id) {
-        boolean success = service.delete(id);
-        Map<String, Object> res = new HashMap<>();
-        res.put("result", success);
-        if (success) {
-            res.put("code", 200);
-            res.put("msg", "删除成功");
-            return res;
-        }
-        res.put("code", 500);
-        res.put("msg", "删除失败");
-        return res;
+        return service.delete(id);
     }
 
     @RequestMapping("/update")
     @ResponseBody
     public Map update(Album album) {
-        service.update(album);
-        Map<String, Object> res = new HashMap<>();
-        res.put("result", true);
-        res.put("code", 200);
-        res.put("msg", "更新成功");
-        return res;
+        return service.update(album);
     }
 
 }

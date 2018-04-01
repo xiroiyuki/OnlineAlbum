@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -32,13 +33,24 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
     }
 
     @Override
-    public boolean delete(long id) {
-        dao.delete(id);
-        return dao.selectById(id) == null;
+    public Map delete(long id) {
+        Album album = dao.selectById(id);
+        if (album == null) {
+            return super.createNotFoundResultMap();
+        } else {
+            dao.delete(id);
+            return super.createOKResultMap();
+        }
     }
 
     @Override
-    public void update(Album album) {
-        dao.update(album);
+    public Map update(Album album) {
+        Album temp = dao.selectById(album.getId());
+        if (temp == null) {
+            return super.createNotFoundResultMap();
+        } else {
+            dao.update(album);
+            return super.createOKResultMap();
+        }
     }
 }

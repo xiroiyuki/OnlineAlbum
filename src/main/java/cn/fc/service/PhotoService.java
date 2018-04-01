@@ -3,6 +3,7 @@ package cn.fc.service;
 import cn.fc.bean.Photo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PhotoService {
     Photo get(long id);
@@ -11,8 +12,8 @@ public interface PhotoService {
 
     List<Photo> getAll(int pageNum);
 
-    boolean delete(long id);
+    Map delete(long id);
 
-    boolean update(Photo photo);
+    Map update(Photo photo);
 
 }
