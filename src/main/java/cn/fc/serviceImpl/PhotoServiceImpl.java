@@ -36,6 +36,11 @@ public class PhotoServiceImpl extends BaseService implements PhotoService {
     }
 
     @Override
+    public List<Photo> getAll() {
+        return dao.selectAll();
+    }
+
+    @Override
     public Map delete(long id) {
         Photo photo = dao.selectById(id);
         if (photo == null) {

@@ -14,6 +14,8 @@ public interface PhotoService {
 
     List<Photo> getAll(int pageNum);
 
+    List<Photo> getAll();
+
     Map delete(long id);
 
     Map update(Photo photo);
