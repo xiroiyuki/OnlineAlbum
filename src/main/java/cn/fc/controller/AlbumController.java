@@ -31,16 +31,11 @@ public class AlbumController {
     }
 
     @RequestMapping("/detail")
-    public String detail(Long id, Integer page, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        if (id == null) {
-            return "error";
-        }
+    public String detail(Long id, HttpServletRequest request) {
         Album album = service.get(id);
-        List<Photo> photos = photoService.getAllByAlbum(id, page);
+        List<Photo> photos = photoService.getAllByAlbum(id);
         request.setAttribute("photos", photos);
         request.setAttribute("album", album);
-        request.setAttribute("page", page);
         return "albumDetail";
     }
 

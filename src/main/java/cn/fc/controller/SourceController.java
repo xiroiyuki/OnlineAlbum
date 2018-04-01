@@ -25,26 +25,18 @@ public class SourceController {
 
 
     @RequestMapping("/list")
-    public String list(Integer page, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        List<Source> sources;
-        sources = service.getAllSource(page);
+    public String list(HttpServletRequest request) {
+        List<Source> sources = service.getAllSource();
         request.setAttribute("sources", sources);
-        request.setAttribute("page", page);
         return "sourceList";
     }
 
     @RequestMapping("/detail")
-    public String detail(Long id, Integer page, HttpServletRequest request) {
-        if (id == null) {
-            return "error";
-        }
-        page = page == null ? 1 : page;
+    public String detail(Long id, HttpServletRequest request) {
         Source source = service.get(id);
-        List<Album> albums = albumService.getAllBySource(id, page);
+        List<Album> albums = albumService.getAllBySource(id);
         request.setAttribute("source", source);
         request.setAttribute("albums", albums);
-        request.setAttribute("page", page);
         return "sourceDetail";
     }
 

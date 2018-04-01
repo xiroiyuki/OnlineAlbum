@@ -27,6 +27,11 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
     }
 
     @Override
+    public List<Album> getAllBySource(long sourceId) {
+        return dao.selectBySource(sourceId);
+    }
+
+    @Override
     public List<Album> getAll(int pageNum) {
         return dao.selectAll(pageNum, super.configuration.getPageSize());
     }

@@ -26,6 +26,11 @@ public class PhotoServiceImpl extends BaseService implements PhotoService {
     }
 
     @Override
+    public List<Photo> getAllByAlbum(long albumId) {
+        return dao.selectByAlbumId(albumId);
+    }
+
+    @Override
     public List<Photo> getAll(int pageNum) {
         return dao.selectAll(pageNum, super.configuration.getPageSize());
     }

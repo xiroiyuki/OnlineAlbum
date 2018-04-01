@@ -75,7 +75,7 @@
                 <h3 class="box-title">包含的相册</h3>
             </div>
             <div class="box-body">
-                <table id="sourceTable" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -114,24 +114,6 @@
                     </c:choose>
                     </tbody>
                 </table>
-            </div>
-            <div class="box-footer">
-                <div class="row">
-                    <div class="col-md-4 pull-right">
-                        <ul class="pagination">
-                            <li>
-                                <a href="source/detail?id=${source.id}&page=${page-1}">
-                                    上一页
-                                </a>
-                            </li>
-                            <li>
-                                <a href="source/detail?id=${source.id}&page=${page+1}">
-                                    下一页
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -188,13 +170,13 @@
         );
     });
     $(document).ready(function () {
-        $('#sourceTable').DataTable(
+        $('#table').DataTable(
             {
-                "paging": false,
-                "lengthChange": false,
+                "paging": true,
+                "lengthChange": true,
                 "searching": true,
                 "ordering": true,
-                "info": false,
+                "info": true,
                 "autoWidth": true
             }
         );

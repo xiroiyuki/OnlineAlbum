@@ -10,6 +10,8 @@ public interface PhotoService {
 
     List<Photo> getAllByAlbum(long albumId, int pageNum);
 
+    List<Photo> getAllByAlbum(long albumId);
+
     List<Photo> getAll(int pageNum);
 
     Map delete(long id);

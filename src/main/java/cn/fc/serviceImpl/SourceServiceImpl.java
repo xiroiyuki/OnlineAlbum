@@ -26,6 +26,11 @@ public class SourceServiceImpl extends BaseService implements SourceService {
     }
 
     @Override
+    public List<Source> getAllSource() {
+        return dao.select();
+    }
+
+    @Override
     public Map update(Source source) {
         Source temp = dao.selectById(source.getId());
         if (temp == null) {

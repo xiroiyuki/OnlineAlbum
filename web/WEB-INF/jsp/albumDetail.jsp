@@ -138,24 +138,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="box-footer">
-                <div class="row">
-                    <div class="col-md-4 pull-right">
-                        <ul class="pagination">
-                            <li>
-                                <a href="album/detail?id=${album.id}&page=${page-1}">
-                                    上一页
-                                </a>
-                            </li>
-                            <li>
-                                <a href="album/detail?id=${album.id}&page=${page+1}">
-                                    下一页
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="modal fade" id="resModal">
@@ -184,30 +166,30 @@
 <script>
     var tabId = top.getActivePageId();
     <c:choose>
-        <c:when test="${album eq null}">
-        showNotFoundModal();
-        closeTab(tabId, 2000);
-        </c:when>
-        <c:otherwise>
-        $("#delete").click(function (e) {
-            $.get('album/delete', {id:${album.id}}, function (data, status) {
-                    resultHandler(data, status, tabId);
-                }
-            );
-        });
-        $(document).ready(function () {
-            $('#photoTable').DataTable(
-                {
-                    "paging": false,
-                    "lengthChange": false,
-                    "searching": true,
-                    "ordering": true,
-                    "info": false,
-                    "autoWidth": true
-                }
-            );
-        });
-        </c:otherwise>
+    <c:when test="${album eq null}">
+    showNotFoundModal();
+    closeTab(tabId, 2000);
+    </c:when>
+    <c:otherwise>
+    $("#delete").click(function (e) {
+        $.get('album/delete', {id:${album.id}}, function (data, status) {
+                resultHandler(data, status, tabId);
+            }
+        );
+    });
+    $(document).ready(function () {
+        $('#photoTable').DataTable(
+            {
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            }
+        );
+    });
+    </c:otherwise>
     </c:choose>
 </script>
 </body>

@@ -10,6 +10,8 @@ public interface AlbumService {
 
     List<Album> getAllBySource(long sourceId, int pageNum);
 
+    List<Album> getAllBySource(long sourceId);
+
     List<Album> getAll(int pageNum);
 
     List<Album> getAll();

@@ -37,13 +37,15 @@
         <div class="box box-solid">
             <div class="box-body">
                 <table class="table table-hover" id="table">
-                    <tbody>
+                    <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
+                        <th>#</th>
                         <th>标题</th>
                         <th>原始URL</th>
                         <th>操作</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <c:choose>
                         <c:when test="${sources ==  null || fn:length(sources) == 0} ">
                             <tr>
@@ -65,12 +67,6 @@
                     </c:choose>
                     </tbody>
                 </table>
-            </div>
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="source/list?page=${page-1}"> << </a></li>
-                    <li><a href="source/list?page=${page+1}"> >> </a></li>
-                </ul>
             </div>
         </div>
     </div>

@@ -11,6 +11,8 @@ public interface SourceService {
 
     List<Source> getAllSource(int pageNum);
 
+    List<Source> getAllSource();
+
     Map update(Source source);
 
     Map delete(long id);
