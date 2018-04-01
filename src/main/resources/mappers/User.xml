@@ -9,6 +9,11 @@
         WHERE username = #{username} AND password = #{password}
     </select>
 
+    <select id="selectAll" resultType="cn.fc.bean.User">
+        SELECT *
+        FROM `user`
+    </select>
+
     <select id="selectById" resultType="cn.fc.bean.User" parameterType="long">
         SELECT *
         FROM `user`
@@ -24,9 +29,23 @@
             <if test="password != null">
                 password = #{password},
             </if>
+            <if test="ROLE_ID != 0">
+                ROLE_ID = #{roleID},
+            </if>
+            <if test="state != 0">
+                state = #{state},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
         </trim>
         <where>
             id=#{id}
         </where>
     </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
 </mapper>

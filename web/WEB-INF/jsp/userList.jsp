@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>OnlineAlbum | Dashboard</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <link rel="stylesheet" href="../plugins/pace-master/themes/blue/pace-theme-flash.css">
     <script type="text/javascript" src="../plugins/pace-master/pace.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -28,10 +29,9 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        相册列表
+        用户列表
     </h1>
 </section>
-
 <section class="content">
     <div class="row">
         <div class="box box-solid">
@@ -40,34 +40,32 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>标题</th>
-                        <th>简介</th>
-                        <th>封面图</th>
-                        <th>图片数量</th>
-                        <th>原始URL</th>
+                        <th>用户名</th>
+                        <th>状态</th>
+                        <th>角色</th>
                         <th>创建时间</th>
+                        <th>备注</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:choose>
-                        <c:when test="${albums ==  null || fn:length(albums) == 0} ">
+                        <c:when test="${users ==  null || fn:length(users) == 0} ">
                             <tr>
                                 <th width="30" colspan="3">暂无数据</th>
                             </tr>
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="album" items="${albums}">
+                            <c:forEach var="user" items="${users}">
                                 <tr>
-                                    <td>${album.id}</td>
-                                    <td>${album.title}</td>
-                                    <td>${album.intro}</td>
-                                    <td><a href="${album.faceUrl}">查看</a></td>
-                                    <td>${album.photoNum}</td>
-                                    <td><a href="${album.url}">打开</a></td>
-                                    <td>${album.createTime}</td>
+                                    <td>${user.id}</td>
+                                    <td>${user.username}</td>
+                                    <td>${user.state}</td>
+                                    <td>${user.roleId}</td>
+                                    <td>${user.createTime}</td>
+                                    <td>${user.remark}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
+                                        <a href="javascript:createNewTab('user/detail?id=${user.id}','用户 ${user.username}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -78,6 +76,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>

@@ -176,6 +176,7 @@
                 id: "9102",
                 text: "用户管理",
                 icon: "fa fa-user",
+                url: "user/list",
                 targetType: "iframe-tab"
             },
             {
