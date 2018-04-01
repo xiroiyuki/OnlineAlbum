@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
@@ -34,8 +36,8 @@
     <div class="row">
         <div class="box box-solid">
             <div class="box-body">
-                <table class="table table-hover">
-                    <tbody>
+                <table class="table table-hover" id="table">
+                    <thead>
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>标题</th>
@@ -46,6 +48,8 @@
                         <th>创建时间</th>
                         <th>操作</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <c:choose>
                         <c:when test="${albums ==  null || fn:length(albums) == 0} ">
                             <tr>
@@ -72,12 +76,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="album/list?page=${page-1}">«</a></li>
-                    <li><a href="album/list?page=${page+1}">»</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </section>
@@ -92,5 +90,21 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 </body>
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable(
+            {
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            }
+        );
+    });
+</script>
 </html>

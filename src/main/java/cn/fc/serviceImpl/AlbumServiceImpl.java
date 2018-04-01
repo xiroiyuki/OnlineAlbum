@@ -32,6 +32,11 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
     }
 
     @Override
+    public List<Album> getAll() {
+        return dao.selectAll();
+    }
+
+    @Override
     public Map delete(long id) {
         Album album = dao.selectById(id);
         if (album == null) {

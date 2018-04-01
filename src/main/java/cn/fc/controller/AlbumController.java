@@ -24,11 +24,9 @@ public class AlbumController {
     private PhotoService photoService;
 
     @RequestMapping("/list")
-    public String list(Integer page, HttpServletRequest request) {
-        page = page == null ? 1 : page;
-        List<Album> albums = service.getAll(page);
+    public String list(HttpServletRequest request) {
+        List<Album> albums = service.getAll();
         request.setAttribute("albums", albums);
-        request.setAttribute("page", page);
         return "albumList";
     }
 

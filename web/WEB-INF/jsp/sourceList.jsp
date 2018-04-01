@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -35,7 +36,7 @@
     <div class="row">
         <div class="box box-solid">
             <div class="box-body">
-                <table class="table table-hover">
+                <table class="table table-hover" id="table">
                     <tbody>
                     <tr>
                         <th style="width: 10px">#</th>
@@ -84,5 +85,21 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 </body>
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable(
+            {
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            }
+        );
+    });
+</script>
 </html>

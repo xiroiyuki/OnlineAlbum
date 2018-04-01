@@ -12,6 +12,8 @@ public interface AlbumService {
 
     List<Album> getAll(int pageNum);
 
+    List<Album> getAll();
+
     Map delete(long id);
 
     Map update(Album album);
