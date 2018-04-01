@@ -3,6 +3,7 @@ package cn.fc.service;
 import cn.fc.bean.Source;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SourceService {
 
@@ -10,7 +11,7 @@ public interface SourceService {
 
     List<Source> getAllSource(int pageNum);
 
-    boolean update(Source source);
+    Map update(Source source);
 
-    boolean delete(long id);
+    Map delete(long id);
 }

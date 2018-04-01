@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SourceServiceImpl extends BaseService implements SourceService {
@@ -26,16 +27,14 @@ public class SourceServiceImpl extends BaseService implements SourceService {
     }
 
     @Override
-    public boolean update(Source source) {
-        Source old = dao.selectById(source.getId());
+    public Map update(Source source) {
         dao.update(source);
-        Source newSource = dao.selectById(source.getId());
-        return !old.equals(newSource);
+        return super.resultDataBuilder.setCode(200).setMsg("修改成功").setResult(true).create();
     }
 
     @Override
-    public boolean delete(long id) {
+    public Map delete(long id) {
         dao.delete(id);
-        return dao.selectById(id) == null;
+        return super.resultDataBuilder.setCode(200).setMsg("删除成功").setResult(true).create();
     }
 }
