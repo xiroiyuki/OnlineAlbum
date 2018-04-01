@@ -1,4 +1,4 @@
-package cn.fc.service;
+package cn.fc.serviceImpl;
 
 import cn.fc.conf.AppConfiguration;
 import cn.fc.util.ResultCode;

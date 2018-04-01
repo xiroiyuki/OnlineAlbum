@@ -2,7 +2,6 @@ package cn.fc.serviceImpl;
 
 import cn.fc.bean.Source;
 import cn.fc.dao.SourceDao;
-import cn.fc.service.BaseService;
 import cn.fc.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,6 @@ package cn.fc.serviceImpl;
 import cn.fc.bean.Album;
 import cn.fc.dao.AlbumDao;
 import cn.fc.service.AlbumService;
-import cn.fc.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,6 @@ package cn.fc.serviceImpl;
 
 import cn.fc.bean.Photo;
 import cn.fc.dao.PhotoDao;
-import cn.fc.service.BaseService;
 import cn.fc.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
