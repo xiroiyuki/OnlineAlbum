@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fc.dao.AuthorityDao">
+    <insert id="insert" parameterType="cn.fc.bean.Authority">
+        insert into authority (name, url)
+        values (#{name}, #{url})
+    </insert>
+    <select id="selectId" parameterType="long" resultType="cn.fc.bean.Authority">
+        select *
+        from authority
+        where id = #{id}
+    </select>
+    <select id="select" resultType="cn.fc.bean.Authority">
+        select *
+        from authority
+    </select>
+    <select id="edit" resultType="cn.fc.bean.Authority">
+        select *
+        from authority
+        where id = #{id}
+        order by id
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from authority
+        where id = #{id}
+    </delete>
+    <update id="update" parameterType="cn.fc.bean.Authority">
+        update authority set
+        <trim suffixOverrides=",">
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+        </trim>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <select id="loadUserAuthority" parameterType="cn.fc.bean.User" resultType="cn.fc.bean.Authority">
+        select a.*
+        from `user` u, role_authority ra, authority a
+        where ra.ROLE_ID = u.ROLE_ID and a.id = ra.AUTHORITY_ID and u.id = #{id}
+    </select>
+</mapper>
