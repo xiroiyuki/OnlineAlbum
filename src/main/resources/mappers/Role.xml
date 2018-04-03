@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fc.dao.RoleDao">
+    <insert id="insert" parameterType="cn.fc.bean.Role">
+        insert into role (rolename) values (#{roleName})
+    </insert>
+    <select id="select" resultType="cn.fc.bean.Role">
+        select *
+        from role
+    </select>
+    <delete id="delete" parameterType="long">
+        delete from role
+        where id = #{id}
+    </delete>
+    <update id="update" parameterType="cn.fc.bean.Role">
+        update role
+        set rolename = #{rolename}
+        where id = #{id}
+    </update>
+    <select id="edit" resultType="cn.fc.bean.Role" parameterType="long">
+        select *
+        from role
+        where id = #{id}
+    </select>
+</mapper>
