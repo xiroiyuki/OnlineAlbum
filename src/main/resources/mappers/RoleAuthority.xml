@@ -3,14 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.RoleAuthorityDao">
-    <insert id="insert" parameterType="cn.fc.bean.RoleAuthority">
+    <insert id="grant" parameterType="cn.fc.bean.RoleAuthority">
         insert into role_authority (ROLE_ID, AUTHORITY_ID)
         values (#{role.id}, #{authority.id})
     </insert>
 
-    <delete id="delete" parameterType="long">
+    <delete id="revoke" parameterType="cn.fc.bean.RoleAuthority">
         DELETE FROM role_authority
-        WHERE id = #{id}
+        WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
     </delete>
 
 </mapper>

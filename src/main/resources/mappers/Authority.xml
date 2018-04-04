@@ -7,26 +7,68 @@
         insert into authority (name, url)
         values (#{name}, #{url})
     </insert>
-    <select id="selectById" parameterType="long" resultType="cn.fc.bean.Authority">
+    <select id="selectById" parameterType="long" resultMap="authorityMap">
         SELECT
-            role.id      AS r_id,
-            authority.id AS a_id,
-            role.*,
-            authority.*
+            r_tmp.r_id,
+            r_tmp.rolename,
+            a_tmp.a_id,
+            a_tmp.`name`,
+            a_tmp.url
         FROM
-            role,
-            authority
-        where authority.id = #{id}
+            (
+                SELECT DISTINCT
+                    authority.id     AS a_id,
+                    authority.`name` AS `name`,
+                    authority.url    AS url
+                FROM
+                    authority
+                    LEFT JOIN role_authority ON authority.id = role_authority.AUTHORITY_ID
+            ) AS a_tmp
+            LEFT JOIN (
+                          SELECT
+                              role.id       AS r_id,
+                              role.rolename AS rolename,
+                              role_authority.AUTHORITY_ID,
+                              role_authority.ROLE_ID
+                          FROM
+                              role,
+                              role_authority
+                          WHERE
+                              role.id = role_authority.ROLE_ID
+                      ) AS r_tmp ON a_tmp.a_id = r_tmp.AUTHORITY_ID
+        WHERE
+            a_id = #{id}
     </select>
-    <select id="select" resultType="authorityMap">
+    <select id="select" resultMap="authorityMap">
         SELECT
-            role.id      AS r_id,
-            authority.id AS a_id,
-            role.*,
-            authority.*
+            r_tmp.r_id,
+            r_tmp.rolename,
+            a_tmp.a_id,
+            a_tmp.`name`,
+            a_tmp.url
         FROM
-            role,
-            authority
+            (
+                SELECT DISTINCT
+                    authority.id     AS a_id,
+                    authority.`name` AS `name`,
+                    authority.url    AS url
+                FROM
+                    authority
+                    LEFT JOIN role_authority ON authority.id = role_authority.AUTHORITY_ID
+            ) AS a_tmp
+            LEFT JOIN (
+                          SELECT
+                              role.id       AS r_id,
+                              role.rolename AS rolename,
+                              role_authority.AUTHORITY_ID,
+                              role_authority.ROLE_ID
+                          FROM
+                              role,
+                              role_authority
+                          WHERE
+                              role.id = role_authority.ROLE_ID
+                      ) AS r_tmp ON a_tmp.a_id = r_tmp.AUTHORITY_ID
+
     </select>
     <delete id="delete" parameterType="int">
         delete from authority

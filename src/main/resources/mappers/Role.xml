@@ -6,9 +6,35 @@
     <insert id="insert" parameterType="cn.fc.bean.Role">
         insert into role (rolename) values (#{roleName})
     </insert>
-    <select id="select" resultType="cn.fc.bean.Role">
-        select *
-        from role
+    <select id="select" resultMap="roleMap">
+        SELECT
+            r_tmp.r_id,
+            r_tmp.rolename,
+            a_tmp.a_id,
+            a_tmp.`name`,
+            a_tmp.url
+        FROM
+            (
+                SELECT DISTINCT
+                    role.id       AS r_id,
+                    role.rolename AS rolename
+                FROM
+                    role
+                    LEFT JOIN role_authority ON role.id = role_authority.ROLE_ID
+            ) AS r_tmp
+            LEFT JOIN (
+                          SELECT
+                              authority.id     AS a_id,
+                              authority.`name` AS `name`,
+                              authority.url    AS url,
+                              role_authority.AUTHORITY_ID,
+                              role_authority.ROLE_ID
+                          FROM
+                              authority,
+                              role_authority
+                          WHERE
+                              authority.id = role_authority.AUTHORITY_ID
+                      ) AS a_tmp ON r_tmp.r_id = a_tmp.ROLE_ID
     </select>
     <delete id="delete" parameterType="long">
         delete from role
@@ -22,18 +48,39 @@
 
     <select id="selectById" resultMap="roleMap" parameterType="long">
         SELECT
-            role.id      AS r_id,
-            authority.id AS a_id,
-            role.*,
-            authority.*
+            r_tmp.r_id,
+            r_tmp.rolename,
+            a_tmp.a_id,
+            a_tmp.`name`,
+            a_tmp.url
         FROM
-            role,
-            authority
-        where role.id = #{id}
+            (
+                SELECT DISTINCT
+                    role.id       AS r_id,
+                    role.rolename AS rolename
+                FROM
+                    role
+                    LEFT JOIN role_authority ON role.id = role_authority.ROLE_ID
+            ) AS r_tmp
+            LEFT JOIN (
+                          SELECT
+                              authority.id     AS a_id,
+                              authority.`name` AS `name`,
+                              authority.url    AS url,
+                              role_authority.AUTHORITY_ID,
+                              role_authority.ROLE_ID
+                          FROM
+                              authority,
+                              role_authority
+                          WHERE
+                              authority.id = role_authority.AUTHORITY_ID
+                      ) AS a_tmp ON r_tmp.r_id = a_tmp.ROLE_ID
+        WHERE
+            r_id = #{id}
     </select>
 
     <resultMap id="roleMap" type="cn.fc.bean.Role">
-        <id property="r_id" column="id"/>
+        <id property="id" column="r_id"/>
         <result property="roleName" column="rolename"/>
         <collection property="authorities" ofType="cn.fc.bean.Authority">
             <id column="a_id" property="id"/>
