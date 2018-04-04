@@ -45,10 +45,14 @@ public class RoleDaoTest {
 
     @Test
     public void insert() {
+        Role role = new Role();
+        role.setRoleName("哦i阿斯顿");
+        roleDao.insert(role);
     }
 
     @Test
     public void delete() {
+        roleDao.delete(5);
     }
 
     @Test
@@ -63,5 +67,8 @@ public class RoleDaoTest {
 
     @Test
     public void update() {
+        Role r = roleDao.selectById(5);
+        r.setRoleName("kasklaklklasjkld");
+        roleDao.update(r);
     }
 }

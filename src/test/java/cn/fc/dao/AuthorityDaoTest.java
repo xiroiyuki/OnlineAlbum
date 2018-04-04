@@ -1,5 +1,6 @@
 package cn.fc.dao;
 
+import cn.fc.bean.Authority;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,22 @@ public class AuthorityDaoTest {
 
     @Autowired
     private AuthorityDao authorityDao;
+    @Autowired
+    private UserDao userDao;
 
     @Test
     public void insert() {
 
+        Authority authority = new Authority();
+        authority.setUrl("tetteee");
+        authority.setName("tetetaw");
+        authorityDao.insert(authority);
 
     }
 
     @Test
     public void delete() {
+        authorityDao.delete(5);
     }
 
     @Test
@@ -38,9 +46,13 @@ public class AuthorityDaoTest {
 
     @Test
     public void loadUserAuthority() {
+        System.out.println(authorityDao.loadUserAuthority(userDao.selectById(4)));
     }
 
     @Test
     public void update() {
+        Authority authority = authorityDao.selectById(5);
+        authority.setName("81823482348");
+        authorityDao.update(authority);
     }
 }
