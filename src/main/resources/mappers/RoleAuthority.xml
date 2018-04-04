@@ -7,17 +7,10 @@
         insert into role_authority (ROLE_ID, AUTHORITY_ID)
         values (#{role.id}, #{authority.id})
     </insert>
-    <delete id="delete" parameterType="int">
-        delete from role_authority
-        where ROLE_ID = #{roleid}
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM role_authority
+        WHERE id = #{id}
     </delete>
-    <delete id="deleteAuthority" parameterType="long">
-        delete from role_authority
-        where AUTHORITY_ID = #{id}
-    </delete>
-    <select id="select" parameterType="long">
-        select *
-        from role_authority
-        where AUTHORITY_ID = #{roleId}
-    </select>
+
 </mapper>

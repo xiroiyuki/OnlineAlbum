@@ -12,11 +12,9 @@ public interface AuthorityDao {
 
     List select();
 
-    Authority selectId(long id);
+    Authority selectById(long id);
 
     List loadUserAuthority(User user);
-
-    Authority edit(long id);
 
     void update(Authority authority);
 

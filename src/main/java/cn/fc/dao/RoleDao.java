@@ -11,7 +11,8 @@ public interface RoleDao {
 
     List select();
 
-    Role edit(long id);
+    Role selectById(long id);
 
     void update(Role r);
+
 }

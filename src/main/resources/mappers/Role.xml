@@ -16,12 +16,30 @@
     </delete>
     <update id="update" parameterType="cn.fc.bean.Role">
         update role
-        set rolename = #{rolename}
+        set rolename = #{roleName}
         where id = #{id}
     </update>
-    <select id="edit" resultType="cn.fc.bean.Role" parameterType="long">
-        select *
-        from role
-        where id = #{id}
+
+    <select id="selectById" resultMap="roleMap" parameterType="long">
+        SELECT
+            role.id      AS r_id,
+            authority.id AS a_id,
+            role.*,
+            authority.*
+        FROM
+            role,
+            authority
+        where role.id = #{id}
     </select>
+
+    <resultMap id="roleMap" type="cn.fc.bean.Role">
+        <id property="r_id" column="id"/>
+        <result property="roleName" column="rolename"/>
+        <collection property="authorities" ofType="cn.fc.bean.Authority">
+            <id column="a_id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="url" property="url"/>
+        </collection>
+    </resultMap>
+
 </mapper>
