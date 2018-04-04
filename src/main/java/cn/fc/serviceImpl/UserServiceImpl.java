@@ -24,6 +24,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public User get(long id) {
+        return dao.selectById(id);
+    }
+
+    @Override
     public Map update(User user) {
         User temp = dao.selectById(user.getId());
         if (temp == null) {

@@ -45,4 +45,24 @@ public class UserController {
         return "userList";
     }
 
+    @RequestMapping("/detail")
+    public String detail(Long id, HttpServletRequest request) {
+        User user = service.get(id);
+        request.setAttribute("user", user);
+        return "userDetail";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Long id, HttpServletRequest request) {
+        User user = service.get(id);
+        request.setAttribute("user", user);
+        return "userEdit";
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Map delete(Long id) {
+        return service.delete(id);
+    }
+
 }

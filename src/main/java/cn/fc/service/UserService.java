@@ -9,6 +9,8 @@ public interface UserService {
 
     User login(String username, String password);
 
+    User get(long id);
+
     Map update(User user);
 
     Map delete(Long id);

@@ -10,11 +10,11 @@ public interface AuthorityDao {
 
     void delete(int id);
 
-    List select();
+    List<Authority> select();
 
     Authority selectById(long id);
 
-    List loadUserAuthority(User user);
+    List<Authority> loadUserAuthority(User user);
 
     void update(Authority authority);
 

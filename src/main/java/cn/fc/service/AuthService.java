@@ -23,13 +23,13 @@ public interface AuthService {
 
     Map grant(Role role, Authority authority);
 
-    boolean validateLoginUserAuthority(User user);
+    List<Authority> loadLoginUserAuthority(User user);
 
     Map updateAuthority(Authority authority);
 
     Map updateRole(Role role);
 
-    Map deleteRole(Role role);
+    Map deleteRole(long id);
 
-    Map deleteAuthority(Authority authority);
+    Map deleteAuthority(long id);
 }

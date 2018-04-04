@@ -9,7 +9,7 @@ public interface RoleDao {
 
     void delete(long id);
 
-    List select();
+    List<Role> select();
 
     Role selectById(long id);
 
