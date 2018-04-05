@@ -199,10 +199,24 @@
             },
             {
                 id: "9106",
-                text: "角色权限",
+                text: "权限控制",
                 icon: "fa fa-lock",
-                url: "role/list",
-                targetType: "iframe-tab"
+                children: [
+                    {
+                        id: "910601",
+                        text: "角色管理",
+                        url: "role/list",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "910602",
+                        text: "权限管理",
+                        url: "authority/list",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }
+                ]
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});
