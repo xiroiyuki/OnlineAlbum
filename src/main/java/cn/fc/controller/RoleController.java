@@ -53,7 +53,7 @@ public class RoleController {
     @RequestMapping("/insert")
     @ResponseBody
     public Map insert(Role role) {
-        return service.updateRole(role);
+        return service.insertRole(role);
     }
 
 
