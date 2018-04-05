@@ -70,7 +70,7 @@
                       ) AS r_tmp ON a_tmp.a_id = r_tmp.AUTHORITY_ID
 
     </select>
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
         delete from authority
         where id = #{id}
     </delete>

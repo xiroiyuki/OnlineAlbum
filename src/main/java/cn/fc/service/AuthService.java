@@ -3,12 +3,10 @@ package cn.fc.service;
 import cn.fc.bean.Authority;
 import cn.fc.bean.Role;
 import cn.fc.bean.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-@Service
 public interface AuthService {
 
     List<Role> listRole();
@@ -32,4 +30,10 @@ public interface AuthService {
     Map deleteRole(long id);
 
     Map deleteAuthority(long id);
+
+    Map insertAuthority(Authority authority);
+
+    Map insertRole(Role role);
+
+
 }

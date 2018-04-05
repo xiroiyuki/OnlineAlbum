@@ -7,4 +7,6 @@ public interface RoleAuthorityDao {
 
     void revoke(RoleAuthority roleAuthority);
 
+    RoleAuthority exists(RoleAuthority roleAuthority);
+
 }

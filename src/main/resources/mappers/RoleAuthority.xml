@@ -13,4 +13,17 @@
         WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
     </delete>
 
+    <select id="exists" parameterType="cn.fc.bean.RoleAuthority" resultMap="raMap">
+        SELECT *
+        FROM role_authority
+        WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
+    </select>
+
+    <resultMap id="raMap" type="cn.fc.bean.RoleAuthority">
+        <id column="id" property="id" javaType="long"/>
+        <association property="role" column="ROLE_ID" javaType="cn.fc.bean.Role" select="cn.fc.dao.RoleDao.selectById"/>
+        <association property="authority" column="AUTHORITY_ID" javaType="cn.fc.bean.Authority"
+                     select="cn.fc.dao.AuthorityDao.selectById"/>
+    </resultMap>
+
 </mapper>

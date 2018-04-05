@@ -196,6 +196,13 @@
                 text: "消息推送",
                 icon: "fa fa-wifi",
                 targetType: "iframe-tab"
+            },
+            {
+                id: "9106",
+                text: "角色权限",
+                icon: "fa fa-lock",
+                url: "role/list",
+                targetType: "iframe-tab"
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});

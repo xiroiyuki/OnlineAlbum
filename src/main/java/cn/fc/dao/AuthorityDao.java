@@ -8,7 +8,7 @@ import java.util.List;
 public interface AuthorityDao {
     void insert(Authority authority);
 
-    void delete(int id);
+    void delete(long id);
 
     List<Authority> select();
 

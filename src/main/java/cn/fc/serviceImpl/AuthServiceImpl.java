@@ -8,6 +8,7 @@ import cn.fc.dao.AuthorityDao;
 import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
 import cn.fc.service.AuthService;
+import cn.fc.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,43 +27,61 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     private RoleDao roleDao;
 
 
+    @Override
     public List<Role> listRole() {
         return roleDao.select();
     }
 
+    @Override
     public List<Authority> listAuthority() {
         return authorityDao.select();
     }
 
+    @Override
     public Role getRole(long id) {
         return roleDao.selectById(id);
     }
 
+    @Override
     public Authority getAuthority(long id) {
         return authorityDao.selectById(id);
     }
 
+    @Override
     public Map revoke(Role role, Authority authority) {
         RoleAuthority roleAuthority = new RoleAuthority();
         roleAuthority.setRole(role);
         roleAuthority.setAuthority(authority);
-        roleAuthorityDao.revoke(roleAuthority);
-        return null;
+        RoleAuthority temp = roleAuthorityDao.exists(roleAuthority);
+        if (temp == null) {
+            return createNotFoundResultMap();
+        } else {
+            roleAuthorityDao.revoke(roleAuthority);
+            return createOKResultMap();
+        }
     }
 
+    @Override
     public Map grant(Role role, Authority authority) {
         RoleAuthority roleAuthority = new RoleAuthority();
         roleAuthority.setRole(role);
         roleAuthority.setAuthority(authority);
-        roleAuthorityDao.grant(roleAuthority);
-        return null;
+        RoleAuthority temp = roleAuthorityDao.exists(roleAuthority);
+        if (temp != null) {
+            return createResultMap(ResultCode.BAD_REQUEST, "已存在此授权,不可再次授权", false);
+        } else {
+            roleAuthorityDao.grant(roleAuthority);
+            return createOKResultMap();
+        }
     }
 
+    @Override
     public List<Authority> loadLoginUserAuthority(User user) {
         List<Authority> authority = authorityDao.loadUserAuthority(user);
         return authority;
     }
 
+    @Override
     public Map updateAuthority(Authority authority) {
         Authority temp = authorityDao.selectById(authority.getId());
         if (temp == null) {
@@ -73,6 +92,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         }
     }
 
+    @Override
     public Map updateRole(Role role) {
         Role temp = roleDao.selectById(role.getId());
         if (temp == null) {
@@ -83,6 +103,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         }
     }
 
+    @Override
     public Map deleteRole(long id) {
         Role temp = roleDao.selectById(id);
         if (temp == null) {
@@ -93,12 +114,26 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         }
     }
 
+    @Override
     public Map deleteAuthority(long id) {
         Authority temp = authorityDao.selectById(id);
         if (temp == null) {
             return createNotFoundResultMap();
         } else {
+            authorityDao.delete(id);
             return createOKResultMap();
         }
+    }
+
+    @Override
+    public Map insertAuthority(Authority authority) {
+        authorityDao.insert(authority);
+        return createOKResultMap();
+    }
+
+    @Override
+    public Map insertRole(Role role) {
+        roleDao.insert(role);
+        return createOKResultMap();
     }
 }
