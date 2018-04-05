@@ -4,18 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.UserDao">
     <select id="login" resultType="cn.fc.bean.User" parameterType="cn.fc.bean.User">
-        SELECT *
+        SELECT
+            *,
+            ROLE_ID AS roleId
         FROM `user`
         WHERE username = #{username} AND password = #{password}
     </select>
 
     <select id="selectAll" resultType="cn.fc.bean.User">
-        SELECT *
+        SELECT
+            *,
+            ROLE_ID AS roleId
         FROM `user`
     </select>
 
     <select id="selectById" resultType="cn.fc.bean.User" parameterType="long">
-        SELECT *
+        SELECT
+            *,
+            ROLE_ID AS roleId
         FROM `user`
         WHERE id = #{id}
     </select>
@@ -29,8 +35,8 @@
             <if test="password != null">
                 password = #{password},
             </if>
-            <if test="ROLE_ID != 0">
-                ROLE_ID = #{roleID},
+            <if test="roleId != 0">
+                ROLE_ID = #{roleId},
             </if>
             <if test="state != 0">
                 state = #{state},

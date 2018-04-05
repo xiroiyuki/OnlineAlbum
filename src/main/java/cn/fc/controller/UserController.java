@@ -1,6 +1,7 @@
 package cn.fc.controller;
 
 import cn.fc.bean.User;
+import cn.fc.service.AuthService;
 import cn.fc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private AuthService authService;
+
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.POST})
     public String doLogin(String username, String password, HttpSession session) {
@@ -56,6 +60,7 @@ public class UserController {
     public String edit(Long id, HttpServletRequest request) {
         User user = service.get(id);
         request.setAttribute("user", user);
+        request.setAttribute("roles", authService.listRole());
         return "userEdit";
     }
 

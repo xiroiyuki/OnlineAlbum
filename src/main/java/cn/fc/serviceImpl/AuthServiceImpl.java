@@ -9,10 +9,12 @@ import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
 import cn.fc.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class AuthServiceImpl extends BaseService implements AuthService {
 
 
@@ -63,9 +65,9 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     public Map updateAuthority(Authority authority) {
         Authority temp = authorityDao.selectById(authority.getId());
-        if (temp == null){
+        if (temp == null) {
             return createNotFoundResultMap();
-        }else{
+        } else {
             authorityDao.update(authority);
             return createOKResultMap();
         }
@@ -73,9 +75,9 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     public Map updateRole(Role role) {
         Role temp = roleDao.selectById(role.getId());
-        if (temp==null){
+        if (temp == null) {
             return createNotFoundResultMap();
-        }else{
+        } else {
             roleDao.update(role);
             return createOKResultMap();
         }
@@ -83,9 +85,9 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     public Map deleteRole(long id) {
         Role temp = roleDao.selectById(id);
-        if (temp==null){
+        if (temp == null) {
             return createNotFoundResultMap();
-        }else{
+        } else {
             roleDao.delete(id);
             return createOKResultMap();
         }
@@ -93,10 +95,10 @@ public class AuthServiceImpl extends BaseService implements AuthService {
 
     public Map deleteAuthority(long id) {
         Authority temp = authorityDao.selectById(id);
-        if (temp==null){
+        if (temp == null) {
             return createNotFoundResultMap();
-        }else {
-            return  createOKResultMap();
+        } else {
+            return createOKResultMap();
         }
     }
 }

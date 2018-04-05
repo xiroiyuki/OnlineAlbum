@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2.min.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
-
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
@@ -32,46 +32,48 @@
 </section>
 <section class="content">
     <div class="row">
-        <div class="box box-solid">
-            <form role="form">
-                <div class="box-body">
-                    <input name="id" id="id" value="${user.id}" hidden>
-                    <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入新用户名"
-                               value="${ user.username}">
+        <div class="col-md-4">
+            <div class="box box-solid">
+                <form role="form">
+                    <div class="box-body">
+                        <input name="id" id="id" value="${user.id}" hidden>
+                        <div class="form-group">
+                            <label for="username">用户名</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="请输入新用户名"
+                                   value="${ user.username}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="text" class="form-control" name="password" id="password"
+                                   value="${user.password}"
+                                   placeholder="请输入新密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="roleId">角色</label>
+                            <select class="form-control select2" id="roleId" style="width: 100%;">
+                                <c:forEach items="${roles}" var="role">
+                                    <option value="${role.id}" ${user.roleId - role.id == 0 ?"selected":"" }>${role.roleName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">状态</label>
+                            <select class="form-control select2" id="state" style="width: 100%;">
+                                <option selected="selected" value="1">正常</option>
+                                <option value="0">锁定</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark">备注</label>
+                            <input type="text" class="form-control" name="remark" id="remark" placeholder="请输入备注"
+                                   value="${user. remark}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="text" class="form-control" name="password" id="password" value="${user.password}"
-                               placeholder="请输入新密码">
+                    <div class="box-footer">
+                        <button type="button" id="submit" class="btn btn-primary">提交</button>
                     </div>
-                    <div class="form-group">
-                        <label for="roleId">角色</label>
-                        <section class="form-control" name="roleId" id="roleId">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </section>
-                    </div>
-                    <div class="form-group">
-                        <label for="state">状态</label>
-                        <section class="form-control" name="state" id="state">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </section>
-                    </div>
-                    <div class="form-group">
-                        <label for="remark">用户名</label>
-                        <input type="text" class="form-control" name="remark" id="remark" placeholder="请输入备注"
-                               value="${ user. remark}">
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <button type="button" id="submit" class="btn btn-primary">提交</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -96,16 +98,21 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
+<script src="../plugins/select2/select2.full.min.js"></script>
+
 </body>
 
 <script>
     var tabId = top.getActivePageId();
     $("#submit").click(function () {
-        $.post("source/update",
+        $.post("user/update",
             {
                 id: $("#id").val(),
-                name: $("#name").val(),
-                url: $("#url").val()
+                username: $("#username").val(),
+                password: $("#password").val(),
+                roleId: $("#roleId").val(),
+                state: $("#state").val(),
+                remark: $("#remark").val()
             },
             function (data, status) {
                 console.log("Data: " + data.result + "\nStatus: " + status);
@@ -126,6 +133,10 @@
                 }
             });
     });
+    $(function () {
+        $(".select2").select2();
+    });
+
 </script>
 
 </html>
