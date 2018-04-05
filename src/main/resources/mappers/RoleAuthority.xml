@@ -3,22 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.RoleAuthorityDao">
-    <insert id="grant" parameterType="cn.fc.bean.RoleAuthority">
-        insert into role_authority (ROLE_ID, AUTHORITY_ID)
-        values (#{role.id}, #{authority.id})
-    </insert>
-    <insert id="grantAll" parameterType="java.util.List">
+    <insert id="grantRoleAuthorities" parameterType="java.util.List">
         insert into role_authority (ROLE_ID, AUTHORITY_ID)
         values
         <foreach collection="list" item="ra" separator=",">
             (#{ra.role.id }, #{ra.authority.id})
         </foreach>
     </insert>
-
-    <delete id="revoke" parameterType="cn.fc.bean.RoleAuthority">
-        DELETE FROM role_authority
-        WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
-    </delete>
 
     <delete id="revokeRole" parameterType="cn.fc.bean.Role">
         DELETE FROM role_authority
@@ -29,18 +20,5 @@
         DELETE FROM role_authority
         WHERE AUTHORITY_ID = #{id}
     </delete>
-
-    <select id="exists" parameterType="cn.fc.bean.RoleAuthority" resultMap="raMap">
-        SELECT *
-        FROM role_authority
-        WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
-    </select>
-
-    <resultMap id="raMap" type="cn.fc.bean.RoleAuthority">
-        <id column="id" property="id" javaType="long"/>
-        <association property="role" column="ROLE_ID" javaType="cn.fc.bean.Role" select="cn.fc.dao.RoleDao.selectById"/>
-        <association property="authority" column="AUTHORITY_ID" javaType="cn.fc.bean.Authority"
-                     select="cn.fc.dao.AuthorityDao.selectById"/>
-    </resultMap>
 
 </mapper>

@@ -7,12 +7,12 @@ import java.util.List;
 public interface RoleDao {
     void insert(Role role);
 
-    void delete(long id);
-
     List<Role> select();
 
-    Role selectById(long id);
+    void delete(long id);
 
     void update(Role r);
+
+    Role selectById(long id);
 
 }

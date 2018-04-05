@@ -80,24 +80,22 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         roleAuthorityDao.revokeAuthority(authority);
     }
 
-    @Override
-    public void grant(Role role, Authority authority) {
-        RoleAuthority roleAuthority = new RoleAuthority();
-        roleAuthority.setRole(role);
-        roleAuthority.setAuthority(authority);
-        roleAuthorityDao.grant(roleAuthority);
-    }
 
     @Override
-    public void grantList(Role role, Long[] authorityIds) {
-        List<Authority> authorities = authorityDao.selectList(authorityIds);
+    public void grantAuthorities(Role role, Long[] authorityIds) {
+        List<Authority> authorities = authorityDao.selectByIds(authorityIds);
         List<RoleAuthority> roleAuthorities = authorities.stream().map(authority -> {
             RoleAuthority roleAuthority = new RoleAuthority();
             roleAuthority.setAuthority(authority);
             roleAuthority.setRole(role);
             return roleAuthority;
         }).collect(Collectors.toList());
-        roleAuthorityDao.grantAll(roleAuthorities);
+        roleAuthorityDao.grantRoleAuthorities(roleAuthorities);
+    }
+
+    @Override
+    public void grantRoles(Long[] roleIds, Authority authority) {
+
     }
 
     @Override

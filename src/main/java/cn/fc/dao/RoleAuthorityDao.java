@@ -7,13 +7,7 @@ import cn.fc.bean.RoleAuthority;
 import java.util.List;
 
 public interface RoleAuthorityDao {
-    void grant(RoleAuthority roleAuthority);
-
-    void grantAll(List<RoleAuthority> roleAuthorities);
-
-    void revoke(RoleAuthority roleAuthority);
-
-    RoleAuthority exists(RoleAuthority roleAuthority);
+    void grantRoleAuthorities(List<RoleAuthority> roleAuthorities);
 
     void revokeRole(Role role);
 

@@ -57,7 +57,7 @@ public class RoleController {
     public Map update(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
         service.revokeRole(role);
         if (authorityIds != null && authorityIds.length > 0) {
-            service.grantList(role, authorityIds);
+            service.grantAuthorities(role, authorityIds);
         }
         return service.updateRole(role);
     }

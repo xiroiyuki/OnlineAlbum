@@ -29,9 +29,9 @@ public interface AuthService {
 
     void revokeAuthority(Authority authority);
 
-    void grant(Role role, Authority authority);
+    void grantAuthorities(Role role, Long[] authorityIds);
 
-    void grantList(Role role, Long[] authorityIds);
+    void grantRoles(Long[] roleIds, Authority authority);
 
     List<Authority> loadLoginUserAuthority(User user);
 

@@ -12,12 +12,12 @@ public interface AuthorityDao {
 
     List<Authority> select();
 
-    List<Authority> selectList(Long[] ids);
-
     Authority selectById(long id);
 
-    List<Authority> loadUserAuthority(User user);
+    List<Authority> selectByIds(Long[] ids);
 
     void update(Authority authority);
+
+    List<Authority> loadUserAuthority(User user);
 
 }
