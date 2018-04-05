@@ -7,6 +7,13 @@
         insert into role_authority (ROLE_ID, AUTHORITY_ID)
         values (#{role.id}, #{authority.id})
     </insert>
+    <insert id="grantAll" parameterType="java.util.List">
+        insert into role_authority (ROLE_ID, AUTHORITY_ID)
+        values
+        <foreach collection="list" item="ra" separator=",">
+            (#{ra.role.id }, #{ra.authority.id})
+        </foreach>
+    </insert>
 
     <delete id="revoke" parameterType="cn.fc.bean.RoleAuthority">
         DELETE FROM role_authority
@@ -18,6 +25,10 @@
         WHERE ROLE_ID = #{id}
     </delete>
 
+    <delete id="revokeAuthority" parameterType="cn.fc.bean.Authority">
+        DELETE FROM role_authority
+        WHERE AUTHORITY_ID = #{id}
+    </delete>
 
     <select id="exists" parameterType="cn.fc.bean.RoleAuthority" resultMap="raMap">
         SELECT *

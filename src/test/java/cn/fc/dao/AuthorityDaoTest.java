@@ -45,6 +45,11 @@ public class AuthorityDaoTest {
     }
 
     @Test
+    public void selectByIdArray() {
+        System.out.println(authorityDao.selectList(new Long[]{1L, 2L, 4L, 5L}));
+    }
+
+    @Test
     public void loadUserAuthority() {
         System.out.println(authorityDao.loadUserAuthority(userDao.selectById(4)));
     }

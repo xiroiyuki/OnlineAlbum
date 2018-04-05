@@ -25,11 +25,13 @@ public interface AuthService {
 
     Authority getAuthority(long id);
 
-    Map revoke(Role role, Authority authority);
+    void revokeRole(Role role);
 
-    void revoke(Role role);
+    void revokeAuthority(Authority authority);
 
-    Map grant(Role role, Authority authority);
+    void grant(Role role, Authority authority);
+
+    void grantList(Role role, Long[] authorityIds);
 
     List<Authority> loadLoginUserAuthority(User user);
 

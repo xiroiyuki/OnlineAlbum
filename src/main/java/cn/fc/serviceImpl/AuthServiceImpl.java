@@ -8,7 +8,6 @@ import cn.fc.dao.AuthorityDao;
 import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
 import cn.fc.service.AuthService;
-import cn.fc.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,42 +71,38 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
-    public Map revoke(Role role, Authority authority) {
-        RoleAuthority roleAuthority = new RoleAuthority();
-        roleAuthority.setRole(role);
-        roleAuthority.setAuthority(authority);
-        RoleAuthority temp = roleAuthorityDao.exists(roleAuthority);
-        if (temp == null) {
-            return createNotFoundResultMap();
-        } else {
-            roleAuthorityDao.revoke(roleAuthority);
-            return createOKResultMap();
-        }
-    }
-
-    @Override
-    public void revoke(Role role) {
+    public void revokeRole(Role role) {
         roleAuthorityDao.revokeRole(role);
     }
 
     @Override
-    public Map grant(Role role, Authority authority) {
+    public void revokeAuthority(Authority authority) {
+        roleAuthorityDao.revokeAuthority(authority);
+    }
+
+    @Override
+    public void grant(Role role, Authority authority) {
         RoleAuthority roleAuthority = new RoleAuthority();
         roleAuthority.setRole(role);
         roleAuthority.setAuthority(authority);
-        RoleAuthority temp = roleAuthorityDao.exists(roleAuthority);
-        if (temp != null) {
-            return createResultMap(ResultCode.BAD_REQUEST, "已存在此授权,不可再次授权", false);
-        } else {
-            roleAuthorityDao.grant(roleAuthority);
-            return createOKResultMap();
-        }
+        roleAuthorityDao.grant(roleAuthority);
+    }
+
+    @Override
+    public void grantList(Role role, Long[] authorityIds) {
+        List<Authority> authorities = authorityDao.selectList(authorityIds);
+        List<RoleAuthority> roleAuthorities = authorities.stream().map(authority -> {
+            RoleAuthority roleAuthority = new RoleAuthority();
+            roleAuthority.setAuthority(authority);
+            roleAuthority.setRole(role);
+            return roleAuthority;
+        }).collect(Collectors.toList());
+        roleAuthorityDao.grantAll(roleAuthorities);
     }
 
     @Override
     public List<Authority> loadLoginUserAuthority(User user) {
-        List<Authority> authority = authorityDao.loadUserAuthority(user);
-        return authority;
+        return authorityDao.loadUserAuthority(user);
     }
 
     @Override

@@ -55,12 +55,9 @@ public class RoleController {
     @RequestMapping("/update")
     @ResponseBody
     public Map update(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
-//        TODO 流程待修改
-        service.revoke(role);
+        service.revokeRole(role);
         if (authorityIds != null && authorityIds.length > 0) {
-            for (Long authorityId : authorityIds) {
-                service.grant(role, service.getAuthority(authorityId));
-            }
+            service.grantList(role, authorityIds);
         }
         return service.updateRole(role);
     }

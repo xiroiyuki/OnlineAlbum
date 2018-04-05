@@ -36,18 +36,18 @@ public class AuthServiceTest {
         System.out.println(service.getAuthority(4));
     }
 
-    @Test
-    public void revoke() {
-        Authority authority = service.getAuthority(1);
-        Role role = service.getRole(1);
-        System.out.println(service.revoke(role, authority));
-    }
 
     @Test
     public void grant() {
         Authority authority = service.getAuthority(2);
         Role role = service.getRole(2);
-        System.out.println(service.grant(role, authority));
+        service.grant(role, authority);
+    }
+
+    @Test
+    public void grantList() {
+        Role role = service.getRole(2);
+        service.grantList(role, new Long[]{1L, 2L, 3L, 4L, 5L});
     }
 
     @Test
