@@ -7,7 +7,9 @@ import cn.fc.bean.User;
 import cn.fc.dao.AuthorityDao;
 import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
-import cn.fc.service.AuthService;
+import cn.fc.service.AuthorityService;
+import cn.fc.service.RoleAuthorityService;
+import cn.fc.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class AuthServiceImpl extends BaseService implements AuthService {
+public class AuthServiceImpl extends BaseService implements RoleAuthorityService, RoleService, AuthorityService {
 
 
     @Autowired
@@ -25,7 +27,6 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     private AuthorityDao authorityDao;
     @Autowired
     private RoleDao roleDao;
-
 
     @Override
     public List<Role> listRole() {
@@ -38,24 +39,24 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
-    public List<Authority> listRoleAuthority(Role role) {
+    public List<Authority> listAuthoritiesFromRole(Role role) {
         List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
         return authorityDao.select().stream().filter(authority -> hasId.contains(authority.getId())).collect(Collectors.toList());
     }
 
     @Override
-    public List<Authority> listAuthorityRole(Authority authority) {
+    public List<Role> listRolesFromAuthority(Authority authority) {
         return null;
     }
 
     @Override
-    public List<Authority> listRoleNotHasAuthority(Role role) {
+    public List<Authority> listExceptAuthoritiesFromRole(Role role) {
         List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
         return authorityDao.select().stream().filter(authority -> !hasId.contains(authority.getId())).collect(Collectors.toList());
     }
 
     @Override
-    public List<Authority> listAuthorityNotHasRole(Authority authority) {
+    public List<Role> listExceptRolesFromAuthority(Authority authority) {
         return null;
     }
 
@@ -71,18 +72,18 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
-    public void revokeRole(Role role) {
+    public void revokeRoleFromAllAuthorities(Role role) {
         roleAuthorityDao.revokeRole(role);
     }
 
     @Override
-    public void revokeAuthority(Authority authority) {
+    public void revokeAuthorityFromAllRoles(Authority authority) {
         roleAuthorityDao.revokeAuthority(authority);
     }
 
 
     @Override
-    public void grantAuthorities(Role role, Long[] authorityIds) {
+    public void grantAuthoritiesToRole(Long[] authorityIds, Role role) {
         List<Authority> authorities = authorityDao.selectByIds(authorityIds);
         List<RoleAuthority> roleAuthorities = authorities.stream().map(authority -> {
             RoleAuthority roleAuthority = new RoleAuthority();
@@ -94,7 +95,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
-    public void grantRoles(Long[] roleIds, Authority authority) {
+    public void grantRolesToAuthority(Long[] roleIds, Authority authority) {
 
     }
 

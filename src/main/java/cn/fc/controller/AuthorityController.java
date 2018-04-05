@@ -1,7 +1,7 @@
 package cn.fc.controller;
 
 import cn.fc.bean.Authority;
-import cn.fc.service.AuthService;
+import cn.fc.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,9 @@ import java.util.Map;
 public class AuthorityController {
 
     @Autowired
-    private AuthService service;
+    private AuthorityService service;
+
+
 
     @RequestMapping("/detail")
     public String detail(Long id, HttpServletRequest request) {

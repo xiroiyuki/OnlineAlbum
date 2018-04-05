@@ -2,7 +2,8 @@ package cn.fc.controller;
 
 import cn.fc.bean.Authority;
 import cn.fc.bean.Role;
-import cn.fc.service.AuthService;
+import cn.fc.service.RoleAuthorityService;
+import cn.fc.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ import java.util.Map;
 public class RoleController {
 
     @Autowired
-    private AuthService service;
+    private RoleService service;
+    @Autowired
+    private RoleAuthorityService roleAuthorityService;
 
     @RequestMapping("/detail")
     public String detail(Long id, HttpServletRequest request) {
@@ -36,10 +39,8 @@ public class RoleController {
     @RequestMapping("/edit")
     public String edit(Long id, HttpServletRequest request) {
         Role role = service.getRole(id);
-        List<Authority> has = service.listRoleAuthority(role);
-        List<Authority> notHas = service.listRoleNotHasAuthority(role);
-        System.out.println(has);
-        System.out.println(notHas);
+        List<Authority> has = roleAuthorityService.listAuthoritiesFromRole(role);
+        List<Authority> notHas = roleAuthorityService.listExceptAuthoritiesFromRole(role);
         request.setAttribute("role", role);
         request.setAttribute("has", has);
         request.setAttribute("notHas", notHas);
@@ -55,9 +56,9 @@ public class RoleController {
     @RequestMapping("/update")
     @ResponseBody
     public Map update(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
-        service.revokeRole(role);
+        roleAuthorityService.revokeRoleFromAllAuthorities(role);
         if (authorityIds != null && authorityIds.length > 0) {
-            service.grantAuthorities(role, authorityIds);
+            roleAuthorityService.grantAuthoritiesToRole(authorityIds, role);
         }
         return service.updateRole(role);
     }
