@@ -13,11 +13,21 @@ public interface AuthService {
 
     List<Authority> listAuthority();
 
+    List<Authority> listRoleAuthority(Role role);
+
+    List<Authority> listAuthorityRole(Authority authority);
+
+    List<Authority> listRoleNotHasAuthority(Role role);
+
+    List<Authority> listAuthorityNotHasRole(Authority authority);
+
     Role getRole(long id);
 
     Authority getAuthority(long id);
 
     Map revoke(Role role, Authority authority);
+
+    void revoke(Role role);
 
     Map grant(Role role, Authority authority);
 

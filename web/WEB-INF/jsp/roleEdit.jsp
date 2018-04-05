@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2.min.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -40,12 +42,26 @@
                         <input type="text" class="form-control" name="roleName" id="roleName" placeholder="请输入新标题"
                                value="${role.roleName}">
                     </div>
-                    <%--<div class="form-group">--%>
-                    <%--<label for="authority">权限</label>--%>
-                    <%--<input type="url" class="form-control" name="authority" id="authority"--%>
-                    <%--value="${role.authorities}"--%>
-                    <%--placeholder="请输入新原始URL">--%>
-                    <%--</div>--%>
+                    <div class="form-group">
+                        <label for="authorityIds">权限</label>
+                        <select class="form-control select2" multiple="multiple" id="authorityIds" name="authorityIds"
+                                data-placeholder="选择权限"
+                                style="width: 100%;">
+                            <c:choose>
+                                <c:when test="${(notHas eq null || fn:length(notHas) eq 0) && (has eq null || fn:length(has) eq 0)}">
+                                    <option value="-1" disabled>没有获取到权限列表</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="h" items="${has}">
+                                        <option value="${h.id}" selected>${h.name}</option>
+                                    </c:forEach>
+                                    <c:forEach items="${notHas}" var="nh">
+                                        <option value="${nh.id}">${nh.name}</option>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </div>
                 </div>
                 <div class="box-footer">
                     <button type="button" id="submit" class="btn btn-primary">提交</button>
@@ -74,13 +90,16 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../plugins/select2/select2.full.min.js"></script>
+
 <script>
     var tabId = top.getActivePageId();
     $("#submit").click(function () {
         $.post("role/update",
             {
                 id: $("#id").val(),
-                roleName: $("#roleName").val()
+                roleName: $("#roleName").val(),
+                authorityIds: $("#authorityIds").val()
             },
             function (data, status) {
                 console.log("Data: " + data.result + "\nStatus: " + status);
@@ -100,6 +119,12 @@
                     $('#resModal').modal('show');
                 }
             });
+    });
+
+    $(function () {
+        $(".select2").select2({
+            closeOnSelect: false
+        });
     });
 </script>
 </body>

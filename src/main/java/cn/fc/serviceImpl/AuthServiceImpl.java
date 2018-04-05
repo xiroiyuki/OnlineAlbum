@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthServiceImpl extends BaseService implements AuthService {
@@ -38,6 +39,29 @@ public class AuthServiceImpl extends BaseService implements AuthService {
     }
 
     @Override
+    public List<Authority> listRoleAuthority(Role role) {
+        List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
+        return authorityDao.select().stream().filter(authority -> hasId.contains(authority.getId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Authority> listAuthorityRole(Authority authority) {
+        return null;
+    }
+
+    @Override
+    public List<Authority> listRoleNotHasAuthority(Role role) {
+        List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
+        return authorityDao.select().stream().filter(authority -> !hasId.contains(authority.getId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Authority> listAuthorityNotHasRole(Authority authority) {
+        return null;
+    }
+
+
+    @Override
     public Role getRole(long id) {
         return roleDao.selectById(id);
     }
@@ -59,6 +83,11 @@ public class AuthServiceImpl extends BaseService implements AuthService {
             roleAuthorityDao.revoke(roleAuthority);
             return createOKResultMap();
         }
+    }
+
+    @Override
+    public void revoke(Role role) {
+        roleAuthorityDao.revokeRole(role);
     }
 
     @Override

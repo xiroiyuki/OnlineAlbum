@@ -1,5 +1,6 @@
 package cn.fc.dao;
 
+import cn.fc.bean.Role;
 import cn.fc.bean.RoleAuthority;
 
 public interface RoleAuthorityDao {
@@ -8,5 +9,7 @@ public interface RoleAuthorityDao {
     void revoke(RoleAuthority roleAuthority);
 
     RoleAuthority exists(RoleAuthority roleAuthority);
+
+    void revokeRole(Role role);
 
 }

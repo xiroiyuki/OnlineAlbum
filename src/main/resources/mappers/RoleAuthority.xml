@@ -13,6 +13,12 @@
         WHERE ROLE_ID = #{role.id} AND AUTHORITY_ID = #{authority.id}
     </delete>
 
+    <delete id="revokeRole" parameterType="cn.fc.bean.Role">
+        DELETE FROM role_authority
+        WHERE ROLE_ID = #{id}
+    </delete>
+
+
     <select id="exists" parameterType="cn.fc.bean.RoleAuthority" resultMap="raMap">
         SELECT *
         FROM role_authority
