@@ -16,6 +16,8 @@ public interface AuthorityDao {
 
     List<Authority> selectByIds(Long[] ids);
 
+    List<Authority> selectExceptByIds(Long[] ids);
+
     void update(Authority authority);
 
     List<Authority> loadUserAuthority(User user);

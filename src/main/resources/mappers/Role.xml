@@ -79,7 +79,6 @@
         set rolename = #{roleName}
         where id = #{id}
     </update>
-
     <select id="selectById" resultMap="roleMap" parameterType="long">
         SELECT
             r_tmp.r_id,
@@ -112,7 +111,41 @@
         WHERE
             r_id = #{id}
     </select>
-
+    <select id="selectExceptByIds" resultMap="roleMap" parameterType="long">
+        SELECT
+        r_tmp.r_id,
+        r_tmp.rolename,
+        a_tmp.a_id,
+        a_tmp.`name`,
+        a_tmp.url
+        FROM
+        (
+        SELECT DISTINCT
+        role.id AS r_id,
+        role.rolename AS rolename
+        FROM
+        role
+        LEFT JOIN role_authority ON role.id = role_authority.ROLE_ID
+        ) AS r_tmp
+        LEFT JOIN (
+        SELECT
+        authority.id AS a_id,
+        authority.`name` AS `name`,
+        authority.url AS url,
+        role_authority.AUTHORITY_ID,
+        role_authority.ROLE_ID
+        FROM
+        authority,
+        role_authority
+        WHERE
+        authority.id = role_authority.AUTHORITY_ID
+        ) AS a_tmp ON r_tmp.r_id = a_tmp.ROLE_ID
+        WHERE
+        r_id NOT IN
+        <foreach collection="array" item="ids" separator="," open="(" close=")">
+            #{ids}
+        </foreach>
+    </select>
     <resultMap id="roleMap" type="cn.fc.bean.Role">
         <id property="id" column="r_id"/>
         <result property="roleName" column="rolename"/>

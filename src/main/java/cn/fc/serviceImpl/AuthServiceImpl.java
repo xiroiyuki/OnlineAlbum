@@ -60,15 +60,20 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
     @Override
     public List<Authority> listExceptAuthoritiesFromRole(Role role) {
         List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
-        return authorityDao.select().stream().filter(authority -> !hasId.contains(authority.getId())).collect(Collectors.toList());
+        if (hasId.isEmpty()) {
+            return authorityDao.select();
+        }
+        return authorityDao.selectExceptByIds(hasId.toArray(new Long[]{}));
     }
 
     @Override
     public List<Role> listExceptRolesFromAuthority(Authority authority) {
         List<Long> hasId = authority.getRoles().stream().map(Role::getId).collect(Collectors.toList());
-        return roleDao.select().stream().filter(role -> !hasId.contains(role.getId())).collect(Collectors.toList());
+        if (hasId.isEmpty()) {
+            return roleDao.select();
+        }
+        return roleDao.selectExceptByIds(hasId.toArray(new Long[]{}));
     }
-
 
     @Override
     public Role getRole(long id) {
