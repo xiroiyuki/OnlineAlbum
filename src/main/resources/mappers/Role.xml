@@ -36,6 +36,40 @@
                               authority.id = role_authority.AUTHORITY_ID
                       ) AS a_tmp ON r_tmp.r_id = a_tmp.ROLE_ID
     </select>
+    <select id="selectByIds" resultMap="roleMap">
+        SELECT
+        r_tmp.r_id,
+        r_tmp.rolename,
+        a_tmp.a_id,
+        a_tmp.`name`,
+        a_tmp.url
+        FROM
+        (
+        SELECT DISTINCT
+        role.id AS r_id,
+        role.rolename AS rolename
+        FROM
+        role
+        LEFT JOIN role_authority ON role.id = role_authority.ROLE_ID
+        ) AS r_tmp
+        LEFT JOIN (
+        SELECT
+        authority.id AS a_id,
+        authority.`name` AS `name`,
+        authority.url AS url,
+        role_authority.AUTHORITY_ID,
+        role_authority.ROLE_ID
+        FROM
+        authority,
+        role_authority
+        WHERE
+        authority.id = role_authority.AUTHORITY_ID
+        ) AS a_tmp ON r_tmp.r_id = a_tmp.ROLE_ID
+        WHERE r_id IN
+        <foreach collection="array" item="ids" separator="," open="(" close=")">
+            #{ids}
+        </foreach>
+    </select>
     <delete id="delete" parameterType="long">
         delete from role
         where id = #{id}

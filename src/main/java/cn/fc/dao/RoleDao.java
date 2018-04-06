@@ -9,6 +9,8 @@ public interface RoleDao {
 
     List<Role> select();
 
+    List<Role> selectByIds(Long[] ids);
+
     void delete(long id);
 
     void update(Role r);

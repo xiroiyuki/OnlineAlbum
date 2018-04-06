@@ -13,6 +13,7 @@ import cn.fc.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,12 +42,19 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
     @Override
     public List<Authority> listAuthoritiesFromRole(Role role) {
         List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
-        return authorityDao.select().stream().filter(authority -> hasId.contains(authority.getId())).collect(Collectors.toList());
+        if (hasId.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return authorityDao.selectByIds(hasId.toArray(new Long[]{}));
     }
 
     @Override
     public List<Role> listRolesFromAuthority(Authority authority) {
-        return null;
+        List<Long> hasId = authority.getRoles().stream().map(Role::getId).collect(Collectors.toList());
+        if (hasId.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return roleDao.selectByIds(hasId.toArray(new Long[]{}));
     }
 
     @Override
@@ -57,7 +65,8 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
 
     @Override
     public List<Role> listExceptRolesFromAuthority(Authority authority) {
-        return null;
+        List<Long> hasId = authority.getRoles().stream().map(Role::getId).collect(Collectors.toList());
+        return roleDao.select().stream().filter(role -> !hasId.contains(role.getId())).collect(Collectors.toList());
     }
 
 
@@ -96,7 +105,14 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
 
     @Override
     public void grantRolesToAuthority(Long[] roleIds, Authority authority) {
-
+        List<Role> roles = roleDao.selectByIds(roleIds);
+        List<RoleAuthority> authorityRoles = roles.stream().map(role -> {
+            RoleAuthority roleAuthority = new RoleAuthority();
+            roleAuthority.setRole(role);
+            roleAuthority.setAuthority(authority);
+            return roleAuthority;
+        }).collect(Collectors.toList());
+        roleAuthorityDao.grantRoleAuthorities(authorityRoles);
     }
 
     @Override
