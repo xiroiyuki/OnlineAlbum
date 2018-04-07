@@ -87,22 +87,7 @@
                 url: $("#url").val()
             },
             function (data, status) {
-                console.log("Data: " + data.result + "\nStatus: " + status);
-                if (data.result) {
-                    $("#submit").attr('disabled', "true");
-                    $('#resModal').addClass('modal-success');
-                    $('#resModal').removeClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                    setTimeout(function () {
-                        top.closeTabByPageId(tabId);
-                    }, 2000);
-                } else {
-                    $('#resModal').removeClass('modal-success');
-                    $('#resModal').addClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                }
+                resultHandlerCloseTab(data, status, tabId);
             });
     });
 </script>

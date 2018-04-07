@@ -96,7 +96,7 @@
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
 <script src="../plugins/select2/select2.full.min.js"></script>
-
+<script src="../dist/js/online_album.js"></script>
 <script>
     var tabId = top.getActivePageId();
     $("#submit").click(function () {
@@ -108,22 +108,7 @@
                 roleIds: $("#roleIds").val()
             },
             function (data, status) {
-                console.log("Data: " + data.result + "\nStatus: " + status);
-                if (data.result) {
-                    $("#submit").attr('disabled', "true");
-                    $('#resModal').addClass('modal-success');
-                    $('#resModal').removeClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                    setTimeout(function () {
-                        top.closeTabByPageId(tabId);
-                    }, 2000);
-                } else {
-                    $('#resModal').removeClass('modal-success');
-                    $('#resModal').addClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                }
+                resultHandlerCloseTab(data, status, tabId);
             });
     });
     $(function () {

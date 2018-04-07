@@ -68,6 +68,8 @@
 <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../plugins/chartjs/Chart.min.js"></script>
+<script src="../dist/js/online_album.js"></script>
+
 </body>
 <script>
     var tabId = top.getActivePageId();
@@ -78,22 +80,8 @@
                 url: $("#url").val()
             },
             function (data, status) {
-                console.log("Data: " + data.result + "\nStatus: " + status);
-                if (data.result) {
-                    $("#submit").attr('disabled', "true");
-                    $('#resModal').addClass('modal-success');
-                    $('#resModal').removeClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                    setTimeout(function () {
-                        top.closeTabByPageId(tabId);
-                    }, 2000);
-                } else {
-                    $('#resModal').removeClass('modal-success');
-                    $('#resModal').addClass('modal-danger');
-                    $("#modalMsg").text(data.msg);
-                    $('#resModal').modal('show');
-                }
+                resultHandlerCloseTab(data, status, tabId);
+
             });
     });
 </script>

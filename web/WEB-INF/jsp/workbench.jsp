@@ -198,10 +198,10 @@
                 children: [
                     {
                         id: "910501",
-                        text: "发布消息",
+                        text: "添加消息",
                         url: "message/add",
                         targetType: "iframe-tab",
-                        icon: "fa fa-circle-o"
+                        icon: "fa fa-plus"
                     },
                     {
                         id: "910502",
@@ -233,14 +233,14 @@
                     },
                     {
                         id: "910603",
-                        text: "添加角色",
+                        text: "创建角色",
                         url: "role/add",
                         targetType: "iframe-tab",
                         icon: "fa fa-plus"
                     },
                     {
                         id: "910604",
-                        text: "添加权限",
+                        text: "创建权限",
                         url: "authority/add",
                         targetType: "iframe-tab",
                         icon: "fa fa-plus"
