@@ -41,9 +41,6 @@
             <if test="faceUrl != null">
                 face_url=#{faceUrl},
             </if>
-            <if test="photoNum >= 0">
-                photo_num=#{photoNum},
-            </if>
             <if test="url != null">
                 url=#{url},
             </if>
@@ -57,6 +54,12 @@
         <where>
             id=#{id}
         </where>
+    </update>
+
+    <update id="updatePhotoNum" parameterType="cn.fc.bean.Album">
+        UPDATE album
+        SET photo_num = #{photoNum}
+        WHERE id = #{id}
     </update>
 
     <delete id="delete">

@@ -21,4 +21,6 @@ public interface AlbumDao {
 
     void update(Album album);
 
+    void updatePhotoNum(Album album);
+
 }

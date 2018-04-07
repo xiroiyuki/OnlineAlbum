@@ -180,8 +180,8 @@
     });
     $("#refresh").click(function (e) {
         $.get('album/refresh', {albumId:${album.id}}, function (data, status) {
-            if (data.code == 200) {
-                $("#photoNum").text(data.result);
+            if (data.result.success) {
+                $("#photoNum").text(data.result.photo_num);
             } else {
                 alert(data.msg);
             }

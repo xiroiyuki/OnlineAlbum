@@ -7,6 +7,7 @@ import cn.fc.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +76,11 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
             int num = photoDao.selectPhotoCountByAlbumId(albumId);
             Album album = dao.selectById(albumId);
             album.setPhotoNum(num);
-            dao.update(album);
-            return super.createOKResultMap(num);
+            dao.updatePhotoNum(album);
+            Map<String, Object> resData = new HashMap<>();
+            resData.put("success", true);
+            resData.put("photo_num", num);
+            return super.createOKResultMap(resData);
         }
     }
 }
