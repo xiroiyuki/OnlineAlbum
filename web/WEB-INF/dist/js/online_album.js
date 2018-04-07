@@ -39,11 +39,12 @@ function resultHandler(data, status, success, fail) {
     }
 }
 
-function showNotFoundModal() {
+function showNotFoundModal(func) {
     $('#resModal').removeClass('modal-success');
     $('#resModal').addClass('modal-danger');
     $("#modalMsg").text("项目不存在");
     $('#resModal').modal('show');
+    func();
 }
 
 function closeTab(tabId, delay) {

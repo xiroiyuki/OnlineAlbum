@@ -87,6 +87,13 @@
 <script src="../dist/js/online_album.js"></script>
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${album eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
     $("#submit").click(function () {
         $.post("album/update",
             {
@@ -100,6 +107,9 @@
                 resultHandlerCloseTab(data, status, tabId);
             });
     });
+
+    </c:otherwise>
+    </c:choose>
 </script>
 </body>
 </html>

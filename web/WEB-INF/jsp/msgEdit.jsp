@@ -80,6 +80,13 @@
 
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${msg eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
     $("#submit").click(function () {
         $.post("message/update",
             {
@@ -96,6 +103,11 @@
             closeOnSelect: false
         });
     });
+
+    </c:otherwise>
+    </c:choose>
+
+
 </script>
 </body>
 </html>

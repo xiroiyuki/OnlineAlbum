@@ -111,8 +111,9 @@
     var tabId = top.getActivePageId();
     <c:choose>
     <c:when test="${user eq null}">
-    showNotFoundModal();
-    closeTab(tabId, 2000);
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {

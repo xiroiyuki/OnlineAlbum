@@ -134,8 +134,9 @@
     var tabId = top.getActivePageId();
     <c:choose>
     <c:when test="${msg eq null}">
-    showNotFoundModal();
-    closeTab(tabId, 2000);
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
     </c:when>
     <c:otherwise>
 

@@ -105,6 +105,14 @@
 
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${user eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
+
     $("#submit").click(function () {
         $.post("user/update",
             {
@@ -122,7 +130,8 @@
     $(function () {
         $(".select2").select2();
     });
-
+    </c:otherwise>
+    </c:choose>
 </script>
 
 </html>

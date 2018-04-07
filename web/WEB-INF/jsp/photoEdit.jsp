@@ -73,6 +73,13 @@
 </body>
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${photo eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
     $("#submit").click(function () {
         $.post("photo/update",
             {
@@ -84,6 +91,11 @@
 
             });
     });
+
+    </c:otherwise>
+    </c:choose>
+
+
 </script>
 
 </html>

@@ -79,6 +79,13 @@
 
 <script>
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${source eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
     $("#submit").click(function () {
         $.post("source/update",
             {
@@ -90,6 +97,9 @@
                 resultHandlerCloseTab(data, status, tabId);
             });
     });
+    </c:otherwise>
+    </c:choose>
+
 </script>
 
 </html>

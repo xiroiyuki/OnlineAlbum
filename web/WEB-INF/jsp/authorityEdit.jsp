@@ -98,7 +98,15 @@
 <script src="../plugins/select2/select2.full.min.js"></script>
 <script src="../dist/js/online_album.js"></script>
 <script>
+
     var tabId = top.getActivePageId();
+    <c:choose>
+    <c:when test="${authority eq null}">
+    showNotFoundModal(function () {
+        closeTab(tabId, 2000);
+    });
+    </c:when>
+    <c:otherwise>
     $("#submit").click(function () {
         $.post("authority/update",
             {
@@ -116,6 +124,10 @@
             closeOnSelect: false
         });
     });
+    </c:otherwise>
+    </c:choose>
+
+
 </script>
 </body>
 </html>
