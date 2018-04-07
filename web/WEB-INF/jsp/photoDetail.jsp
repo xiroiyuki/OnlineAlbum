@@ -117,7 +117,7 @@
     $("#delete").click(function (e) {
         $.get(
             'photo/delete', {id:${photo.id}}, function (data, status) {
-                resultHandler(data, status, tabId);
+                resultHandlerCloseTab(data, status, tabId);
             }
         );
     });

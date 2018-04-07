@@ -9,19 +9,33 @@ function createNewTab(url, title) {
     });
 }
 
-function resultHandler(data, status, tabId) {
+function resultHandlerCloseTab(data, status, tabId) {
+    resultHandler(data, status, function () {
+        closeTab(tabId, 2000);
+    })
+}
+
+function resultHandlerRefreshTab(data, status, tabId) {
+    resultHandler(data, status, function () {
+        refreshTab(tabId, 2000);
+    })
+}
+
+
+function resultHandler(data, status, success, fail) {
     console.log("Data: " + data.result + "\nStatus: " + status);
     if (data.result) {
         $('#resModal').addClass('modal-success');
         $('#resModal').removeClass('modal-danger');
         $("#modalMsg").text(data.msg);
         $('#resModal').modal('show');
-        closeTab(tabId, 2000);
+        success();
     } else {
         $('#resModal').removeClass('modal-success');
         $('#resModal').addClass('modal-danger');
         $("#modalMsg").text(data.msg);
         $('#resModal').modal('show');
+        fail();
     }
 }
 
@@ -35,5 +49,11 @@ function showNotFoundModal() {
 function closeTab(tabId, delay) {
     setTimeout(function () {
         top.closeTabByPageId(tabId);
+    }, delay);
+}
+
+function refreshTab(tabId, delay) {
+    setTimeout(function () {
+        top.refreshTabById(tabId);
     }, delay);
 }

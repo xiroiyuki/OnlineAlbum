@@ -174,7 +174,7 @@
     <c:otherwise>
     $("#delete").click(function (e) {
         $.get('album/delete', {id:${album.id}}, function (data, status) {
-                resultHandler(data, status, tabId);
+                resultHandlerCloseTab(data, status, tabId);
             }
         );
     });

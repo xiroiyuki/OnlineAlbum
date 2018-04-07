@@ -141,7 +141,7 @@
     <c:otherwise>
     $("#delete").click(function (e) {
         $.get('role/delete', {id:${role.id}}, function (data, status) {
-                resultHandler(data, status, tabId);
+                resultHandlerCloseTab(data, status, tabId);
             }
         );
     });

@@ -27,7 +27,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        权限详情
+        消息详情
     </h1>
 </section>
 <section class="content">
@@ -49,64 +49,61 @@
                             <tbody>
                             <tr>
                                 <td>ID</td>
-                                <td>${authority.id}</td>
+                                <td>${msg.id}</td>
                             </tr>
                             <tr>
-                                <td>角色名称</td>
-                                <td>${authority.name}</td>
+                                <td>标题</td>
+                                <td>${msg.title}</td>
                             </tr>
                             <tr>
-                                <td>URL</td>
-                                <td>${authority.url}</td>
+                                <td>发布时间</td>
+                                <td>${msg.publishTime eq 0?"未发布":msg.publishTime}</td>
+                            </tr>
+                            <tr>
+                                <td>状态</td>
+                                <td>
+                                    <c:if test="${msg.state eq -1}">
+                                        <span class="label label-danger">已撤回</span>
+                                    </c:if>
+                                    <c:if test="${msg.state eq 0}">
+                                        <span class="label label-warning">未发布</span>
+                                    </c:if>
+                                    <c:if test="${msg.state eq 1}">
+                                        <span class="label label-success">已发布</span>
+                                    </c:if>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="javascript:createNewTab('authority/edit?id=${authority.id}','编辑权限 ${authority.name}')">
+                    <a href="javascript:createNewTab('message/edit?id=${msg.id}','编辑消息 ${msg.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>
+                    <c:if test="${msg.state eq -1}">
+                        <button class="btn btn-success" id="publish">发布</button>
+                    </c:if>
+                    <c:if test="${msg.state eq 0}">
+                        <button class="btn btn-success" id="publish">发布</button>
+                    </c:if>
+                    <c:if test="${msg.state eq 1}">
+                        <button class="btn btn-warning" id="withdraw">撤回</button>
+                    </c:if>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="box box-solid">
-            <div class="box-header">
-                <h3 class="box-title">拥有此权限的角色</h3>
-            </div>
-            <div class="box-body">
-                <table id="photoTable" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>名称</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:choose>
-                        <c:when test="${authority.roles ==  null || fn:length(authority.roles) == 0} ">
-                            <tr>
-                                <th width="30" colspan="8">暂无数据</th>
-                            </tr>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach var="role" items="${authority.roles}">
-                                <tr>
-                                    <td>${role.id}</td>
-                                    <td>${role.roleName}</td>
-                                    <td>
-                                        <a href="javascript:createNewTab('role/detail?id=${role.id}','角色 ${role.roleName}')">详情</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
-                    </tbody>
-                </table>
+        <div class="col-md-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">消息内容</h3>
+                </div>
+                <div class="box-body">
+                    <p>
+                        ${msg.content}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -136,17 +133,45 @@
 <script>
     var tabId = top.getActivePageId();
     <c:choose>
-    <c:when test="${authority eq null}">
+    <c:when test="${msg eq null}">
     showNotFoundModal();
     closeTab(tabId, 2000);
     </c:when>
     <c:otherwise>
+
+    <c:if test="${msg.state eq -1}">
+    $("#publish").click(function (e) {
+        $.get('message/publish', {id:${msg.id}}, function (data, status) {
+                resultHandlerRefreshTab(data, status, tabId);
+            }
+        );
+    });
+    </c:if>
+    <c:if test="${msg.state eq 0}">
+    $("#publish").click(function (e) {
+        $.get('message/publish', {id:${msg.id}}, function (data, status) {
+                resultHandlerRefreshTab(data, status, tabId);
+            }
+        );
+    });
+    </c:if>
+    <c:if test="${msg.state eq 1}">
+    $("#withdraw").click(function (e) {
+        $.get('message/withdraw', {id:${msg.id}}, function (data, status) {
+                resultHandlerRefreshTab(data, status, tabId);
+            }
+        );
+    });
+    </c:if>
+
     $("#delete").click(function (e) {
-        $.get('authority/delete', {id:${authority.id}}, function (data, status) {
+        $.get('message/delete', {id:${msg.id}}, function (data, status) {
                 resultHandlerCloseTab(data, status, tabId);
             }
         );
     });
+
+
     $(document).ready(function () {
         $('#photoTable').DataTable(
             {

@@ -195,7 +195,22 @@
                 id: "9105",
                 text: "消息推送",
                 icon: "fa fa-wifi",
-                targetType: "iframe-tab"
+                children: [
+                    {
+                        id: "910501",
+                        text: "发布消息",
+                        url: "message/add",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "910502",
+                        text: "消息列表",
+                        url: "message/list",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }
+                ]
             },
             {
                 id: "9106",
