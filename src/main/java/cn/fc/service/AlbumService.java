@@ -20,4 +20,6 @@ public interface AlbumService {
 
     Map update(Album album);
 
+    Map refresh(Long albumId);
+
 }

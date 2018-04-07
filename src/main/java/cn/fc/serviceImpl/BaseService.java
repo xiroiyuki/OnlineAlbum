@@ -28,6 +28,10 @@ public class BaseService {
         return createResultMap(ResultCode.OK, "操作成功", true);
     }
 
+    protected Map createOKResultMap(Object data) {
+        return createResultMap(ResultCode.OK, "操作成功", data);
+    }
+
     protected Map createExceptionResultMap() {
         return createResultMap(ResultCode.INTERNAL_SERVER_ERROR, "服务器内部错误", false);
     }

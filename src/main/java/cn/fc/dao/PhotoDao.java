@@ -14,6 +14,8 @@ public interface PhotoDao {
 
     List<Photo> selectByAlbumId(@Param("albumId") long albumId);
 
+    int selectPhotoCountByAlbumId(@Param("albumId") long albumId);
+
     List<Photo> selectByAlbumId(@Param("albumId") long albumId, @Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
     void delete(long id);

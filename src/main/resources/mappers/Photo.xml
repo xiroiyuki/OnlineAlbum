@@ -16,6 +16,11 @@
             ALBUM_ID AS albumId
         FROM photo
     </select>
+    <select id="selectPhotoCountByAlbumId" resultType="int" parameterType="long">
+        SELECT count(*)
+        FROM photo
+        WHERE ALBUM_ID = #{albumId}
+    </select>
     <select id="selectByAlbumId" resultType="cn.fc.bean.Photo" parameterType="long">
         SELECT
             *,

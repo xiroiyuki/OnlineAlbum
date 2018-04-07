@@ -19,7 +19,7 @@
         FROM album
     </select>
 
-    <select id="selectById" resultMap="Album"  parameterType="long">
+    <select id="selectById" resultMap="Album" parameterType="long">
         SELECT *
         FROM album
         WHERE id = #{id}
@@ -41,7 +41,7 @@
             <if test="faceUrl != null">
                 face_url=#{faceUrl},
             </if>
-            <if test="photoNum != 0">
+            <if test="photoNum >= 0">
                 photo_num=#{photoNum},
             </if>
             <if test="url != null">

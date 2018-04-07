@@ -65,7 +65,7 @@
                             </tr>
                             <tr>
                                 <td>图片数量</td>
-                                <td>${album.photoNum}</td>
+                                <td id="photoNum">${album.photoNum}</td>
                             </tr>
                             <tr>
                                 <td>URL</td>
@@ -84,6 +84,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
+                    <button class="btn btn-default" id="refresh">刷新图片数量</button>
                     <a href="javascript:createNewTab('album/edit?id=${album.id}','编辑相册 ${album.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
@@ -176,6 +177,15 @@
                 resultHandler(data, status, tabId);
             }
         );
+    });
+    $("#refresh").click(function (e) {
+        $.get('album/refresh', {albumId:${album.id}}, function (data, status) {
+            if (data.code == 200) {
+                $("#photoNum").text(data.result);
+            } else {
+                alert(data.msg);
+            }
+        });
     });
     $(document).ready(function () {
         $('#photoTable').DataTable(

@@ -64,4 +64,10 @@ public class AlbumController {
         return service.update(album);
     }
 
+    @RequestMapping("/refresh")
+    @ResponseBody
+    public Map refresh(Long albumId) {
+        return service.refresh(albumId);
+    }
+
 }

@@ -2,6 +2,7 @@ package cn.fc.serviceImpl;
 
 import cn.fc.bean.Album;
 import cn.fc.dao.AlbumDao;
+import cn.fc.dao.PhotoDao;
 import cn.fc.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
 
     @Autowired
     private AlbumDao dao;
+    @Autowired
+    private PhotoDao photoDao;
+
 
     @Override
     public Album get(long id) {
@@ -60,6 +64,19 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
         } else {
             dao.update(album);
             return super.createOKResultMap();
+        }
+    }
+
+    @Override
+    public Map refresh(Long albumId) {
+        if (albumId == null) {
+            return super.createNotFoundResultMap();
+        } else {
+            int num = photoDao.selectPhotoCountByAlbumId(albumId);
+            Album album = dao.selectById(albumId);
+            album.setPhotoNum(num);
+            dao.update(album);
+            return super.createOKResultMap(num);
         }
     }
 }
