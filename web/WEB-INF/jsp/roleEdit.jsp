@@ -39,7 +39,7 @@
                     <input name="id" id="id" value="${role.id}" hidden>
                     <div class="form-group">
                         <label for="roleName">角色名称</label>
-                        <input type="text" class="form-control" name="roleName" id="roleName" placeholder="请输入新标题"
+                        <input type="text" class="form-control" name="roleName" id="roleName" placeholder="请输入角色名称"
                                value="${role.roleName}">
                     </div>
                     <div class="form-group">
