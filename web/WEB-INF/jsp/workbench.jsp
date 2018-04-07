@@ -215,6 +215,20 @@
                         url: "authority/list",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "910603",
+                        text: "添加角色",
+                        url: "role/add",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-plus"
+                    },
+                    {
+                        id: "910604",
+                        text: "添加权限",
+                        url: "authority/add",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-plus"
                     }
                 ]
             }

@@ -12,9 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>OnlineAlbum | Dashboard</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../plugins/pace-master/themes/blue/pace-theme-flash.css">
     <script type="text/javascript" src="../plugins/pace-master/pace.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
@@ -68,6 +68,7 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 </section>

@@ -30,12 +30,12 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
     private RoleDao roleDao;
 
     @Override
-    public List<Role> listRole() {
+    public List<Role> listRoles() {
         return roleDao.select();
     }
 
     @Override
-    public List<Authority> listAuthority() {
+    public List<Authority> listAuthorities() {
         return authorityDao.select();
     }
 

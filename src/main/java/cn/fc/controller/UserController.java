@@ -60,7 +60,7 @@ public class UserController {
     public String edit(Long id, HttpServletRequest request) {
         User user = service.get(id);
         request.setAttribute("user", user);
-        request.setAttribute("roles", authService.listRole());
+        request.setAttribute("roles", authService.listRoles());
         return "userEdit";
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface AuthorityService {
-    List<Authority> listAuthority();
+    List<Authority> listAuthorities();
 
     Authority getAuthority(long id);
 

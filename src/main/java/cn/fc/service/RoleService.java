@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface RoleService {
-    List<Role> listRole();
+    List<Role> listRoles();
 
     Role getRole(long id);
 

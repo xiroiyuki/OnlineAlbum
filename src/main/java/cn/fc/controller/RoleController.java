@@ -2,6 +2,7 @@ package cn.fc.controller;
 
 import cn.fc.bean.Authority;
 import cn.fc.bean.Role;
+import cn.fc.service.AuthorityService;
 import cn.fc.service.RoleAuthorityService;
 import cn.fc.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class RoleController {
     @Autowired
     private RoleService service;
     @Autowired
+    private AuthorityService authorityService;
+    @Autowired
     private RoleAuthorityService roleAuthorityService;
 
     @RequestMapping("/detail")
@@ -32,7 +35,7 @@ public class RoleController {
 
     @RequestMapping("/list")
     public String list(HttpServletRequest request) {
-        request.setAttribute("roles", service.listRole());
+        request.setAttribute("roles", service.listRoles());
         return "roleList";
     }
 
@@ -63,10 +66,21 @@ public class RoleController {
         return service.updateRole(role);
     }
 
+    @RequestMapping("/add")
+    public String add(HttpServletRequest request) {
+        List<Authority> authorities = authorityService.listAuthorities();
+        request.setAttribute("authorities", authorities);
+        return "roleAdd";
+    }
+
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Role role) {
-        return service.insertRole(role);
+    public Map insert(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
+        Map res = service.insertRole(role);
+        if (authorityIds != null && authorityIds.length > 0) {
+            roleAuthorityService.grantAuthoritiesToRole(authorityIds, role);
+        }
+        return res;
     }
 
 
