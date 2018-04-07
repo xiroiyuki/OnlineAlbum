@@ -48,13 +48,13 @@
                                value="${authority.url}">
                     </div>
                     <div class="form-group">
-                        <label for="roleIds">分配给用户</label>
+                        <label for="roleIds">分配给角色</label>
                         <select class="form-control select2" multiple="multiple" id="roleIds" name="roleIds"
-                                data-placeholder="选择用户"
+                                data-placeholder="选择角色"
                                 style="width: 100%;">
                             <c:choose>
                                 <c:when test="${(notHas eq null || fn:length(notHas) eq 0) && (has eq null || fn:length(has) eq 0)}">
-                                    <option value="-1" disabled>没有获取到权限列表</option>
+                                    <option value="-1" disabled>没有获取到角色列表</option>
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="h" items="${has}">
