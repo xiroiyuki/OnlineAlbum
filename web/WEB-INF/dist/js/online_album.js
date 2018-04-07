@@ -12,13 +12,13 @@ function createNewTab(url, title) {
 function resultHandlerCloseTab(data, status, tabId) {
     resultHandler(data, status, function () {
         closeTab(tabId, 2000);
-    })
+    });
 }
 
 function resultHandlerRefreshTab(data, status, tabId) {
     resultHandler(data, status, function () {
         refreshTab(tabId, 2000);
-    })
+    });
 }
 
 
