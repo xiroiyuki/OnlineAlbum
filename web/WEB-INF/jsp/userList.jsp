@@ -62,9 +62,9 @@
                                     <td>${user.id}</td>
                                     <td>${user.username}</td>
                                     <td>${user.state}</td>
-                                    <td>${user.roleId}</td>
+                                    <td>${user.role.roleName}</td>
                                     <td>
-                                        <date:date value="${user.createTime}"/>
+                                        <date:date value="${user.regTime}"/>
                                     </td>
                                     <td>${user.remark}</td>
                                     <td>

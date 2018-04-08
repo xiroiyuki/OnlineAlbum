@@ -63,12 +63,12 @@
                             </tr>
                             <tr>
                                 <td>角色</td>
-                                <td>${user.roleId}</td>
+                                <td>${user.role.roleName}</td>
                             </tr>
                             <tr>
                                 <td>创建时间</td>
                                 <td>
-                                    <date:date value="${user.createTime}"/>
+                                    <date:date value="${user.regTime}"/>
                                 </td>
                             </tr>
                             <tr>

@@ -52,7 +52,7 @@
                             <label for="roleId">角色</label>
                             <select class="form-control select2" id="roleId" style="width: 100%;">
                                 <c:forEach items="${roles}" var="role">
-                                    <option value="${role.id}" ${user.roleId - role.id == 0 ?"selected":"" }>${role.roleName}</option>
+                                    <option value="${role.id}" ${user.role.id eq role.id ?"selected":"" }>${role.roleName}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label for="remark">备注</label>
                             <input type="text" class="form-control" name="remark" id="remark" placeholder="请输入备注"
-                                   value="${user. remark}">
+                                   value="${user.remark}">
                         </div>
                     </div>
                     <div class="box-footer">

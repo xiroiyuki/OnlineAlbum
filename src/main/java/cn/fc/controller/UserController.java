@@ -1,5 +1,6 @@
 package cn.fc.controller;
 
+import cn.fc.bean.Role;
 import cn.fc.bean.User;
 import cn.fc.service.RoleService;
 import cn.fc.service.UserService;
@@ -21,7 +22,7 @@ public class UserController {
     @Autowired
     private UserService service;
     @Autowired
-    private RoleService authService;
+    private RoleService roleService;
 
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.POST})
@@ -37,7 +38,9 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(User user) {
+    public Map update(User user, Long roleId) {
+        Role role = roleService.getRole(roleId);
+        user.setRole(role);
         return service.update(user);
     }
 
@@ -60,7 +63,7 @@ public class UserController {
     public String edit(Long id, HttpServletRequest request) {
         User user = service.get(id);
         request.setAttribute("user", user);
-        request.setAttribute("roles", authService.listRoles());
+        request.setAttribute("roles", roleService.listRoles());
         return "userEdit";
     }
 

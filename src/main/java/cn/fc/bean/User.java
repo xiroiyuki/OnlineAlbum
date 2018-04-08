@@ -5,9 +5,9 @@ public class User {
     private String username;
     private String password;
     private int state;
-    private int roleId;
-    private long createTime;
+    private Role role;//ROLE_ID
     private String remark;
+    private long regTime;
 
     @Override
     public String toString() {
@@ -16,19 +16,20 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", state=" + state +
-                ", roleId=" + roleId +
-                ", createTime=" + createTime +
+                ", role=" + role +
                 ", remark='" + remark + '\'' +
+                ", regTime=" + regTime +
                 '}';
     }
 
-    public long getCreateTime() {
-        return createTime;
+    public long getRegTime() {
+        return regTime;
     }
 
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
+    public void setRegTime(long regTime) {
+        this.regTime = regTime;
     }
+
 
     public int getState() {
         return state;
@@ -38,12 +39,12 @@ public class User {
         this.state = state;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getRemark() {
