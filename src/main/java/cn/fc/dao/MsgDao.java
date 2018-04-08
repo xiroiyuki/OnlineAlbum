@@ -15,9 +15,4 @@ public interface MsgDao {
 
     void delete(long id);
 
-    void publish(Message message);
-
-    void withdraw(Message message);
-
-
 }

@@ -54,25 +54,4 @@ public class MsgServiceImpl extends BaseService implements MsgService {
         }
     }
 
-    @Override
-    public Map publish(Long id) {
-        Message temp = this.getMessage(id);
-        if (temp == null) {
-            return createNotFoundResultMap();
-        } else {
-            dao.publish(temp);
-            return createOKResultMap();
-        }
-    }
-
-    @Override
-    public Map withdraw(Long id) {
-        Message temp = this.getMessage(id);
-        if (temp == null) {
-            return createNotFoundResultMap();
-        } else {
-            dao.withdraw(temp);
-            return createOKResultMap();
-        }
-    }
 }

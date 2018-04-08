@@ -4,8 +4,6 @@ public class Message {
     private long id;
     private String title;
     private String content;
-    //    发布状态 1: 发布 0: 未发布 -1: 撤回
-    private int state;
 
     @Override
     public String toString() {
@@ -13,16 +11,7 @@ public class Message {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", state=" + state +
                 '}';
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
     }
 
     public long getId() {

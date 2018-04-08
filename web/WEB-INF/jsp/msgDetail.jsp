@@ -57,20 +57,6 @@
                                 <td>标题</td>
                                 <td>${msg.title}</td>
                             </tr>
-                            <tr>
-                                <td>状态</td>
-                                <td>
-                                    <c:if test="${msg.state eq -1}">
-                                        <span class="label label-danger">已撤回</span>
-                                    </c:if>
-                                    <c:if test="${msg.state eq 0}">
-                                        <span class="label label-warning">未发布</span>
-                                    </c:if>
-                                    <c:if test="${msg.state eq 1}">
-                                        <span class="label label-success">已发布</span>
-                                    </c:if>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -80,15 +66,6 @@
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>
-                    <c:if test="${msg.state eq -1}">
-                        <button class="btn btn-success" id="publish">发布</button>
-                    </c:if>
-                    <c:if test="${msg.state eq 0}">
-                        <button class="btn btn-success" id="publish">发布</button>
-                    </c:if>
-                    <c:if test="${msg.state eq 1}">
-                        <button class="btn btn-warning" id="withdraw">撤回</button>
-                    </c:if>
                 </div>
             </div>
         </div>
@@ -137,31 +114,6 @@
     });
     </c:when>
     <c:otherwise>
-
-    <c:if test="${msg.state eq -1}">
-    $("#publish").click(function (e) {
-        $.get('message/publish', {id:${msg.id}}, function (data, status) {
-                resultHandlerRefreshTab(data, status, tabId);
-            }
-        );
-    });
-    </c:if>
-    <c:if test="${msg.state eq 0}">
-    $("#publish").click(function (e) {
-        $.get('message/publish', {id:${msg.id}}, function (data, status) {
-                resultHandlerRefreshTab(data, status, tabId);
-            }
-        );
-    });
-    </c:if>
-    <c:if test="${msg.state eq 1}">
-    $("#withdraw").click(function (e) {
-        $.get('message/withdraw', {id:${msg.id}}, function (data, status) {
-                resultHandlerRefreshTab(data, status, tabId);
-            }
-        );
-    });
-    </c:if>
 
     $("#delete").click(function (e) {
         $.get('message/delete', {id:${msg.id}}, function (data, status) {

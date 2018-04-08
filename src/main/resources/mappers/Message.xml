@@ -12,18 +12,6 @@
         WHERE id = #{id}
     </delete>
 
-    <update id="publish" parameterType="cn.fc.bean.Message">
-        UPDATE message
-        SET state = 1
-        WHERE id = #{id}
-    </update>
-
-    <update id="withdraw" parameterType="cn.fc.bean.Message">
-        UPDATE message
-        SET state = -1
-        WHERE id = #{id}
-    </update>
-
     <select id="select" resultType="cn.fc.bean.Message">
         SELECT
             *,

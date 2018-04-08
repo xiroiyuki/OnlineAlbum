@@ -17,8 +17,4 @@ public interface MsgService {
 
     Map update(Message message);
 
-    Map publish(Long id);
-
-    Map withdraw(Long id);
-
 }

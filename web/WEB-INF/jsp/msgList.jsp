@@ -30,7 +30,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        消息列表
+        消息库
     </h1>
 </section>
 
@@ -43,7 +43,6 @@
                     <tr>
                         <th>#</th>
                         <th>标题</th>
-                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -59,17 +58,6 @@
                                 <tr>
                                     <td>${msg.id}</td>
                                     <td>${msg.title}</td>
-                                    <td>
-                                        <c:if test="${msg.state eq -1}">
-                                            <span class="label label-danger">已撤回</span>
-                                        </c:if>
-                                        <c:if test="${msg.state eq 0}">
-                                            <span class="label label-warning">未发布</span>
-                                        </c:if>
-                                        <c:if test="${msg.state eq 1}">
-                                            <span class="label label-success">已发布</span>
-                                        </c:if>
-                                    </td>
                                     <td>
                                         <a href="javascript:createNewTab('message/detail?id=${msg.id}','消息 ${msg.title}')">详情</a>
                                     </td>

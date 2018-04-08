@@ -28,7 +28,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        发布消息
+        创建消息
     </h1>
 </section>
 <section class="content">

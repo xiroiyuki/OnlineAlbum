@@ -53,18 +53,6 @@ public class MessageController {
         return service.update(message);
     }
 
-    @RequestMapping("/publish")
-    @ResponseBody
-    public Map publish(Long id) {
-        return service.publish(id);
-    }
-
-    @RequestMapping("/withdraw")
-    @ResponseBody
-    public Map withdraw(Long id) {
-        return service.withdraw(id);
-    }
-
     @RequestMapping("/insert")
     @ResponseBody
     public Map insert(Message message) {
