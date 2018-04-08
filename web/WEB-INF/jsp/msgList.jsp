@@ -43,7 +43,6 @@
                     <tr>
                         <th>#</th>
                         <th>标题</th>
-                        <th>发布时间</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
@@ -60,14 +59,6 @@
                                 <tr>
                                     <td>${msg.id}</td>
                                     <td>${msg.title}</td>
-                                    <c:choose>
-                                        <c:when test="${msg.publishTime eq 0}">
-                                            <td>未发布</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td><date:date value="${msg.publishTime} "/></td>
-                                        </c:otherwise>
-                                    </c:choose>
                                     <td>
                                         <c:if test="${msg.state eq -1}">
                                             <span class="label label-danger">已撤回</span>

@@ -1,13 +1,9 @@
 package cn.fc.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Message {
     private long id;
     private String title;
     private String content;
-    @SerializedName("publish_time")
-    private long publishTime;
     //    发布状态 1: 发布 0: 未发布 -1: 撤回
     private int state;
 
@@ -17,7 +13,6 @@ public class Message {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", publishTime=" + publishTime +
                 ", state=" + state +
                 '}';
     }
@@ -52,14 +47,6 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public long getPublishTime() {
-        return publishTime;
-    }
-
-    public void setPublishTime(long publishTime) {
-        this.publishTime = publishTime;
     }
 
 }

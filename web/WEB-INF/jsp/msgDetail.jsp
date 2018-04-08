@@ -58,18 +58,6 @@
                                 <td>${msg.title}</td>
                             </tr>
                             <tr>
-                                <td>发布时间</td>
-                                <c:choose>
-                                    <c:when test="${msg.publishTime eq 0}">
-                                        <td>未发布</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td><date:date value="${msg.publishTime} "/></td>
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </tr>
-                            <tr>
                                 <td>状态</td>
                                 <td>
                                     <c:if test="${msg.state eq -1}">

@@ -14,7 +14,7 @@
 
     <update id="publish" parameterType="cn.fc.bean.Message">
         UPDATE message
-        SET state = 1, publish_time = UNIX_TIMESTAMP()
+        SET state = 1
         WHERE id = #{id}
     </update>
 

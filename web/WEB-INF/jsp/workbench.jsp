@@ -198,15 +198,21 @@
                 children: [
                     {
                         id: "910501",
-                        text: "添加消息",
+                        text: "创建消息",
                         url: "message/add",
                         targetType: "iframe-tab",
-                        icon: "fa fa-plus"
+                        icon: "fa fa-circle-o"
                     },
                     {
                         id: "910502",
-                        text: "消息列表",
+                        text: "消息库",
                         url: "message/list",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "910503",
+                        text: "发布控制",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     }
@@ -236,14 +242,14 @@
                         text: "创建角色",
                         url: "role/add",
                         targetType: "iframe-tab",
-                        icon: "fa fa-plus"
+                        icon: "fa fa-circle-o"
                     },
                     {
                         id: "910604",
                         text: "创建权限",
                         url: "authority/add",
                         targetType: "iframe-tab",
-                        icon: "fa fa-plus"
+                        icon: "fa fa-circle-o"
                     }
                 ]
             }
