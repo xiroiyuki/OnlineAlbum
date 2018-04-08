@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="/tags" prefix="date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -62,7 +63,9 @@
                                     <td>${user.username}</td>
                                     <td>${user.state}</td>
                                     <td>${user.roleId}</td>
-                                    <td>${user.createTime}</td>
+                                    <td>
+                                        <date:date value="${user.createTime}"/>
+                                    </td>
                                     <td>${user.remark}</td>
                                     <td>
                                         <a href="javascript:createNewTab('user/detail?id=${user.id}','用户 ${user.username}')">详情</a>

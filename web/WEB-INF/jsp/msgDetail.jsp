@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="/tags" prefix="date" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -57,7 +59,15 @@
                             </tr>
                             <tr>
                                 <td>发布时间</td>
-                                <td>${msg.publishTime eq 0?"未发布":msg.publishTime}</td>
+                                <c:choose>
+                                    <c:when test="${msg.publishTime eq 0}">
+                                        <td>未发布</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><date:date value="${msg.publishTime} "/></td>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </tr>
                             <tr>
                                 <td>状态</td>

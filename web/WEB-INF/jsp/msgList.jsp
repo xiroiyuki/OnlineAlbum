@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="/tags" prefix="date" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -58,7 +60,14 @@
                                 <tr>
                                     <td>${msg.id}</td>
                                     <td>${msg.title}</td>
-                                    <td>${msg.publishTime eq 0?"未发布":msg.publishTime}</td>
+                                    <c:choose>
+                                        <c:when test="${msg.publishTime eq 0}">
+                                            <td>未发布</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td><date:date value="${msg.publishTime} "/></td>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <td>
                                         <c:if test="${msg.state eq -1}">
                                             <span class="label label-danger">已撤回</span>

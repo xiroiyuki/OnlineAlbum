@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="/tags" prefix="date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -73,7 +74,8 @@
                             </tr>
                             <tr>
                                 <td>创建时间</td>
-                                <td>${album.createTime}</td>
+                                <td><date:date value="${album.createTime}"/>
+                                </td>
                             </tr>
                             <tr>
                                 <td>来源</td>
