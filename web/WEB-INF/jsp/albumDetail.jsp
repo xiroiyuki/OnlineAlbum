@@ -184,11 +184,21 @@
         }
     });
     $("#refresh").click(function (e) {
-        $.get('album/refresh', {albumId:${album.id}}, function (data, status) {
-            if (data.result.success) {
-                $("#photoNum").text(data.result.photo_num);
-            } else {
-                alert(data.msg);
+        $.ajax({
+            url: 'album/refresh',
+            type: "get",
+            data: {
+                albumId:${album.id}
+            },
+            beforeSend: function () {
+                $("#photoNum").html("<span class=\"fa fa-refresh fa-spin\"></span>");
+            },
+            success: function (data, status) {
+                if (data.result.success) {
+                    $("#photoNum").text(data.result.photo_num);
+                } else {
+                    alert(data.msg);
+                }
             }
         });
     });
