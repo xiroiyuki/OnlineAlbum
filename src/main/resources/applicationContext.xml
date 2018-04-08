@@ -76,6 +76,19 @@
         </tx:attributes>
     </tx:advice>
 
+    <bean id="myInterceptor" class="cn.fc.interceptor.MyInterceptor"/>
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <map>
+                <entry key="/album/list" value-ref="albumController"/>
+            </map>
+        </property>
+        <property name="interceptors">
+            <list>
+                <ref bean="myInterceptor"/>
+            </list>
+        </property>
+    </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.fc.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
