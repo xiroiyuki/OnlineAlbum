@@ -141,10 +141,12 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get('role/delete', {id:${role.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?')) {
+            $.get('role/delete', {id:${role.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
     $(document).ready(function () {
         $('#photoTable').DataTable(

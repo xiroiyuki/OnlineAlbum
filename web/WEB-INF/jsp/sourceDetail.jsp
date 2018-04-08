@@ -150,11 +150,13 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get(
-            'source/delete', {id:${source.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?此操作会删除此来源下的所有相册和图片')) {
+            $.get(
+                'source/delete', {id:${source.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
     $(document).ready(function () {
         $('#table').DataTable(

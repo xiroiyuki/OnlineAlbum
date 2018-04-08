@@ -116,11 +116,13 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get(
-            'photo/delete', {id:${photo.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?')) {
+            $.get(
+                'photo/delete', {id:${photo.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
     </c:otherwise>
     </c:choose>

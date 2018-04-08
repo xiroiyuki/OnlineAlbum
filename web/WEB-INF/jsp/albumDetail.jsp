@@ -176,10 +176,12 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get('album/delete', {id:${album.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?此操作会同时删除相册包含的图片')) {
+            $.get('album/delete', {id:${album.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
     $("#refresh").click(function (e) {
         $.get('album/refresh', {albumId:${album.id}}, function (data, status) {

@@ -121,10 +121,12 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get('user/delete', {id:${user.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?')) {
+            $.get('user/delete', {id:${user.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
 
     </c:otherwise>

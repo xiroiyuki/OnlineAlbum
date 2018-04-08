@@ -116,10 +116,12 @@
     <c:otherwise>
 
     $("#delete").click(function (e) {
-        $.get('message/delete', {id:${msg.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?')) {
+            $.get('message/delete', {id:${msg.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
 
 

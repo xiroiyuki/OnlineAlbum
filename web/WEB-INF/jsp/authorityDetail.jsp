@@ -143,10 +143,12 @@
     </c:when>
     <c:otherwise>
     $("#delete").click(function (e) {
-        $.get('authority/delete', {id:${authority.id}}, function (data, status) {
-                resultHandlerCloseTab(data, status, tabId);
-            }
-        );
+        if (confirm('确认要删除吗?此操作会影响到所有被授予此权限的角色及设置为此角色的用户')) {
+            $.get('authority/delete', {id:${authority.id}}, function (data, status) {
+                    resultHandlerCloseTab(data, status, tabId);
+                }
+            );
+        }
     });
     $(document).ready(function () {
         $('#photoTable').DataTable(
