@@ -7,6 +7,7 @@ import cn.fc.bean.User;
 import cn.fc.dao.AuthorityDao;
 import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
+import cn.fc.dao.UserDao;
 import cn.fc.service.AuthorityService;
 import cn.fc.service.RoleAuthorityService;
 import cn.fc.service.RoleService;
@@ -28,6 +29,9 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
     private AuthorityDao authorityDao;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private UserDao userDao;
+
 
     @Override
     public List<Role> listRoles() {
@@ -153,7 +157,11 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
         if (temp == null) {
             return createNotFoundResultMap();
         } else {
-            roleDao.delete(id);
+            if (userDao.selectByRole(id).size() > 0) {
+                return createExceptionResultMap("此角色已绑定用户,不可删除");
+            } else {
+                roleDao.delete(id);
+            }
             return createOKResultMap();
         }
     }

@@ -77,7 +77,7 @@
             <tx:method name="get*" read-only="true"/>
             <tx:method name="list*" read-only="true"/>
             <tx:method name="login" read-only="true"/>
-            <tx:method name="*" propagation="REQUIRED"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
         </tx:attributes>
     </tx:advice>
 

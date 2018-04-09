@@ -30,6 +30,12 @@
         WHERE id = #{id}
     </select>
 
+    <select id="selectByRole" resultMap="userMap" parameterType="long">
+        SELECT *
+        FROM `user`
+        WHERE ROLE_ID = #{roleId}
+    </select>
+
     <update id="update" parameterType="cn.fc.bean.User">
         UPDATE `user` SET
         <trim suffixOverrides=",">

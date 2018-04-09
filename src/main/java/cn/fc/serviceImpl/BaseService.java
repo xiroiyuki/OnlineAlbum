@@ -24,23 +24,27 @@ public class BaseService {
 
     }
 
-    protected Map createOKResultMap() {
+    public Map createOKResultMap() {
         return createResultMap(ResultCode.OK, "操作成功", true);
     }
 
-    protected Map createOKResultMap(Object data) {
+    public Map createOKResultMap(Object data) {
         return createResultMap(ResultCode.OK, "操作成功", data);
     }
 
-    protected Map createExceptionResultMap() {
+    public Map createExceptionResultMap() {
         return createResultMap(ResultCode.INTERNAL_SERVER_ERROR, "服务器内部错误", false);
     }
 
-    protected Map createNotFoundResultMap() {
+    public Map createExceptionResultMap(String msg) {
+        return createResultMap(ResultCode.INTERNAL_SERVER_ERROR, msg, false);
+    }
+
+    public Map createNotFoundResultMap() {
         return createResultMap(ResultCode.NOT_FOUND, "没有找到目标资源", false);
     }
 
-    protected Map createUnauthorizedResultMap() {
+    public Map createUnauthorizedResultMap() {
         return createResultMap(ResultCode.UNAUTHORIZED, "访问未被授权", false);
     }
 }

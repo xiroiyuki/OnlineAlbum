@@ -12,6 +12,8 @@ public interface UserDao {
 
     List<User> selectAll();
 
+    List<User> selectByRole(long roleId);
+
     User selectById(long id);
 
     User login(User user);
