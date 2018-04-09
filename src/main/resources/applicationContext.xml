@@ -61,13 +61,15 @@
         <aop:pointcut id="serviceMethod" expression="execution(* cn.fc.service.*.*(..))"/>
         <aop:pointcut id="authorityUpdatePC" expression="execution(* cn.fc.service.AuthorityService.*(..))"/>
 
-        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
-        <aop:aspect ref="myAdvice">
+        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice" order="2"/>
+
+        <aop:aspect ref="myAdvice" order="1">
             <aop:before method="before" pointcut-ref="serviceMethod"/>
             <aop:after method="after" pointcut-ref="serviceMethod"/>
             <aop:around method="around" pointcut-ref="serviceMethod"/>
         </aop:aspect>
-        <aop:aspect ref="authorityUpdateAdvice">
+
+        <aop:aspect ref="authorityUpdateAdvice" order="3">
             <aop:after method="after" pointcut-ref="authorityUpdatePC"/>
         </aop:aspect>
     </aop:config>
@@ -91,6 +93,7 @@
     <mvc:resources location="/WEB-INF/plugins/" mapping="/plugins/**"/>
     <mvc:resources location="/WEB-INF/upload/" mapping="/upload/**"/>
     <mvc:interceptors>
+        <bean id="requestTimerInterceptor" class="cn.fc.interceptor.RequestTimerInterceptor"/>
         <bean id="authInterceptor" class="cn.fc.interceptor.AuthInterceptor"/>
     </mvc:interceptors>
     <mvc:view-controller path="/" view-name="login"/>
