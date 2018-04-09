@@ -2,6 +2,7 @@ package cn.fc.interceptor;
 
 import cn.fc.bean.Authority;
 import cn.fc.bean.User;
+import cn.fc.context.AlbumContext;
 import cn.fc.dao.AuthorityDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -14,12 +15,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private AuthorityDao authorityDao;
+    @Autowired
+    private AlbumContext context;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        List<Authority> authorities = authorityDao.select();
+        if (context.getAuthorities() == null) {
+            context.setAuthorities(authorityDao.select());
+        }
+        List<Authority> authorities = context.getAuthorities();
         String path = request.getServletPath();
-        System.out.println("visiting " + path);
         boolean match = authorities.stream().anyMatch(authority -> authority.getUrl().equals(path.trim()));
         if (match) {
             Object loginUser = request.getSession().getAttribute("loginUser");

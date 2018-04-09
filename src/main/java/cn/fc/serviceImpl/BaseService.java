@@ -1,6 +1,6 @@
 package cn.fc.serviceImpl;
 
-import cn.fc.conf.AppConfiguration;
+import cn.fc.context.AlbumContext;
 import cn.fc.util.ResultCode;
 import cn.fc.util.ResultDataBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class BaseService {
     @Autowired
-    protected AppConfiguration configuration;
+    protected AlbumContext configuration;
     @Autowired
     protected ResultDataBuilder resultDataBuilder;
 
