@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="javascript:createNewTab('role/edit?id=${role.id}','编辑角色 ${role.roleName}')">
+                    <a href="javascript:createNewTab('role/edit?id=${role.id}',63${role.id},'编辑角色 ${role.roleName}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>

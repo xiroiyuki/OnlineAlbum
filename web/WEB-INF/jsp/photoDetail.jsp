@@ -63,7 +63,7 @@
                 </table>
             </div>
             <div class="box-footer">
-                <a href="javascript:createNewTab('photo/edit?id=${photo.id}','编辑图片 ${photo.id}')">
+                <a href="javascript:createNewTab('photo/edit?id=${photo.id}',53${photo.id},'编辑图片 ${photo.id}')">
                     <button class="btn btn-info">编辑</button>
                 </a>
                 <button class="btn btn-danger" id="delete">删除</button>

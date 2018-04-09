@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="javascript:createNewTab('authority/edit?id=${authority.id}','编辑权限 ${authority.name}')">
+                    <a href="javascript:createNewTab('authority/edit?id=${authority.id}',33${authority.id},'编辑权限 ${authority.name}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>

@@ -59,7 +59,7 @@
                                     <td>${authority.name}</td>
                                     <td>${authority.url}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('authority/detail?id=${authority.id}','权限 ${authority.name}')">详情</a>
+                                        <a href="javascript:createNewTab('authority/detail?id=${authority.id}',32${authority.id},'权限 ${authority.name}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

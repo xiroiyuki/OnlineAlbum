@@ -138,7 +138,7 @@
         App.setbasePath("");
         App.setGlobalImgPath("dist/img/");
         addTabs({
-            id: '10008',
+            id: '100000',
             title: '欢迎页',
             close: false,
             url: 'welcome',
@@ -147,105 +147,87 @@
         App.fixIframeCotent();
         var menus = [
             {
-                id: "9000",
+                id: "100001",
                 text: "OnlineAlbum",
                 icon: "",
                 isHeader: true
             },
             {
-                id: "9001",
-                text: "来源管理",
+                id: "71",
+                text: "来源列表",
                 icon: "fa fa-cloud",
                 url: "source/list",
                 targetType: "iframe-tab"
             },
             {
-                id: "9002",
-                text: "相册管理",
+                id: "21",
+                text: "相册列表",
                 icon: "fa fa-folder-open",
                 url: "album/list",
                 targetType: "iframe-tab"
             },
             {
-                id: "9101",
+                id: "100002",
                 text: "System",
                 icon: "",
                 isHeader: true
             },
             {
-                id: "9102",
-                text: "用户管理",
+                id: "11",
+                text: "用户列表",
                 icon: "fa fa-user",
                 url: "user/list",
                 targetType: "iframe-tab"
             },
             {
-                id: "9103",
-                text: "数据维护",
-                icon: "fa fa-database",
-                targetType: "iframe-tab"
-            },
-            {
-                id: "9104",
-                text: "日志统计",
-                icon: "fa fa-book",
-                targetType: "iframe-tab"
-            },
-            {
-                id: "9105",
+                id: "6",
                 text: "消息推送",
                 icon: "fa fa-wifi",
                 children: [
                     {
-                        id: "910501",
+                        id: "40",
                         text: "创建消息",
                         url: "message/add",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
                     {
-                        id: "910502",
+                        id: "41",
                         text: "消息库",
                         url: "message/list",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o"
-                    },
-                    {
-                        id: "910503",
-                        text: "发布控制",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     }
                 ]
             },
             {
-                id: "9106",
+                id: "5",
                 text: "权限控制",
                 icon: "fa fa-lock",
                 children: [
                     {
-                        id: "910601",
-                        text: "角色管理",
+                        id: "61",
+                        text: "角色列表",
                         url: "role/list",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
                     {
-                        id: "910602",
-                        text: "权限管理",
+                        id: "31",
+                        text: "权限列表",
                         url: "authority/list",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
                     {
-                        id: "910603",
+                        id: "60",
                         text: "创建角色",
                         url: "role/add",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
                     {
-                        id: "910604",
+                        id: "30",
                         text: "创建权限",
                         url: "authority/add",
                         targetType: "iframe-tab",

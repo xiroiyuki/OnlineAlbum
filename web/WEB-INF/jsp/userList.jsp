@@ -68,7 +68,7 @@
                                     </td>
                                     <td>${user.remark}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('user/detail?id=${user.id}','用户 ${user.username}')">详情</a>
+                                        <a href="javascript:createNewTab('user/detail?id=${user.id}',12${user.id},'用户 ${user.username}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

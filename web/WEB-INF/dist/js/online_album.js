@@ -9,6 +9,16 @@ function createNewTab(url, title) {
     });
 }
 
+function createNewTab(url, tabId, title) {
+    top.addTabs({
+        id: '' + tabId,
+        title: title,
+        close: true,
+        url: url,
+        urlType: "relative"
+    });
+}
+
 function resultHandlerCloseTab(data, status, tabId) {
     resultHandler(data, status, function () {
         closeTab(tabId, 2000);

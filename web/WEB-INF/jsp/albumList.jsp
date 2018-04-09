@@ -67,7 +67,7 @@
                                     <td><a href="${album.url}">打开</a></td>
                                     <td>${album.createTime}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
+                                        <a href="javascript:createNewTab('album/detail?id=${album.id}',22${album.id},'相册 ${album.title}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

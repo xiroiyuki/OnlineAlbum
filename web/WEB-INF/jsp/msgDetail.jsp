@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="javascript:createNewTab('message/edit?id=${msg.id}','编辑消息 ${msg.title}')">
+                    <a href="javascript:createNewTab('message/edit?id=${msg.id}',43${msg.id},'编辑消息 ${msg.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>

@@ -59,7 +59,7 @@
                                     <td>${msg.id}</td>
                                     <td>${msg.title}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('message/detail?id=${msg.id}','消息 ${msg.title}')">详情</a>
+                                        <a href="javascript:createNewTab('message/detail?id=${msg.id}',42${msg.id},'消息 ${msg.title}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

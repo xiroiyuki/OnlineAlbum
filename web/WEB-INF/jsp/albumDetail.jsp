@@ -87,7 +87,7 @@
                 </div>
                 <div class="box-footer">
                     <button class="btn btn-default" id="refresh">刷新图片数量</button>
-                    <a href="javascript:createNewTab('album/edit?id=${album.id}','编辑相册 ${album.title}')">
+                    <a href="javascript:createNewTab('album/edit?id=${album.id}',23${album.id},'编辑相册 ${album.title}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>

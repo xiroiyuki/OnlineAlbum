@@ -59,7 +59,7 @@
                                     <td>${source.name}</td>
                                     <td>${source.url}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('source/detail?id=${source.id}','来源 ${source.name}')">详情</a>
+                                        <a href="javascript:createNewTab('source/detail?id=${source.id}',72${source.id},'来源 ${source.name}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>

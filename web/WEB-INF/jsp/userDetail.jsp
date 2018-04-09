@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a href="javascript:createNewTab('user/edit?id=${ user.id}','编辑用户 ${user.username}')">
+                    <a href="javascript:createNewTab('user/edit?id=${user.id}',13${user.id},'编辑用户 ${user.username}')">
                         <button class="btn btn-info">编辑</button>
                     </a>
                     <button class="btn btn-danger" id="delete">删除</button>

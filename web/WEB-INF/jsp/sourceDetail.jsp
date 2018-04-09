@@ -62,7 +62,7 @@
                 </table>
             </div>
             <div class="box-footer">
-                <a href="javascript:createNewTab('source/edit?id=${source.id}','编辑来源 ${source.name}')">
+                <a href="javascript:createNewTab('source/edit?id=${source.id}',73${source.id},'编辑来源 ${source.name}')">
                     <button class="btn btn-info">编辑</button>
                 </a>
                 <button class="btn btn-danger" id="delete">删除</button>

@@ -57,7 +57,7 @@
                                     <td>${role.id}</td>
                                     <td>${role.roleName}</td>
                                     <td>
-                                        <a href="javascript:createNewTab('role/detail?id=${role.id}','角色 ${role.roleName}')">详情</a>
+                                        <a href="javascript:createNewTab('role/detail?id=${role.id}',62${role.id},'角色 ${role.roleName}')">详情</a>
                                     </td>
                                 </tr>
                             </c:forEach>
