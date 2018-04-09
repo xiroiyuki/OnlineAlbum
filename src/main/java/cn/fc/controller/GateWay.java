@@ -23,5 +23,9 @@ public class GateWay {
         return "workbench";
     }
 
+    @RequestMapping("/error")
+    public String error() {
+        return "error";
+    }
 
 }

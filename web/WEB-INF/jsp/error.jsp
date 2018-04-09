@@ -24,17 +24,19 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <section class="content-header">
     <h1>
-        Dashboard
-        <small>Version 2.0</small>
+        ${errorCode}
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-    </ol>
 </section>
-
 <section class="content">
-    <h1>发生了错误</h1>
+    <div class="error-page">
+        <h2 class="headline text-yellow">${errorCode}</h2>
+        <div class="error-content">
+            <h3><i class="fa fa-warning text-yellow"></i> 请求失败 </h3>
+            <p>
+                ${msg}
+            </p>
+        </div>
+    </div>
 </section>
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>

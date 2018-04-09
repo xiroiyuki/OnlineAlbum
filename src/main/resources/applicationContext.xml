@@ -76,23 +76,19 @@
         </tx:attributes>
     </tx:advice>
 
-    <mvc:interceptors>
-        <!-- 使用 bean 定义一个 Interceptor，直接定义在 mvc:interceptors 下面的 Interceptor 将拦截所有的请求 -->
-        <mvc:interceptor>
-            <mvc:mapping path="/workbench"/>
-            <!-- 定义在 mvc:interceptor 下面的 Interceptor，表示对特定的请求进行拦截 -->
-            <bean id="myInterceptor" class="cn.fc.interceptor.MyInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
-
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.fc.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
     </bean>
 
+
+
     <mvc:annotation-driven/>
     <mvc:resources location="/WEB-INF/dist/" mapping="/dist/**"/>
     <mvc:resources location="/WEB-INF/plugins/" mapping="/plugins/**"/>
     <mvc:resources location="/WEB-INF/upload/" mapping="/upload/**"/>
-
+    <mvc:interceptors>
+        <bean id="myInterceptor" class="cn.fc.interceptor.AuthInterceptor"/>
+    </mvc:interceptors>
+    <mvc:view-controller path="/" view-name="login"/>
 </beans>
