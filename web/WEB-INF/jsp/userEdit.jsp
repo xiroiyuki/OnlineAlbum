@@ -155,7 +155,7 @@
             url: "role/detail.json",
             data: {id: $("#roleId").val()},
             beforeSend: function () {
-                table.clear();
+                table.clear().draw();
                 $("#loading").show();
             },
             success: function (data, status) {

@@ -44,6 +44,14 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
     }
 
     @Override
+    public Map listAuthoritiesByIds(Long[] authorityIds) {
+        if (authorityIds.length > 0) {
+            return super.createOKResultMap(authorityDao.selectByIds(authorityIds));
+        }
+        return super.createOKResultMap(new ArrayList<>());
+    }
+
+    @Override
     public List<Authority> listAuthoritiesFromRole(Role role) {
         List<Long> hasId = role.getAuthorities().stream().map(Authority::getId).collect(Collectors.toList());
         if (hasId.isEmpty()) {

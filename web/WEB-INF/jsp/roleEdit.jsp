@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="../plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,41 +34,70 @@
 </section>
 <section class="content">
     <div class="row">
-        <div class="box box-solid">
-            <form role="form">
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <form role="form">
+                    <div class="box-body">
+                        <input name="id" id="id" value="${role.id}" hidden>
+                        <div class="form-group">
+                            <label for="roleName">角色名称</label>
+                            <input type="text" class="form-control" name="roleName" id="roleName" placeholder="请输入角色名称"
+                                   value="${role.roleName}">
+                        </div>
+                        <div class="form-group">
+                            <label for="authorityIds">权限</label>
+                            <select class="form-control select2" multiple="multiple" id="authorityIds"
+                                    name="authorityIds"
+                                    data-placeholder="选择权限"
+                                    style="width: 100%;">
+                                <c:choose>
+                                    <c:when test="${(notHas eq null || fn:length(notHas) eq 0) && (has eq null || fn:length(has) eq 0)}">
+                                        <option value="-1" disabled>没有获取到权限列表</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="h" items="${has}">
+                                            <option value="${h.id}" selected>${h.name}</option>
+                                        </c:forEach>
+                                        <c:forEach items="${notHas}" var="nh">
+                                            <option value="${nh.id}">${nh.name}</option>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" id="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header">
+                    <h4>此角色即将拥有的权限</h4>
+                </div>
                 <div class="box-body">
-                    <input name="id" id="id" value="${role.id}" hidden>
-                    <div class="form-group">
-                        <label for="roleName">角色名称</label>
-                        <input type="text" class="form-control" name="roleName" id="roleName" placeholder="请输入角色名称"
-                               value="${role.roleName}">
-                    </div>
-                    <div class="form-group">
-                        <label for="authorityIds">权限</label>
-                        <select class="form-control select2" multiple="multiple" id="authorityIds" name="authorityIds"
-                                data-placeholder="选择权限"
-                                style="width: 100%;">
-                            <c:choose>
-                                <c:when test="${(notHas eq null || fn:length(notHas) eq 0) && (has eq null || fn:length(has) eq 0)}">
-                                    <option value="-1" disabled>没有获取到权限列表</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach var="h" items="${has}">
-                                        <option value="${h.id}" selected>${h.name}</option>
-                                    </c:forEach>
-                                    <c:forEach items="${notHas}" var="nh">
-                                        <option value="${nh.id}">${nh.name}</option>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
-                        </select>
-                    </div>
+                    <table id="table" class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>权限名称</th>
+                            <th>URL</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="box-footer">
-                    <button type="button" id="submit" class="btn btn-primary">提交</button>
+                    <h1 class="text-center" id="loading" hidden><span class="fa fa-refresh fa-spin"></span></h1>
                 </div>
-            </form>
+            </div>
         </div>
+
     </div>
 
     <div class="modal fade" id="resModal">
@@ -83,6 +113,8 @@
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../plugins/fastclick/fastclick.js"></script>
 <script src="../dist/js/app.min.js"></script>
 <script src="../plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -102,6 +134,33 @@
     });
     </c:when>
     <c:otherwise>
+
+
+    function loadAuth(table) {
+        $.ajax({
+            type: "post",
+            url: "authority/detail.json",
+            data: {authorityIds: $("#authorityIds").val()},
+            beforeSend: function () {
+                table.clear().draw();
+                $("#loading").show();
+            },
+            success: function (data, status) {
+                $(data.result).each(function (index, item) {
+                    table.row.add([
+                        item.id,
+                        item.name,
+                        item.url
+                    ]).draw(false);
+                });
+                $("#loading").hide();
+            },
+            error: function () {
+                alert("请求失败");
+            }
+        });
+    }
+
     $("#submit").click(function () {
         $.post("role/update",
             {
@@ -115,8 +174,24 @@
     });
 
     $(function () {
-        $(".select2").select2({
+        var table = $('#table').DataTable(
+            {
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                language: {
+                    url: "../plugins/datatables/Chinese.json"
+                }
+            }
+        );
+        loadAuth(table);
+        $("#authorityIds").select2({
             closeOnSelect: false
+        }).on("change", function (e) {
+            loadAuth(table);
         });
     });
     </c:otherwise>

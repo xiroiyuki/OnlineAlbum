@@ -13,6 +13,8 @@ public interface AuthorityService {
 
     List<Authority> loadLoginUserAuthority(User user);
 
+    Map listAuthoritiesByIds(Long[] authorityIds);
+
     Map updateAuthority(Authority authority);
 
     Map deleteAuthority(long id);

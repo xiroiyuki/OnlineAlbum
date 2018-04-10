@@ -33,6 +33,16 @@ public class AuthorityController {
         return "authorityDetail";
     }
 
+    @RequestMapping("/detail.json")
+    @ResponseBody
+    public Map detailJson(@RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
+        if (authorityIds != null && authorityIds.length > 0) {
+            return service.listAuthoritiesByIds(authorityIds);
+        } else {
+            return service.listAuthoritiesByIds(new Long[]{});
+        }
+    }
+
 
     @RequestMapping("/list")
     public String list(HttpServletRequest request) {
