@@ -19,6 +19,7 @@
 
     <bean class="cn.fc.context.AlbumContext" id="albumContext">
         <property name="pageSize" value="20"/>
+        <property name="devMode" value="true"/>
     </bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

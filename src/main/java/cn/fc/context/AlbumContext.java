@@ -8,6 +8,16 @@ public class AlbumContext {
 
     private int pageSize;
 
+    private boolean devMode;
+
+    public boolean isDevMode() {
+        return devMode;
+    }
+
+    public void setDevMode(boolean devMode) {
+        this.devMode = devMode;
+    }
+
     private List<Authority> authorities;
 
     public List<Authority> getAuthorities() {
