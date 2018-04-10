@@ -6,16 +6,15 @@ import cn.fc.bean.Photo;
 import cn.fc.service.AlbumService;
 import cn.fc.service.PhotoService;
 import cn.fc.serviceImpl.BaseService;
-import cn.fc.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -49,9 +48,6 @@ public class AlbumController {
         return "albumDetail";
     }
 
-    /**
-     * 编辑回显方法
-     */
     @RequestMapping("/edit")
     public String edit(Long id, HttpServletRequest request) {
         if (id == null) {
@@ -70,12 +66,9 @@ public class AlbumController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(@Valid Album album, BindingResult result) {
+    public Map update(@Valid Album album, BindingResult result, HttpServletResponse response) {
         if (result.hasErrors()) {
-            List<ObjectError> fieldErrors = result.getAllErrors();
-            StringBuffer sb = new StringBuffer();
-            fieldErrors.forEach(fieldError -> sb.append(fieldError.getObjectName()).append(":").append(fieldError.getDefaultMessage()).append("\n"));
-            return baseService.createResultMap(ResultCode.BAD_REQUEST, sb.toString(), false);
+            return baseService.errorHandler(result, response);
         }
         return service.update(album);
     }

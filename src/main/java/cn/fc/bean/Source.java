@@ -1,15 +1,12 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Source {
     private long id;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.source.url}")
     private String url;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.source.name}")
     private String name;
 
     @Override

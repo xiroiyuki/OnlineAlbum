@@ -2,12 +2,17 @@ package cn.fc.controller;
 
 import cn.fc.bean.Photo;
 import cn.fc.service.PhotoService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -16,6 +21,9 @@ public class PhotoController {
 
     @Autowired
     private PhotoService service;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
 
     @RequestMapping("/detail")
     public String detail(Long id, HttpServletRequest request) {
@@ -45,7 +53,10 @@ public class PhotoController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(Photo photo) {
+    public Map update(@Valid Photo photo, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         return service.update(photo);
     }
 }

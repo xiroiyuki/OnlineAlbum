@@ -4,14 +4,20 @@ import cn.fc.bean.Role;
 import cn.fc.bean.User;
 import cn.fc.service.RoleService;
 import cn.fc.service.UserService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +29,9 @@ public class UserController {
     private UserService service;
     @Autowired
     private RoleService roleService;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
 
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.POST})
@@ -38,7 +47,10 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(User user, Long roleId) {
+    public Map update(@Valid User user,Long roleId, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         Role role = roleService.getRole(roleId);
         user.setRole(role);
         return service.update(user);

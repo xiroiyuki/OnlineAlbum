@@ -5,13 +5,18 @@ import cn.fc.bean.Role;
 import cn.fc.service.AuthorityService;
 import cn.fc.service.RoleAuthorityService;
 import cn.fc.service.RoleService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +30,9 @@ public class AuthorityController {
     private RoleAuthorityService roleAuthorityService;
     @Autowired
     private RoleService roleService;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
 
 
     @RequestMapping("/detail")
@@ -69,7 +77,10 @@ public class AuthorityController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(Authority authority, @RequestParam(value = "roleIds[]", required = false) Long[] roleIds) {
+    public Map update(@Valid Authority authority, @RequestParam(value = "roleIds[]", required = false) Long[] roleIds, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         roleAuthorityService.revokeAuthorityFromAllRoles(authority);
         if (roleIds != null && roleIds.length > 0) {
             roleAuthorityService.grantRolesToAuthority(roleIds, authority);
@@ -86,7 +97,10 @@ public class AuthorityController {
 
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Authority authority, @RequestParam(value = "roleIds[]", required = false) Long[] roleIds) {
+    public Map insert(@Valid Authority authority, @RequestParam(value = "roleIds[]", required = false) Long[] roleIds, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         Map res = service.insertAuthority(authority);
         if (roleIds != null && roleIds.length > 0) {
             roleAuthorityService.grantRolesToAuthority(roleIds, authority);

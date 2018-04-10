@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 public class Album {
 
     private long id;
-    @NotNull()
     @Size(min = 1, message = "{Size.album.title}")
     private String title;
     private String intro;
@@ -16,8 +15,7 @@ public class Album {
     private String faceUrl;
     @SerializedName("photo_num")
     private int photoNum;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.album.url}")
     private String url;
     @SerializedName("create_time")
     private long createTime;

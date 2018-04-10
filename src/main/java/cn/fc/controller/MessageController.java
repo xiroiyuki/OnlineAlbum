@@ -2,12 +2,17 @@ package cn.fc.controller;
 
 import cn.fc.bean.Message;
 import cn.fc.service.MsgService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.Map;
 
 @RequestMapping("message")
@@ -15,6 +20,9 @@ import java.util.Map;
 public class MessageController {
     @Autowired
     private MsgService service;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
 
     @RequestMapping("/list")
     public String list(HttpServletRequest request) {
@@ -49,13 +57,19 @@ public class MessageController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(Message message) {
+    public Map update(@Valid Message message, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         return service.update(message);
     }
 
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Message message) {
+    public Map insert(@Valid Message message, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         return service.insert(message);
     }
 

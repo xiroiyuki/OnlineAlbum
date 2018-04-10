@@ -2,13 +2,11 @@ package cn.fc.bean;
 
 import com.google.gson.annotations.SerializedName;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Photo {
     private long id;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.photo.url}")
     private String url;
     @SerializedName("album_id")
     private long albumId;//ALBUM_ID

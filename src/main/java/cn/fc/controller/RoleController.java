@@ -9,11 +9,14 @@ import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +73,10 @@ public class RoleController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
+    public Map update(@Valid Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         roleAuthorityService.revokeRoleFromAllAuthorities(role);
         if (authorityIds != null && authorityIds.length > 0) {
             roleAuthorityService.grantAuthoritiesToRole(authorityIds, role);
@@ -87,7 +93,10 @@ public class RoleController {
 
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds) {
+    public Map insert(@Valid Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         Map res = service.insertRole(role);
         if (authorityIds != null && authorityIds.length > 0) {
             roleAuthorityService.grantAuthoritiesToRole(authorityIds, role);

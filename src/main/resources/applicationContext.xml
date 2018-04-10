@@ -102,10 +102,9 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <!--资源文件名-->
-        <!--<property name="basename" value="validationMessage"/>-->
         <property name="basename" value="classpath:validationMessage"/>
         <!-- 资源文件编码格式 -->
-        <property name="fileEncodings" value="utf-8"/>
+        <property name="fileEncodings" value="UTF-8"/>
         <!-- 对资源文件内容缓存时间，单位秒 -->
         <property name="cacheSeconds" value="120"/>
     </bean>

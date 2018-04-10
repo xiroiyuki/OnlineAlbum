@@ -4,12 +4,17 @@ import cn.fc.bean.Album;
 import cn.fc.bean.Source;
 import cn.fc.service.AlbumService;
 import cn.fc.service.SourceService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +27,9 @@ public class SourceController {
     private SourceService service;
     @Autowired
     private AlbumService albumService;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
 
 
     @RequestMapping("/list")
@@ -53,7 +61,10 @@ public class SourceController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(Source sources) {
+    public Map update(@Valid Source sources, BindingResult result, HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return baseService.errorHandler(result, response);
+        }
         return service.update(sources);
     }
 

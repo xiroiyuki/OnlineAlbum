@@ -2,23 +2,19 @@ package cn.fc.bean;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class User {
     private int id;
-    @NotNull
-    @Size(min = 6, max = 18)
+    @Size(min = 6, max = 18,message = "{Size.user.username}")
     private String username;
-    @NotNull
-    @Size(min = 6, max = 18)
+    @Size(min = 6, max = 18,message = "{Size.user.password}")
     private String password;
-    @Min(0)
-    @Max(1)
+    @Min(value = 0,message = "{Min.user.state}")
+    @Max(value = 1,message = "{Max.user.state}")
     private int state;
     private Role role;//ROLE_ID
     private String remark;
-    @Min(0)
     private long regTime;
 
     @Override

@@ -1,13 +1,11 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 public class Role {
     private long id;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.role.roleName}")
     private String roleName;
 
     private List<Authority> authorities;

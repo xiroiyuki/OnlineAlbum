@@ -1,16 +1,13 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 public class Authority {
     private long id;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.authority.name}")
     private String name;
-    @NotNull
-    @Size(min = 1)
+    @Size(min = 1,message = "{Size.authority.url}")
     private String url;
 
     private List<Role> roles;
