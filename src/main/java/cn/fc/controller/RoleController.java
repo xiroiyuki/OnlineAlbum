@@ -5,7 +5,9 @@ import cn.fc.bean.Role;
 import cn.fc.service.AuthorityService;
 import cn.fc.service.RoleAuthorityService;
 import cn.fc.service.RoleService;
+import cn.fc.serviceImpl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,11 +27,21 @@ public class RoleController {
     private AuthorityService authorityService;
     @Autowired
     private RoleAuthorityService roleAuthorityService;
+    @Qualifier("baseService")
+    @Autowired
+    private BaseService baseService;
+
 
     @RequestMapping("/detail")
     public String detail(Long id, HttpServletRequest request) {
         request.setAttribute("role", service.getRole(id));
         return "roleDetail";
+    }
+
+    @RequestMapping("/detail.json")
+    @ResponseBody
+    public Map detailJson(Long id) {
+        return baseService.createOKResultMap(service.getRole(id));
     }
 
 

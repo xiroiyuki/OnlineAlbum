@@ -17,8 +17,9 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
     <link rel="stylesheet" href="../dist/css/ionicons.min.css">
-    <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="../plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/skins/all-skins.min.css">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +33,7 @@
 </section>
 <section class="content">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box box-solid">
                 <form role="form">
                     <div class="box-body">
@@ -75,6 +76,24 @@
                 </form>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <table class="table table-hover table-striped" id="authTable">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>权限名称</th>
+                        <th>URL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <h1 class="text-center" id="loading" hidden><span class="fa fa-refresh fa-spin"></span></h1>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="resModal">
@@ -90,6 +109,8 @@
 
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../plugins/fastclick/fastclick.js"></script>
 <script src="../dist/js/app.min.js"></script>
 <script src="../plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -127,9 +148,54 @@
                 resultHandlerCloseTab(data, status, tabId);
             });
     });
+
+    function loadRoleAuth(table) {
+        $.ajax({
+            type: "get",
+            url: "role/detail.json",
+            data: {id: $("#roleId").val()},
+            beforeSend: function () {
+                table.clear();
+                $("#loading").show();
+            },
+            success: function (data, status) {
+                $(data.result.authorities).each(function (index, item) {
+                    table.row.add([
+                        item.id,
+                        item.name,
+                        item.url
+                    ]).draw(false);
+                });
+                $("#loading").hide();
+            },
+            error: function () {
+                alert("请求失败");
+            }
+        });
+    }
+
     $(function () {
+        var table = $('#authTable').DataTable(
+            {
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                language: {
+                    url: "../plugins/datatables/Chinese.json"
+                }
+            }
+        );
         $(".select2").select2();
+        loadRoleAuth(table);
+        $("#roleId").change(function () {
+            loadRoleAuth(table);
+        });
     });
+
+
     </c:otherwise>
     </c:choose>
 </script>
