@@ -2,15 +2,22 @@ package cn.fc.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Album {
 
     private long id;
+    @NotNull()
+    @Size(min = 1, message = "{Size.album.title}")
     private String title;
     private String intro;
     @SerializedName("face_url")
     private String faceUrl;
     @SerializedName("photo_num")
     private int photoNum;
+    @NotNull
+    @Size(min = 1)
     private String url;
     @SerializedName("create_time")
     private long createTime;

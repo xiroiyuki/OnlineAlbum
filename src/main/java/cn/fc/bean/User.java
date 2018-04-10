@@ -1,12 +1,24 @@
 package cn.fc.bean;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
     private int id;
+    @NotNull
+    @Size(min = 6, max = 18)
     private String username;
+    @NotNull
+    @Size(min = 6, max = 18)
     private String password;
+    @Min(0)
+    @Max(1)
     private int state;
     private Role role;//ROLE_ID
     private String remark;
+    @Min(0)
     private long regTime;
 
     @Override

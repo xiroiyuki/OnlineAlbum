@@ -1,9 +1,16 @@
 package cn.fc.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Source {
     private long id;
-    private String name;
+    @NotNull
+    @Size(min = 1)
     private String url;
+    @NotNull
+    @Size(min = 1)
+    private String name;
 
     @Override
     public String toString() {

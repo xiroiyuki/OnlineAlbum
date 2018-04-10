@@ -41,7 +41,7 @@
                                value="${album.title}">
                     </div>
                     <div class="form-group">
-                        <label for="intro">标题</label>
+                        <label for="intro">简介</label>
                         <input type="text" class="form-control" name="intro" id="intro" placeholder="请输入新简介"
                                value="${album.intro}">
                     </div>
