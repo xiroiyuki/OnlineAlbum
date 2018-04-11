@@ -1,12 +1,12 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Source {
     private long id;
-    @Size(min = 1,message = "{Size.source.url}")
+    @NotBlank(message = "{NotBlank.source.url}")
     private String url;
-    @Size(min = 1,message = "{Size.source.name}")
+    @NotBlank(message = "{NotBlank.source.name}")
     private String name;
 
     @Override

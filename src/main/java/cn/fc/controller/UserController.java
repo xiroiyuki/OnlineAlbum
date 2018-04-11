@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -47,9 +46,9 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(@Valid User user,Long roleId, BindingResult result, HttpServletResponse response) {
+    public Map update(@RequestParam(value = "roleId", required = false) Long roleId, @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
-            return baseService.errorHandler(result, response);
+            return baseService.errorHandler(result);
         }
         Role role = roleService.getRole(roleId);
         user.setRole(role);

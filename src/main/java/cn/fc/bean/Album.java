@@ -1,21 +1,19 @@
 package cn.fc.bean;
 
 import com.google.gson.annotations.SerializedName;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Album {
 
     private long id;
-    @Size(min = 1, message = "{Size.album.title}")
+    @NotBlank(message = "{Size.album.title}")
     private String title;
     private String intro;
     @SerializedName("face_url")
     private String faceUrl;
     @SerializedName("photo_num")
     private int photoNum;
-    @Size(min = 1,message = "{Size.album.url}")
+    @NotBlank(message = "{Size.album.url}")
     private String url;
     @SerializedName("create_time")
     private long createTime;

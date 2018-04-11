@@ -1,17 +1,15 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 public class User {
     private int id;
-    @Size(min = 6, max = 18,message = "{Size.user.username}")
+    @Length(min = 6, max = 18, message = "{Length.user.username}")
     private String username;
-    @Size(min = 6, max = 18,message = "{Size.user.password}")
+    @Length(min = 6, max = 18, message = "{Length.user.password}")
     private String password;
-    @Min(value = 0,message = "{Min.user.state}")
-    @Max(value = 1,message = "{Max.user.state}")
+    @Range(max = 1, message = "{Range.user.state}")
     private int state;
     private Role role;//ROLE_ID
     private String remark;

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -73,9 +72,9 @@ public class RoleController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(@Valid Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, BindingResult result, HttpServletResponse response) {
+    public Map update(@RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, @Valid Role role, BindingResult result) {
         if (result.hasErrors()) {
-            return baseService.errorHandler(result, response);
+            return baseService.errorHandler(result);
         }
         roleAuthorityService.revokeRoleFromAllAuthorities(role);
         if (authorityIds != null && authorityIds.length > 0) {
@@ -93,9 +92,9 @@ public class RoleController {
 
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(@Valid Role role, @RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, BindingResult result, HttpServletResponse response) {
+    public Map insert(@RequestParam(value = "authorityIds[]", required = false) Long[] authorityIds, @Valid Role role, BindingResult result) {
         if (result.hasErrors()) {
-            return baseService.errorHandler(result, response);
+            return baseService.errorHandler(result);
         }
         Map res = service.insertRole(role);
         if (authorityIds != null && authorityIds.length > 0) {

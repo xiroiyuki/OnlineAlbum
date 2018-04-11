@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -66,9 +65,9 @@ public class AlbumController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Map update(@Valid Album album, BindingResult result, HttpServletResponse response) {
+    public Map update(@Valid Album album, BindingResult result) {
         if (result.hasErrors()) {
-            return baseService.errorHandler(result, response);
+            return baseService.errorHandler(result);
         }
         return service.update(album);
     }

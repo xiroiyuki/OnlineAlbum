@@ -1,11 +1,12 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 public class Role {
     private long id;
-    @Size(min = 1,message = "{Size.role.roleName}")
+    @NotBlank(message = "{NotBlank.role.roleName}")
     private String roleName;
 
     private List<Authority> authorities;

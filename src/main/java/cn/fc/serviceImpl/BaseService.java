@@ -6,9 +6,8 @@ import cn.fc.util.ResultDataBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -52,11 +51,11 @@ public class BaseService {
         return createResultMap(ResultCode.UNAUTHORIZED, "访问未被授权", false);
     }
 
-    public Map errorHandler(BindingResult result,HttpServletResponse response){
-        List<FieldError> fieldErrors = result.getFieldErrors();
+
+    public Map errorHandler(BindingResult result) {
+        List<ObjectError> fieldErrors = result.getAllErrors();
         StringBuffer sb = new StringBuffer();
         fieldErrors.forEach(fieldError -> sb.append(fieldError.getDefaultMessage()).append(";"));
-        response.setStatus(HttpServletResponse.SC_OK);
         System.out.println(sb.toString());
         return createResultMap(ResultCode.BAD_REQUEST, sb.toString(), false);
     }

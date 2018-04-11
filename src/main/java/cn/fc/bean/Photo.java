@@ -1,12 +1,11 @@
 package cn.fc.bean;
 
 import com.google.gson.annotations.SerializedName;
-
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Photo {
     private long id;
-    @Size(min = 1,message = "{Size.photo.url}")
+    @NotBlank(message = "{NotBlank.photo.url}")
     private String url;
     @SerializedName("album_id")
     private long albumId;//ALBUM_ID

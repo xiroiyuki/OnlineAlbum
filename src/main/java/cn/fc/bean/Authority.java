@@ -1,13 +1,14 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 public class Authority {
     private long id;
-    @Size(min = 1,message = "{Size.authority.name}")
+    @NotBlank(message = "{NotBlank.authority.name}")
     private String name;
-    @Size(min = 1,message = "{Size.authority.url}")
+    @NotBlank(message = "{NotBlank.authority.url}")
     private String url;
 
     private List<Role> roles;

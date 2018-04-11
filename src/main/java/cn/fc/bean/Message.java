@@ -1,12 +1,12 @@
 package cn.fc.bean;
 
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Message {
     private long id;
-    @Size(min = 1,message = "{Size.message.title}")
+    @NotBlank(message = "{NotBlank.message.title}")
     private String title;
-    @Size(min = 1,message = "{Size.message.content}")
+    @NotBlank(message = "{NotBlank.message.content}")
     private String content;
 
     @Override
