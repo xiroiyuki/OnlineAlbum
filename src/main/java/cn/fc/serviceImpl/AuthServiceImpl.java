@@ -3,7 +3,6 @@ package cn.fc.serviceImpl;
 import cn.fc.bean.Authority;
 import cn.fc.bean.Role;
 import cn.fc.bean.RoleAuthority;
-import cn.fc.bean.User;
 import cn.fc.dao.AuthorityDao;
 import cn.fc.dao.RoleAuthorityDao;
 import cn.fc.dao.RoleDao;
@@ -132,10 +131,6 @@ public class AuthServiceImpl extends BaseService implements RoleAuthorityService
         roleAuthorityDao.grantRoleAuthorities(authorityRoles);
     }
 
-    @Override
-    public List<Authority> loadLoginUserAuthority(User user) {
-        return authorityDao.loadUserAuthority(user);
-    }
 
     @Override
     public Map updateAuthority(Authority authority) {

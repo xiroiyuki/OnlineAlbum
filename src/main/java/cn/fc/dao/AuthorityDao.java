@@ -1,7 +1,6 @@
 package cn.fc.dao;
 
 import cn.fc.bean.Authority;
-import cn.fc.bean.User;
 
 import java.util.List;
 
@@ -19,7 +18,5 @@ public interface AuthorityDao {
     List<Authority> selectExceptByIds(Long[] ids);
 
     void update(Authority authority);
-
-    List<Authority> loadUserAuthority(User user);
 
 }
