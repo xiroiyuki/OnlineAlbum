@@ -6,15 +6,14 @@ public class Log {
     private String method;
     private long reqTime;
     private User user;
-    private String reqResult;
+    private String sourceIP;
 
-    public String getReqResult() {
-        return reqResult;
+    public String getSourceIP() {
+        return sourceIP;
     }
 
-    public void setReqResult(String reqResult) {
-        System.out.println(reqResult);
-        this.reqResult = reqResult;
+    public void setSourceIP(String sourceIP) {
+        this.sourceIP = sourceIP;
     }
 
     public long getId() {
