@@ -75,12 +75,15 @@ public class AlbumServiceImpl extends BaseService implements AlbumService {
         } else {
             int num = photoDao.selectPhotoCountByAlbumId(albumId);
             Album album = dao.selectById(albumId);
-            album.setPhotoNum(num);
-            dao.updatePhotoNum(album);
-            Map<String, Object> resData = new HashMap<>();
-            resData.put("success", true);
-            resData.put("photo_num", num);
-            return super.createOKResultMap(resData);
+            if (album != null) {
+                album.setPhotoNum(num);
+                dao.updatePhotoNum(album);
+                Map<String, Object> resData = new HashMap<>();
+                resData.put("success", true);
+                resData.put("photo_num", num);
+                return super.createOKResultMap(resData);
+            }
         }
+        return createNotFoundResultMap();
     }
 }
