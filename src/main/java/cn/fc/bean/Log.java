@@ -6,6 +6,16 @@ public class Log {
     private String method;
     private long reqTime;
     private User user;
+    private String reqResult;
+
+    public String getReqResult() {
+        return reqResult;
+    }
+
+    public void setReqResult(String reqResult) {
+        System.out.println(reqResult);
+        this.reqResult = reqResult;
+    }
 
     public long getId() {
         return id;

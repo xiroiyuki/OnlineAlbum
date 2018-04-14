@@ -31,23 +31,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         String path = request.getServletPath();
         boolean match = authorities.stream().anyMatch(authority -> authority.getUrl().equals(path.trim()));
         if (match) {
-            Object loginUser = request.getSession().getAttribute("loginUser");
-            if (loginUser == null) {
-                response.sendRedirect("/login");
-                return false;
+            User user = (User) request.getSession().getAttribute("loginUser");
+            List<Authority> userAuthorities = user.getRole().getAuthorities();
+            boolean grant = userAuthorities.stream().anyMatch(authority -> authority.getUrl().equals(path.trim()));
+            if (grant) {
+                return true;
             } else {
-                User user = (User) loginUser;
-                List<Authority> userAuthorities = user.getRole().getAuthorities();
-                boolean grant = userAuthorities.stream().anyMatch(authority -> authority.getUrl().equals(path.trim()));
-                if (grant) {
-                    return true;
-                } else {
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    request.setAttribute("errorCode", HttpServletResponse.SC_FORBIDDEN);
-                    request.setAttribute("msg", "您没有权限访问,如有疑问请联系管理员");
-                    request.getRequestDispatcher("/error").forward(request, response);
-                    return false;
-                }
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                request.setAttribute("errorCode", HttpServletResponse.SC_FORBIDDEN);
+                request.setAttribute("msg", "您没有权限访问,如有疑问请联系管理员");
+                request.getRequestDispatcher("/error").forward(request, response);
+                return false;
             }
         }
         return true;
