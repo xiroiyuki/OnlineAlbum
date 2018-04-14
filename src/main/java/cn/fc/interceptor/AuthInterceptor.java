@@ -3,7 +3,7 @@ package cn.fc.interceptor;
 import cn.fc.bean.Authority;
 import cn.fc.bean.User;
 import cn.fc.context.AlbumContext;
-import cn.fc.dao.AuthorityDao;
+import cn.fc.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    private AuthorityDao authorityDao;
+    private AuthorityService authorityService;
     @Autowired
     private AlbumContext context;
 
@@ -25,7 +25,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         if (context.getAuthorities() == null) {
-            context.setAuthorities(authorityDao.select());
+            context.setAuthorities(authorityService.listAuthorities());
         }
         List<Authority> authorities = context.getAuthorities();
         String path = request.getServletPath();

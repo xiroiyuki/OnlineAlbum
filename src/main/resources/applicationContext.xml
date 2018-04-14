@@ -94,6 +94,7 @@
     <mvc:resources location="/WEB-INF/plugins/" mapping="/plugins/**"/>
     <mvc:resources location="/WEB-INF/upload/" mapping="/upload/**"/>
     <mvc:interceptors>
+        <bean id="logInterceptor" class="cn.fc.interceptor.LogInterceptor"/>
         <bean id="requestTimerInterceptor" class="cn.fc.interceptor.RequestTimerInterceptor"/>
         <bean id="authInterceptor" class="cn.fc.interceptor.AuthInterceptor"/>
     </mvc:interceptors>
