@@ -22,12 +22,16 @@ function createNewTab(url, tabId, title) {
 function resultHandlerCloseTab(data, status, tabId) {
     resultHandler(data, status, function () {
         closeTab(tabId, 2000);
+    }, function () {
+
     });
 }
 
 function resultHandlerRefreshTab(data, status, tabId) {
     resultHandler(data, status, function () {
         refreshTab(tabId, 2000);
+    }, function () {
+
     });
 }
 
@@ -35,8 +39,8 @@ function resultHandlerRefreshTab(data, status, tabId) {
 function resultHandler(data, status, success, fail) {
     console.log("Data: " + data.result + "\nStatus: " + status);
     if (data.result) {
-        $('#resModal').addClass('modal-success');
         $('#resModal').removeClass('modal-danger');
+        $('#resModal').addClass('modal-success');
         $("#modalMsg").text(data.msg);
         $('#resModal').modal('show');
         success();
@@ -45,6 +49,9 @@ function resultHandler(data, status, success, fail) {
         $('#resModal').addClass('modal-danger');
         $("#modalMsg").text(data.msg);
         $('#resModal').modal('show');
+        setTimeout(function () {
+            $('#resModal').modal('hide');
+        }, 2000);
         fail();
     }
 }
