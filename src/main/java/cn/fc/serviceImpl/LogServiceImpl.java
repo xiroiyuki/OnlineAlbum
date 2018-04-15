@@ -6,8 +6,11 @@ import cn.fc.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
-public class LogServiceImpl implements LogService {
+public class LogServiceImpl extends BaseService implements LogService {
 
     @Autowired
     private LogDao dao;
@@ -15,5 +18,16 @@ public class LogServiceImpl implements LogService {
     @Override
     public void saveLog(Log log) {
         dao.insert(log);
+    }
+
+    @Override
+    public List<Log> listLogs() {
+        return dao.select();
+    }
+
+    @Override
+    public Map clear() {
+        dao.clear();
+        return createOKResultMap();
     }
 }

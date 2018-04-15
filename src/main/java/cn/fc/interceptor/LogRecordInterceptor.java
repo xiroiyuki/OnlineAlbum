@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LogInterceptor extends HandlerInterceptorAdapter {
+public class LogRecordInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private AuthorityService authorityService;
     @Autowired
@@ -23,7 +23,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     private AlbumContext context;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         if (context.getAuthorities() == null) {
             context.setAuthorities(authorityService.listAuthorities());
         }
@@ -44,6 +44,5 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             log.setReqTime(System.currentTimeMillis() / 1000);
             new Thread(() -> logService.saveLog(log)).start();
         }
-        return true;
     }
 }

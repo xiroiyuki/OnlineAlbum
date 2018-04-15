@@ -234,6 +234,13 @@
                         icon: "fa fa-circle-o"
                     }
                 ]
+            },
+            {
+                id: "81",
+                text: "日志管理",
+                icon: "fa fa-book",
+                url: "log/list",
+                targetType: "iframe-tab"
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});

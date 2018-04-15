@@ -118,7 +118,7 @@
             <mvc:exclude-mapping path="/dist/**"/>
             <mvc:exclude-mapping path="/plugins/**"/>
             <mvc:exclude-mapping path="/**/*login*"/>
-            <bean id="logInterceptor" class="cn.fc.interceptor.LogInterceptor"/>
+            <bean id="logInterceptor" class="cn.fc.interceptor.LogRecordInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

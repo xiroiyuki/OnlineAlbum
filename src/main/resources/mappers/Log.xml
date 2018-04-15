@@ -4,6 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fc.dao.LogDao">
 
+    <resultMap id="logMap" type="cn.fc.bean.Log">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="method" column="method" jdbcType="VARCHAR"/>
+        <result property="reqTime" column="req_time" jdbcType="INTEGER"/>
+        <result property="sourceIP" column="source_ip" jdbcType="VARCHAR"/>
+        <association property="authority" column="AUTHORITY_ID" javaType="cn.fc.bean.Authority"
+                     select="cn.fc.dao.AuthorityDao.selectById"/>
+        <association property="user" column="USER_ID" javaType="cn.fc.bean.User"
+                     select="cn.fc.dao.UserDao.selectById"/>
+    </resultMap>
+
+    <select id="select" resultMap="logMap">
+        SELECT *
+        FROM log
+    </select>
+
     <insert id="insert" parameterType="cn.fc.bean.Log">
         <choose>
             <when test="user != null">
