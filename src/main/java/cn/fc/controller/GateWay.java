@@ -1,12 +1,19 @@
 package cn.fc.controller;
 
 
+import cn.fc.service.LogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
 public class GateWay {
+
+
+    @Autowired
+    private LogService service;
 
     @RequestMapping("/login")
     public String login() {
@@ -14,8 +21,12 @@ public class GateWay {
     }
 
     @RequestMapping("/welcome")
-    public String welcome() {
-        return "welcome";
+    public ModelAndView welcome() {
+        ModelAndView mv = new ModelAndView("welcome");
+        mv.addObject("weekly", service.listCountsGroupByWeekday());
+        mv.addObject("daily", service.listCountsGroupByHour());
+        mv.addObject("monthly", service.listCountsGroupByMonth());
+        return mv;
     }
 
     @RequestMapping("/workbench")

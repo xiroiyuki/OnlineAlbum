@@ -6,7 +6,9 @@ import cn.fc.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Service
@@ -30,4 +32,53 @@ public class LogServiceImpl extends BaseService implements LogService {
         dao.clear();
         return createOKResultMap();
     }
+
+    @Override
+    public List<Long> listCountsGroupByHour() {
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long start = calendar.getTimeInMillis() / 1000;
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        long end = calendar.getTimeInMillis() / 1000;
+        return dao.selectCountsGroupByHour(start, end);
+    }
+
+    @Override
+    public List<Long> listCountsGroupByMonth() {
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        calendar.set(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long start = calendar.getTimeInMillis() / 1000;
+        calendar.set(Calendar.MONTH, 12);
+        calendar.set(Calendar.DAY_OF_MONTH, 31);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        long end = calendar.getTimeInMillis() / 1000;
+        return dao.selectCountsGroupByMonth(start, end);
+    }
+
+    @Override
+    public List<Long> listCountsGroupByWeekday() {
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long start = calendar.getTimeInMillis() / 1000;
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        long end = calendar.getTimeInMillis() / 1000;
+        return dao.selectCountsGroupByWeekday(start, end);
+    }
+
 }

@@ -13,4 +13,9 @@ public interface LogService {
 
     Map clear();
 
+    List<Long> listCountsGroupByHour();
+
+    List<Long> listCountsGroupByMonth();
+
+    List<Long> listCountsGroupByWeekday();
 }

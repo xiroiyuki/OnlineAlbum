@@ -139,7 +139,7 @@
         App.setGlobalImgPath("dist/img/");
         addTabs({
             id: '100000',
-            title: '欢迎页',
+            title: '概况',
             close: false,
             url: 'welcome',
             urlType: "relative"

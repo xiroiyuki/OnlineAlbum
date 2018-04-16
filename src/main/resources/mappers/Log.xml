@@ -21,6 +21,51 @@
         FROM log
     </select>
 
+    <select id="selectCountsGroupByHour" resultType="long" parameterType="long">
+        SELECT count(*)
+        FROM
+            `log`
+        WHERE
+            req_time BETWEEN #{start} AND #{end}
+        GROUP BY
+            HOUR(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )
+    </select>
+
+    <select id="selectCountsGroupByMonth" resultType="long" parameterType="long">
+        SELECT count(*)
+        FROM
+            `log`
+        WHERE
+            req_time BETWEEN #{start} AND #{end}
+        GROUP BY
+            MONTH(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )
+    </select>
+
+    <select id="selectCountsGroupByWeekday" resultType="long" parameterType="long">
+        SELECT count(*)
+        FROM
+            `log`
+        WHERE
+            req_time BETWEEN #{start} AND #{end}
+        GROUP BY
+            WEEKDAY(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )
+    </select>
+
     <insert id="insert" parameterType="cn.fc.bean.Log">
         <choose>
             <when test="user != null">
