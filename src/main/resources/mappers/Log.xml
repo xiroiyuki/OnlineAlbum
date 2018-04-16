@@ -36,14 +36,14 @@
             )
     </select>
 
-    <select id="selectCountsGroupByMonth" resultType="long" parameterType="long">
+    <select id="selectCountsGroupByMonthDay" resultType="long" parameterType="long">
         SELECT count(*)
         FROM
             `log`
         WHERE
             req_time BETWEEN #{start} AND #{end}
         GROUP BY
-            MONTH(
+            DAYOFMONTH(
                     FROM_UNIXTIME(
                             req_time,
                             '%Y-%m-%d %H:%i:%s'

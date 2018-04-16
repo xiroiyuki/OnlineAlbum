@@ -23,7 +23,7 @@ public class LogServiceImplTest {
 
     @Test
     public void listCountsGroupByMonth() {
-        System.out.println(service.listCountsGroupByMonth());
+        System.out.println(service.listCountsGroupByMonthDay());
     }
 
     @Test

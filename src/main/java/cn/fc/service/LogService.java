@@ -15,7 +15,7 @@ public interface LogService {
 
     List<Long> listCountsGroupByHour();
 
-    List<Long> listCountsGroupByMonth();
+    List<Long> listCountsGroupByMonthDay();
 
     List<Long> listCountsGroupByWeekday();
 }

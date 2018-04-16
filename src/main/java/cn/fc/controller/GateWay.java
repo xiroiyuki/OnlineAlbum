@@ -22,10 +22,11 @@ public class GateWay {
 
     @RequestMapping("/welcome")
     public ModelAndView welcome() {
+//        TODO 数据封装的不正确曲线对不上
         ModelAndView mv = new ModelAndView("welcome");
         mv.addObject("weekly", service.listCountsGroupByWeekday());
         mv.addObject("daily", service.listCountsGroupByHour());
-        mv.addObject("monthly", service.listCountsGroupByMonth());
+        mv.addObject("monthly", service.listCountsGroupByMonthDay());
         return mv;
     }
 

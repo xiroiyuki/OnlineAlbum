@@ -45,7 +45,7 @@ public interface LogDao {
 //			'%Y-%m-%d %H:%i:%s'
 //		)
 //	)
-    List<Long> selectCountsGroupByMonth(@Param("start") long start, @Param("end") long end);
+    List<Long> selectCountsGroupByMonthDay(@Param("start") long start, @Param("end") long end);
 
     //    SELECT
 ////    count(*),

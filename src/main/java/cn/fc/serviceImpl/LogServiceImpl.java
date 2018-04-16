@@ -48,20 +48,19 @@ public class LogServiceImpl extends BaseService implements LogService {
     }
 
     @Override
-    public List<Long> listCountsGroupByMonth() {
+    public List<Long> listCountsGroupByMonthDay() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
-        calendar.set(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         long start = calendar.getTimeInMillis() / 1000;
-        calendar.set(Calendar.MONTH, 12);
-        calendar.set(Calendar.DAY_OF_MONTH, 31);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         long end = calendar.getTimeInMillis() / 1000;
-        return dao.selectCountsGroupByMonth(start, end);
+        return dao.selectCountsGroupByMonthDay(start, end);
     }
 
     @Override
