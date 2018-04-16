@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="/tags" prefix="date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -104,7 +105,7 @@
                                     <td><a href="${album.faceUrl}">查看</a></td>
                                     <td>${album.photoNum}</td>
                                     <td><a href="${album.url}">打开</a></td>
-                                    <td>${album.createTime}</td>
+                                    <td><date:date value="${album.createTime}"/></td>
                                     <td>
                                         <a href="javascript:createNewTab('album/detail?id=${album.id}','相册 ${album.title}')">详情</a>
                                     </td>

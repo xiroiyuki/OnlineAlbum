@@ -34,6 +34,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             User user = (User) request.getSession().getAttribute("loginUser");
             List<Authority> userAuthorities = user.getRole().getAuthorities();
             boolean grant = userAuthorities.stream().anyMatch(authority -> authority.getUrl().equals(path.trim()));
+            request.setAttribute("grant", grant);
             if (grant) {
                 return true;
             } else {

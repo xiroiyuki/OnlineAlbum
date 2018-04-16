@@ -9,6 +9,7 @@
         <result property="method" column="method" jdbcType="VARCHAR"/>
         <result property="reqTime" column="req_time" jdbcType="INTEGER"/>
         <result property="sourceIP" column="source_ip" jdbcType="VARCHAR"/>
+        <result property="granted" column="granted" javaType="boolean" jdbcType="INTEGER"/>
         <association property="authority" column="AUTHORITY_ID" javaType="cn.fc.bean.Authority"
                      select="cn.fc.dao.AuthorityDao.selectById"/>
         <association property="user" column="USER_ID" javaType="cn.fc.bean.User"
@@ -23,12 +24,12 @@
     <insert id="insert" parameterType="cn.fc.bean.Log">
         <choose>
             <when test="user != null">
-                INSERT INTO log (AUTHORITY_ID, method, req_time,source_ip, USER_ID) VALUES
-                (#{authority.id}, #{method}, #{reqTime},#{sourceIP}, #{user.id});
+                INSERT INTO log (AUTHORITY_ID, method, req_time,source_ip,granted, USER_ID) VALUES
+                (#{authority.id}, #{method}, #{reqTime},#{sourceIP},#{granted}, #{user.id});
             </when>
             <otherwise>
-                INSERT INTO log (AUTHORITY_ID, method, req_time,source_ip, USER_ID) VALUES
-                (#{authority.id}, #{method}, #{reqTime},#{sourceIP}, -1);
+                INSERT INTO log (AUTHORITY_ID, method, req_time,source_ip,granted, USER_ID) VALUES
+                (#{authority.id}, #{method}, #{reqTime},#{sourceIP},#{granted}, -1);
             </otherwise>
         </choose>
     </insert>

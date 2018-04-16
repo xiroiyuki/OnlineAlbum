@@ -7,6 +7,7 @@ import cn.fc.context.AlbumContext;
 import cn.fc.service.AuthorityService;
 import cn.fc.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,8 @@ public class LogRecordInterceptor extends HandlerInterceptorAdapter {
     private AlbumContext context;
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
         if (context.getAuthorities() == null) {
             context.setAuthorities(authorityService.listAuthorities());
         }
@@ -42,7 +44,14 @@ public class LogRecordInterceptor extends HandlerInterceptorAdapter {
             log.setMethod(request.getMethod());
             log.setAuthority(matches.get(0));
             log.setReqTime(System.currentTimeMillis() / 1000);
+            if (context.isDevMode()) {
+                log.setGranted(true);
+            } else {
+                log.setGranted((Boolean) request.getAttribute("grant"));
+            }
             new Thread(() -> logService.saveLog(log)).start();
         }
+
+
     }
 }

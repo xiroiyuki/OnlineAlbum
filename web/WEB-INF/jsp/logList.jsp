@@ -47,6 +47,7 @@
                         <th>请求时间</th>
                         <th>执行用户</th>
                         <th>来源IP</th>
+                        <th>处理结果</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,9 +64,10 @@
                                     <td>${log.authority.name}</td>
                                     <td>${log.authority.url}</td>
                                     <td>${log.method}</td>
-                                    <td>${log.reqTime}</td>
+                                    <td><date:date value="${log.reqTime}"/></td>
                                     <td>${log.user eq null?'匿名者':log.user.username}</td>
                                     <td>${log.sourceIP}</td>
+                                    <td>${log.granted?"允许":"拦截"}</td>
                                 </tr>
                             </c:forEach>
                         </c:otherwise>

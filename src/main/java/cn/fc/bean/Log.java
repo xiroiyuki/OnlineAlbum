@@ -7,6 +7,15 @@ public class Log {
     private long reqTime;
     private User user;
     private String sourceIP;
+    private boolean granted;
+
+    public boolean isGranted() {
+        return granted;
+    }
+
+    public void setGranted(boolean granted) {
+        this.granted = granted;
+    }
 
     public String getSourceIP() {
         return sourceIP;

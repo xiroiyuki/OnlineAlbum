@@ -853,8 +853,8 @@ Version 1.1
 
      1.8. "License" means this document.
 
-     1.8.1. "Licensable" means having the right to grant, to the maximum
-     extent possible, whether at the time of the initial grant or
+     1.8.1. "Licensable" means having the right to granted, to the maximum
+     extent possible, whether at the time of the initial granted or
      subsequently acquired, any and all of the rights conveyed herein.
 
      1.9. "Modifications" means any addition to or deletion from the
@@ -1022,7 +1022,7 @@ Version 1.1
           Contributor represents that, except as disclosed pursuant to
           Section 3.4(a) above, Contributor believes that Contributor's
           Modifications are Contributor's original creation(s) and/or
-          Contributor has sufficient rights to grant the rights conveyed by
+          Contributor has sufficient rights to granted the rights conveyed by
           this License.
 
      3.5. Required Notices.
