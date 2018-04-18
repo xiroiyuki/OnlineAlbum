@@ -4,6 +4,7 @@ import cn.fc.bean.Log;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LogDao {
     void insert(Log log);
@@ -14,53 +15,10 @@ public interface LogDao {
 
     List<Log> select();
 
+    List<Map> selectCountsGroupByHour(@Param("start") long start, @Param("end") long end);
 
-//    SELECT
-//	count(*)
-//FROM
-//	`log`
-//WHERE
-//	req_time BETWEEN  0点 AND 23点59
-//GROUP BY
-//	HOUR (
-//		FROM_UNIXTIME(
-//			req_time,
-//			'%Y-%m-%d %H:%i:%s'
-//		)
-//	)
+    List<Map> selectCountsGroupByMonthDay(@Param("start") long start, @Param("end") long end);
 
-    List<Long> selectCountsGroupByHour(@Param("start") long start, @Param("end") long end);
-
-
-    //SELECT
-//	count(*)
-//FROM
-//	`log`
-//WHERE
-//	req_time BETWEEN  元旦 AND 年底
-//GROUP BY
-//	MONTH (
-//		FROM_UNIXTIME(
-//			req_time,
-//			'%Y-%m-%d %H:%i:%s'
-//		)
-//	)
-    List<Long> selectCountsGroupByMonthDay(@Param("start") long start, @Param("end") long end);
-
-    //    SELECT
-////    count(*),
-////    FROM
-////	`log`
-////    WHERE
-////    req_time BETWEEN 周一 AND 周日
-////    GROUP BY
-////    WEEKDAY (
-////            FROM_UNIXTIME(
-////            req_time,
-////			'%Y-%m-%d %H:%i:%s'
-////    )
-////	)
-    List<Long> selectCountsGroupByWeekday(@Param("start") long start, @Param("end") long end);
-
+    List<Map> selectCountsGroupByWeekday(@Param("start") long start, @Param("end") long end);
 
 }

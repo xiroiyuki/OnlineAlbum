@@ -6,10 +6,7 @@ import cn.fc.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class LogServiceImpl extends BaseService implements LogService {
@@ -34,7 +31,7 @@ public class LogServiceImpl extends BaseService implements LogService {
     }
 
     @Override
-    public List<Long> listCountsGroupByHour() {
+    public List<Map> listCountsGroupByHour() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -48,7 +45,7 @@ public class LogServiceImpl extends BaseService implements LogService {
     }
 
     @Override
-    public List<Long> listCountsGroupByMonthDay() {
+    public List<Map> listCountsGroupByMonthDay() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -64,7 +61,7 @@ public class LogServiceImpl extends BaseService implements LogService {
     }
 
     @Override
-    public List<Long> listCountsGroupByWeekday() {
+    public Map listCountsGroupByWeekday() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -77,7 +74,18 @@ public class LogServiceImpl extends BaseService implements LogService {
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         long end = calendar.getTimeInMillis() / 1000;
-        return dao.selectCountsGroupByWeekday(start, end);
+        List<Map> weekdayData = dao.selectCountsGroupByWeekday(start, end);
+        Map res = new TreeMap<>();
+        res.put(0, 0);
+        res.put(1, 0);
+        res.put(2, 0);
+        res.put(3, 0);
+        res.put(4, 0);
+        res.put(5, 0);
+        res.put(6, 0);
+        weekdayData.forEach(map -> res.replace(map.get("weekday"), map.get("count")));
+
+        return res;
     }
 
 }

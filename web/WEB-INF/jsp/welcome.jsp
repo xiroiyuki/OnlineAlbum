@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -157,7 +158,11 @@
             type: 'value'
         },
         series: [{
-            data: ${weekly},
+            data: [
+                <c:forEach items="${weeklyKey}" var="item">
+                ${weekly[item]},
+                </c:forEach>
+            ],
             type: 'line'
         }]
     };
@@ -175,7 +180,7 @@
             type: 'value'
         },
         series: [{
-            data: ${daily},
+            data: [0],
             type: 'line'
         }]
     };
@@ -187,14 +192,14 @@
                 '7', '8', '9', '10', '11', '12',
                 '13', '14', '15', '16', '17', '18',
                 '19', '20', '21', '22', '23', '24',
-                '25', '26', '27', '28', '29', '30','31'
+                '25', '26', '27', '28', '29', '30', '31'
             ]
         },
         yAxis: {
             type: 'value'
         },
         series: [{
-            data: ${monthly},
+            data: [0],
             type: 'line'
         }]
     };

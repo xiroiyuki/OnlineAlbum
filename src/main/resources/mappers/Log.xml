@@ -21,8 +21,15 @@
         FROM log
     </select>
 
-    <select id="selectCountsGroupByHour" resultType="long" parameterType="long">
-        SELECT count(*)
+    <select id="selectCountsGroupByHour" resultType="java.util.Map" parameterType="long">
+        SELECT
+            count(*) AS count,
+            HOUR(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )        AS hour
         FROM
             `log`
         WHERE
@@ -36,8 +43,15 @@
             )
     </select>
 
-    <select id="selectCountsGroupByMonthDay" resultType="long" parameterType="long">
-        SELECT count(*)
+    <select id="selectCountsGroupByMonthDay" resultType="java.util.Map" parameterType="long">
+        SELECT
+            count(*) AS count,
+            DAYOFMONTH(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )        AS dayOfMonth
         FROM
             `log`
         WHERE
@@ -51,8 +65,15 @@
             )
     </select>
 
-    <select id="selectCountsGroupByWeekday" resultType="long" parameterType="long">
-        SELECT count(*)
+    <select id="selectCountsGroupByWeekday" resultType="java.util.Map" parameterType="long">
+        SELECT
+            count(*) AS count,
+            WEEKDAY(
+                    FROM_UNIXTIME(
+                            req_time,
+                            '%Y-%m-%d %H:%i:%s'
+                    )
+            )        AS weekday
         FROM
             `log`
         WHERE
