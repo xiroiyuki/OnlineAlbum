@@ -13,6 +13,8 @@
     <!-- 扫描advice包下所有使用注解的类型 -->
     <context:component-scan base-package="cn.fc.util"/>
     <context:component-scan base-package="cn.fc.advice"/>
+    <context:component-scan base-package="cn.fc.serviceImpl"/>
+
 
 
     <!--初始化自定义的应用程序配置-->
