@@ -3,6 +3,8 @@ package cn.fc.serviceImpl;
 import cn.fc.bean.Log;
 import cn.fc.dao.LogDao;
 import cn.fc.service.LogService;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +49,7 @@ public class LogServiceImpl extends BaseService implements LogService {
             data[(int) datum.get("hour")] = (long) datum.get("count");
         }
         System.out.println(Arrays.toString(data));
-        return Arrays.asList(data);
+        return Longs.asList(data);
     }
 
     @Override
@@ -69,7 +71,7 @@ public class LogServiceImpl extends BaseService implements LogService {
             data[(int) datum.get("dayOfMonth") - 1] = (long) datum.get("count");
         }
         System.out.println(Arrays.toString(data));
-        return Arrays.asList(data);
+        return Longs.asList(data);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class LogServiceImpl extends BaseService implements LogService {
             data[(int) datum.get("weekday")] = (long) datum.get("count");
         }
         System.out.println(Arrays.toString(data));
-        return Arrays.asList(data);
+        return Longs.asList(data);
     }
 
 }

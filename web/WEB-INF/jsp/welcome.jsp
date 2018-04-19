@@ -96,7 +96,7 @@
                 </div>
                 <div class="box-body">
                     <div class="box-body">
-                        <div id="daily" class="col-md-12" style="height:400px;">
+                        <div id="daily" class="col-md-12" style="height:350px;">
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="box-body">
                     <div class="box-body">
-                        <div id="weekly" style="width: 600px;height:400px;">
+                        <div id="weekly" style="width: 600px;height:350px;">
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="box-body">
                     <div class="box-body">
-                        <div id="monthly" style="width: 600px;height:400px;">
+                        <div id="monthly" style="width: 600px;height:350px;">
                         </div>
                     </div>
                 </div>
@@ -158,11 +158,7 @@
             type: 'value'
         },
         series: [{
-            data: [
-                <c:forEach items="${weeklyKey}" var="item">
-                ${weekly[item]},
-                </c:forEach>
-            ],
+            data: ${weekly},
             type: 'line'
         }]
     };
@@ -180,7 +176,7 @@
             type: 'value'
         },
         series: [{
-            data: [0],
+            data: ${daily},
             type: 'line'
         }]
     };
@@ -199,7 +195,7 @@
             type: 'value'
         },
         series: [{
-            data: [0],
+            data:${monthly},
             type: 'line'
         }]
     };
