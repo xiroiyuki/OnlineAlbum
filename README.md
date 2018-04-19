@@ -33,5 +33,5 @@ pageSize 用于设置查询出的数据每页有多少条
 3. 在db.properties 中配置数据库连接信息
 4. validationMessage.properties 配置表单校验错误提示信息
 ## 5.结语
-欢迎提出建议意见,发ISSUE给我,你的关注就是我更新的动力.
+欢迎提出建议意见,发ISSUE/PR给我
 演示地址:http://123.206.57.117:8080/ 用户名:test123 密码:111111
