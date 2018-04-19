@@ -31,7 +31,7 @@ public class LogServiceImpl extends BaseService implements LogService {
     }
 
     @Override
-    public List<Map> listCountsGroupByHour() {
+    public List listCountsGroupByHour() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -41,11 +41,17 @@ public class LogServiceImpl extends BaseService implements LogService {
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         long end = calendar.getTimeInMillis() / 1000;
-        return dao.selectCountsGroupByHour(start, end);
+        long[] data = new long[calendar.getActualMaximum(Calendar.HOUR_OF_DAY)];
+        List<Map> dayOfMonthData = dao.selectCountsGroupByHour(start, end);
+        for (Map datum : dayOfMonthData) {
+            data[(int) datum.get("hour")] = (long) datum.get("count");
+        }
+        System.out.println(Arrays.toString(data));
+        return Arrays.asList(data);
     }
 
     @Override
-    public List<Map> listCountsGroupByMonthDay() {
+    public List listCountsGroupByMonthDay() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -57,11 +63,17 @@ public class LogServiceImpl extends BaseService implements LogService {
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         long end = calendar.getTimeInMillis() / 1000;
-        return dao.selectCountsGroupByMonthDay(start, end);
+        long[] data = new long[calendar.getActualMaximum(Calendar.DAY_OF_MONTH)];
+        List<Map> dayOfMonthData = dao.selectCountsGroupByMonthDay(start, end);
+        for (Map datum : dayOfMonthData) {
+            data[(int) datum.get("dayOfMonth") - 1] = (long) datum.get("count");
+        }
+        System.out.println(Arrays.toString(data));
+        return Arrays.asList(data);
     }
 
     @Override
-    public Map listCountsGroupByWeekday() {
+    public List listCountsGroupByWeekday() {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -75,17 +87,12 @@ public class LogServiceImpl extends BaseService implements LogService {
         calendar.set(Calendar.SECOND, 59);
         long end = calendar.getTimeInMillis() / 1000;
         List<Map> weekdayData = dao.selectCountsGroupByWeekday(start, end);
-        Map res = new TreeMap<>();
-        res.put(0, 0);
-        res.put(1, 0);
-        res.put(2, 0);
-        res.put(3, 0);
-        res.put(4, 0);
-        res.put(5, 0);
-        res.put(6, 0);
-        weekdayData.forEach(map -> res.replace(map.get("weekday"), map.get("count")));
-
-        return res;
+        long[] data = new long[7];
+        for (Map datum : weekdayData) {
+            data[(int) datum.get("weekday")] = (long) datum.get("count");
+        }
+        System.out.println(Arrays.toString(data));
+        return Arrays.asList(data);
     }
 
 }
