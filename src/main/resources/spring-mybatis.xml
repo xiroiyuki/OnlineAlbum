@@ -20,7 +20,7 @@
     <!--初始化自定义的应用程序配置-->
     <bean class="cn.fc.context.AlbumContext" id="albumContext">
         <property name="pageSize" value="20"/>
-        <property name="devMode" value="true"/>
+        <property name="devMode" value="false"/>
     </bean>
 
     <!-- 配置数据库相关参数properties的属性：${url} -->
